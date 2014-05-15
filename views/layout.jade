@@ -1,0 +1,72 @@
+doctype html
+html
+  head
+    title= title
+    link(href='http://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet' type='text/css')
+    link(href='http://fonts.googleapis.com/css?family=Codystar' rel='stylesheet' type='text/css')
+    link(rel='stylesheet', href='/stylesheets/icons.css')
+    link(rel='stylesheet', href='/stylesheets/navbar.css')
+    link(rel='stylesheet', href='/stylesheets/default.css')
+    link(rel='stylesheet', href='/plugins/font-awesome-4.0.3/css/font-awesome.min.css')
+    script(src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js")
+    script(src="/plugins/tablesorter/jquery.tablesorter.min.js")
+    block head
+  body
+    .navbar-content
+        ul.navbar
+            a(href="/home")
+                li.nav.button.left
+                    |LASA UIL Training
+            a(href="/about")
+                li.nav.left
+                    |About
+            a(href="/getfeedback")
+                li.nav.left
+                    |Feedback
+            if cookie
+                //a(href="/home")
+                a(href="/bible")
+                    li.nav.button.left
+                        span='Bible'
+                a(href='programming')
+                    li.nav.button.left
+                        span='Programming'
+                a(href="/random")
+                    li.nav.button.left
+                        i.fa.fa-random
+                label(for="dropdown").nav.right= session.user
+                input(type="checkbox")#dropdown
+                .drop
+                    a(href="/home")
+                        div.dropnav
+                            i.fa.fa-user
+                            span="Profile"
+                    a(href="/scoreboard")
+                        div.dropnav
+                            i.fa.fa-bar-chart-o
+                            span="Graph"
+                    a(href="/settings")
+                        div.dropnav
+                            i.fa.fa-gear
+                            span="Settings"
+                    a(href="/logout")
+                        div.dropnav
+                            i.fa.fa-sign-out
+                            span="Logout"
+            else
+                a(href="/newuser")
+                    li.nav.button.right
+                        |Register
+                a(href="/signin")
+                    li.nav.button.right
+                        |Login
+
+    div.content
+        block content
+    div.footer
+        block footer
+        script.
+            $(document).ready(function(){
+                $("table").tablesorter(); 
+            }); 
+        

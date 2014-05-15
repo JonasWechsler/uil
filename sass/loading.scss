@@ -1,0 +1,150 @@
+@mixin keyframe ($animation_name) {
+    @-webkit-keyframes $animation_name {
+        @content;
+    }
+ 
+    @-moz-keyframes $animation_name {
+        @content;
+    }
+ 
+    @-o-keyframes $animation_name {
+        @content;
+    }
+ 
+    @keyframes $animation_name {
+        @content;
+    }
+}
+@mixin rotate($degree) {
+            transform:rotate($degree);
+       -moz-transform:rotate($degree);
+        -ms-transform:rotate($degree);
+    -webkit-transform:rotate($degree);
+}
+@mixin rotate-bottom-center($degree){
+            transform-origin:50% 0%;
+       -moz-transform-origin:50% 0%;
+        -ms-transform-origin:50% 0%;
+    -webkit-transform-origin:50% 0%;
+  
+  @include rotate($degree);
+}
+@include keyframe(leftbounce){
+  10%{
+    @include rotate-bottom-center(25deg);
+  }
+  40%{
+    @include rotate-bottom-center(0deg);
+  }
+  60%{
+    @include rotate-bottom-center(0deg);
+  }
+  90%{
+    @include rotate-bottom-center(25deg);
+  }
+}
+@include keyframe(rightbounce){
+  10%{
+    @include rotate-bottom-center(-25deg);
+  }
+  25%{
+    @include rotate-bottom-center(0deg);
+  }
+  75%{
+    @include rotate-bottom-center(0deg);
+  }
+  90%{
+    @include rotate-bottom-center(-25deg);
+  }
+}
+@include keyframe(swing){
+  0%{
+    @include rotate-bottom-center(-45deg);
+  }
+  25%{
+    @include rotate-bottom-center(0deg);
+  }
+  75%{
+    @include rotate-bottom-center(0deg);
+  }
+  100%{
+    @include rotate-bottom-center(-45deg);
+  }
+}
+@mixin infinite-animation ($delay, $duration, $animation) {
+    -webkit-animation-delay: $delay;
+    -webkit-animation-duration: $duration;
+    -webkit-animation-name: $animation;
+    -webkit-animation-iteration-count:infinite;
+    -webkit-animation-timing-function:cubic-bezier(.5,0,.5,1);
+    -webkit-animation-fill-mode: forwards; /* this prevents the animation from restarting! */
+ 
+    -moz-animation-delay: $delay;
+    -moz-animation-duration: $duration;
+    -moz-animation-name: $animation;
+    -moz-animation-iteration-count:infinite;
+    -moz-animation-timing-function:cubic-bezier(.5,0,.5,1);
+    -moz-animation-fill-mode: forwards; /* this prevents the animation from restarting! */
+ 
+    -o-animation-delay: $delay;
+    -o-animation-duration: $duration;
+    -o-animation-name: $animation;
+    -o-animation-iteration-count:infinite;
+    -o-animation-timing-function:cubic-bezier(.5,0,.5,1);
+    -o-animation-fill-mode: forwards; /* this prevents the animation from restarting! */
+ 
+    animation-delay: $delay;
+    animation-duration: $duration;
+    animation-name: $animation;
+    animation-iteration-count:infinite;
+    animation-timing-function:cubic-bezier(.5,0,.5,1);
+    animation-fill-mode: forwards; /* this prevents the animation from restarting! */
+}
+
+$ball-diameter:50px;
+$string-length:300px;
+
+.load{
+  width:5*$ball-diameter;
+  height:$string-length;
+  position:relative;
+  span{
+    position:absolute;
+    display:inline-block;
+    width: $ball-diameter;
+    height: $string-length;
+    &:after{
+      content:"";
+      width:$ball-diameter;
+      height:$ball-diameter;
+      position:absolute;
+      background-color:purple;
+      display:block;
+      left:0;
+      bottom:0;
+      border-radius:100%;
+    
+    }
+    &:nth-child(1){
+      left:0;
+    }
+    &:nth-child(2){
+      left:$ball-diameter;
+    }
+    &:nth-child(3){
+      left:2*$ball-diameter;
+    }
+    &:nth-child(4){
+      left:3*$ball-diameter;
+    }
+    &:nth-child(5){
+      left:4*$ball-diameter;
+    }
+  }
+  .bl{
+      @include infinite-animation(0s,1s,leftbounce);
+  }
+  .rl{
+      @include infinite-animation(.5s,1s,rightbounce);
+  }
+}

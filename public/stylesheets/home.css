@@ -1,0 +1,60 @@
+a {
+    text-decoration: none;
+}
+li {
+    padding: 2px 2px 2px 0;
+    list-style: none;
+    font-size:10px;
+}
+h1 {
+    color: rgb(53, 53, 53);
+    clear: left;
+}
+.nums {
+    font-size: 80px;
+}
+.numstwo {
+    font-size: 50px;
+}
+/*golden rati$on proportion*/
+
+.left-column {
+    display: block;
+    position: absolute;
+    width: 381.97px;
+    left: 0;
+    top: 0;
+}
+.right-gold {
+    display: block;
+    position: absolute;
+    width: 618.03px;
+    left: 38.197%;
+    top: 0;
+}
+.left-third {
+    display: block;
+    position: absolute;
+    left: 0;
+    width: 33%;
+}
+.middle-third {
+    display: block;
+    position: absolute;
+    left: 33%;
+    width: 33%;
+}
+.right-third {
+    display: block;
+    position: absolute;
+    left: 66%;
+    width: 33%;
+}
+.qid {
+    font-size: 11px;
+    color: rgb(78, 87, 91);
+    font-family: Monaco, 'Liberation Mono', Courier, monospace;
+}
+.qid:hover {
+    color: rgb(78, 87, 200);
+}

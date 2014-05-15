@@ -1,0 +1,50 @@
+body {
+    padding: 0px;
+    margin: 0 10px 0 10px;
+    font-family: 'Ubuntu', sans-serif;
+}
+.content {
+    margin: 5px;
+}
+.navbar {
+    background-color: white;
+    width: 100%;
+    height: 36px;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    border-bottom: 1px solid #ababab;
+}
+.nav {
+    margin: 0 5px 0 5px;
+    padding: 5px;
+    color: black;
+    /*
+    box-shadow: inset 0 -8px 10px -8px #000000;
+    -moz-box-shadow: inset 0 -8px 10px -8px #000000;
+    -webkit-box-shadow: inset 0 -8px 10px -8px rgba(255, 255, 255, .2);*/
+    vertical-align: bottom;
+    font-size: 20px;
+    position: relative;
+    height: 25px;
+    display: inline-block;
+}
+.nav:hover {
+    box-shadow: inset 0 -8px 10px -8px rgba(196, 133, 255, 1);
+    -moz-box-shadow: inset 0 -8px 10px -8px rgba(196, 133, 255, 1);
+    -webkit-box-shadow: inset 0 -8px 10px -8px rgba(196, 133, 255, 1);
+    border-width: 0 0 1px 0;
+    border-color: #7f33cc;
+    border-style: solid;
+}
+.random {
+    width: 25px;
+    height: 25px;
+    position: relative;
+}
+.right {
+    float: right;
+}
+.left {
+    float: left;
+}

@@ -1,0 +1,123 @@
+.details {
+    margin: 20px;
+    display: inline-block;
+    vertical-align: top;
+    /* Feel free to change this value, here are your options: baseline | sub | super | top | text-top | middle | bottom | text-bottom | <percentage> | <length> | inherit */
+    -webkit-font-smoothing: antialiased;
+    box-sizing: border-box;
+    color: rgb(206, 206, 206);
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    /* Fix for IE7 and below */
+    zoom: 1;
+    *display: inline;
+}
+.title {
+    font-size: 40px;
+}
+.correct  {
+    color: #39c639;
+}
+.incorrect {
+    color:#c6393c;
+}
+.passed {
+    color:grey;
+}
+.corrected{
+    color:gold;
+}
+.test {
+    font-size: 10px;
+}
+.wrong {
+    color : red;
+}
+.cor { 
+    color : green;
+}
+.chng {
+    color:gold;
+}
+.qnum {
+    float: left;
+    height: 150px;
+    display: inline-block;
+    vertical-align: middle;
+    /* Feel free to change this value, here are your options: baseline | sub | super | top | text-top | middle | bottom | text-bottom | <percentage> | <length> | inherit */
+    /* Fix for IE7 and below */
+    zoom: 1;
+    *display: inline;
+    font-size: 120px;
+    color: rgb(53, 53, 53);
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+.code {
+    clear: left;
+}
+.id {
+    clear: left;
+    display: none;
+    font-size: 10px;
+    font-family: courier, monospace;
+}
+input[type="radio"] {
+    /*display: none;*/
+}
+input[type="radio"]:checked+label {
+    /**/
+}
+.next{
+    display: none;
+}
+.try{
+    display:none;
+}
+.submit > label {
+    clear: left;
+    display: block;
+    width: 300px;
+    font-size: 20px;
+    border-width: 0;
+    border-top: 1px;
+    border-style: solid;
+    border-color: #EEEEEE;
+    background-color: #EEEEEE;
+    padding: 5px;
+    margin-top: 5px;
+}
+hr {
+    margin: 0;
+    width: 50%;
+}
+.submit > label:hover {
+    background-color: lightgrey;
+}
+.next {
+    margin-left: 5px;
+}
+.question {
+    margin: 0;
+    word-wrap: break-word;
+    padding: 10px;
+    background-color: #EEEEEE;
+    font-family: Consolas, Monaco, Lucidia Console, Liberation Mono, DejaVu, Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
+    white-space: pre;
+    
+}
+
+.leftcol {
+    position: absolute;
+    top: 190px;
+    left: 1%;
+    display: inline-block;
+    width: 48%;
+    float: left;
+}
+.rightcol {
+    position: absolute;
+    top: 190px;
+    left: 51%;
+    display: inline-block;
+    width: 48%;
+    float: right;
+}

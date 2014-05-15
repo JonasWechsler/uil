@@ -1,0 +1,42 @@
+.workspace {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 1000px;
+  height: 500px;
+  margin-left: -500px;
+  border: 1px solid black; }
+
+.workspace * {
+  position: absolute;
+  border: 1px solid black; }
+
+.background {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%; }
+
+.desks > .left {
+  left: 100px; }
+
+.desk {
+  top: 400px;
+  width: 400px;
+  height: 100px; }
+
+.desk > .top {
+  position: absolute;
+  background-color: black;
+  left: 100px;
+  top: 0px;
+  width: 400px;
+  height: 5px; }
+
+.desk > .left {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100px;
+  width: 5px; }

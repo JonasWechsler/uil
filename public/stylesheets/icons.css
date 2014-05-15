@@ -1,0 +1,94 @@
+.graph-icon {
+    border: 1px solid black;
+    position: absolute;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+}
+.graph-icon > .text {
+    left: 7px;
+    top: 38.33%;
+    font-size: 12px;
+    margin-left: -15%;
+    z-index: 1;
+    opacity: 0;
+    font-family: sans-serif;
+    cursor: default;
+}
+@-webkit-keyframes fadein {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+.graph-icon>span {
+    position: absolute;
+}
+.graph-icon:hover > .top {
+    -webkit-animation: shorttop 1s;
+    -webkit-animation-fill-mode: forwards;
+}
+.graph-icon:hover > .bottom {
+    -webkit-animation: shortbottom 1s;
+    -webkit-animation-fill-mode: forwards;
+}
+.graph-icon:hover > .text {
+    -webkit-animation: fadein 1s;
+    -webkit-animation-fill-mode: forwards;
+}
+@-webkit-keyframes shorttop {
+    to {
+        top: 71.41%;
+        height: 10.72%;
+    }
+}
+@-webkit-keyframes shortbottom {
+    to {
+        top: 89.28%;
+        height: 10.72%;
+    }
+}
+.graph-icon > .top {
+    background-color: black;
+}
+.graph-icon > .bottom {
+    background-color: black;
+}
+.graph-icon > .b0 {
+    left: 76.92%;
+    top: 67.87%;
+    width: 23.08%;
+    height: 32.15%
+}
+.graph-icon > .b1 {
+    left: 38.45%;
+    top: 39.28%;
+    width: 23.08%;
+    height: 60.74%;
+}
+.graph-icon > .b2 {
+    left: 0%;
+    top: 89.28%;
+    width: 23.08%;
+    height: 10.72%;
+}
+.t0 {
+    left: 76.92%;
+    top: 0%;
+    width: 23.08%;
+    height: 60.72%;
+}
+.t1 {
+    left: 38.45%;
+    top: 14.27%;
+    width: 23.08%;
+    height: 17.85%;
+}
+.t2 {
+    left: 0%;
+    top: 57.16%;
+    width: 23.08%;
+    height: 24.99%;
+}

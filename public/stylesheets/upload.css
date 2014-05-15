@@ -1,0 +1,32 @@
+#editor {
+    height: 300px;
+}
+.hide {
+    display: none;
+}
+.question > *.edit{
+    padding:10px 20px 10px 20px;
+    margin:0;
+}
+.question > :not(.edit){
+    margin: 10px;
+    padding-left:10px;
+}
+.question > h1 {
+    padding:10px;
+}
+.question > *.edit:hover{
+    background-color:rgba(224,224,224,0.8);
+}
+button {
+    margin: 5px;
+    border-radius: 0;
+    border: 0px;
+    background-color: rgb(100, 53, 100);
+    color: white;
+    height: 2.5em;
+    width: 8em;
+    font-size: 1em;
+    text-transform: uppercase;
+    letter-spacing: .3em;
+}

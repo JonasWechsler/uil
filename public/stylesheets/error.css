@@ -1,0 +1,26 @@
+.details {
+    margin: 20px;
+    display: inline-block;
+    vertical-align: top;
+    /* Feel free to change this value, here are your options: baseline | sub | super | top | text-top | middle | bottom | text-bottom | <percentage> | <length> | inherit */
+    -webkit-font-smoothing: antialiased;
+    box-sizing: border-box;
+    color: rgb(175, 175, 175);
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    /* Fix for IE7 and below */
+    zoom: 1;
+    *display: inline;
+    font-size: 40px;
+}
+.title {
+    height: 150px;
+    display: inline-block;
+    vertical-align: middle;
+    /* Feel free to change this value, here are your options: baseline | sub | super | top | text-top | middle | bottom | text-bottom | <percentage> | <length> | inherit */
+    /* Fix for IE7 and below */
+    zoom: 1;
+    *display: inline;
+    font-size: 120px;
+    color: rgb(130, 53, 53);
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}

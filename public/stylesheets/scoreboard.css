@@ -1,0 +1,36 @@
+table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+    border: 1px solid white;
+}
+a {
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+}
+thead th{
+    font-weight: normal;
+    height:2em;
+    background-color: #DDDDDD;    
+}
+td, th{
+    width:200px;
+}
+td:nth-child(1) > * > *{
+    background-color: #EEEEEE;
+    display: block;
+    padding: 10px 0 10px 0;
+    width: 100%;
+    height: 100%;
+    margin:0;
+}
+.name:hover {
+    background-color: #DDDDDD;
+}
+.bar{
+    height:2em;
+    display: inline-block;
+    left:0;
+    float: left;
+}

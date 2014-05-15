@@ -1,0 +1,15 @@
+extends layout
+block head
+    link(rel='stylesheet', href='/stylesheets/feedback.css')
+block content
+    h1= "Send us Feedback!"
+    form#formAddUser(name="feedback",method="post",action="/sendfeedback")
+        input#inputName(type="text", placeholder="Name",name = "name")
+        br
+        input#inputEmail(type="text",placeholder = "Your email", name = "email")
+        br
+        input#inputSubject(type="text",placeholder="Subject",name = "subject")
+        br
+        textarea#inputMessage(type="text",cols = "70", rows= "20", placeholder="Please describe the issue",name="text")
+        br
+        button#submit(type="submit") submit

@@ -1,0 +1,92 @@
+body {
+    margin: 0;
+    height: 100%;
+}
+.details {
+    display: inline-block;
+    vertical-align: top;
+    -webkit-font-smoothing: antialiased;
+    box-sizing: border-box;
+    color: rgb(100, 100, 100);
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    /* Fix for IE7 and below */
+    zoom: 1;
+    *display: inline;
+    font-size: 20px;
+    margin-right: 40px;
+}
+.title {
+    display: inline-block;
+    vertical-align: middle;
+    /* Fix for IE7 and below */
+    zoom: 1;
+    *display: inline;
+    font-size: 50px;
+    margin-bottom: 15px;
+    color: rgb(100, 53, 100);
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+.content {
+    padding-top: 3%;
+}
+.name {
+    font-size: 30px;
+    text-align: center;
+}
+.bio {
+    color: white;
+    font-size: 1em;
+    position: absolute;
+    text-align: left;
+    background-color: black;
+    display: none;
+    opacity: 0.7;
+    filter: alpha(opacity=70);
+    /* For IE8 and earlier */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+.name {
+    padding-top: 15px;
+}
+.desc {
+    padding: 15px;
+}
+.profile:hover > .bio {
+    display: block;
+}
+.about {
+    display: inline-block;
+    position: relative;
+    height: 500px;
+    width: 60%;
+    float: left;
+}
+.profile {
+    position: relative;
+    width: 20%;
+    float: left;
+}
+h2 {
+    margin: 0;
+}
+.profileimage {
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    margin-bottom: -5px;
+}
+.end {
+    background-color: black;
+    width: 100%;
+    height: 20px;
+}
+.icon {
+    position: absolute;
+    width: 64px;
+    height: 64px;
+    bottom: 5%;
+    left: 50%;
+}

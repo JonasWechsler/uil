@@ -1,0 +1,119 @@
+
+body{
+    color: rgb(53, 53, 53);
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+
+}
+h1, h2, h3, h4, h5, h6{
+    zoom: 1;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: normal;
+}
+h1{
+    margin-bottom: 15px;
+    font-size:50px;
+    
+}
+h4{
+    color: rgb(100, 100, 100);
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 20px; 
+}
+form > input[type="text"], form > input[type="password"], form > input[type="number"], textarea{
+    border: 2px solid #ccc;
+    color: #999;
+    margin:5px 5px 5px 0;
+    padding:.8em;
+    text-indent:.5em;
+    font-size: 1em;
+}
+form > input[type="text"], form > input[type="password"], form > input[type="number"]{
+    height: 2em;
+}
+select{
+    border: 2px solid #ccc;
+    width:529px;
+    background-color:white;
+    color: #999;
+    margin:5px 0 5px 0;
+    padding:.8em;
+    text-indent:.5em;
+    height: 3.6em;
+    font-size: 1em;
+    -webkit-appearance: none;  /*Removes default chrome and safari style*/
+       -moz-appearance: none;  /*Removes default style Firefox*/
+    text-indent: 0.01px; /*Removes default arrow on Firefox (1)*/
+    text-overflow: ""; /*Removes default arrow on Firefox (2)*/
+    background-image:url("/images/arrow_pointing_down.png");
+    background-size:20px 20px;
+    background-repeat:no-repeat;
+    background-position: 489px 17px;  /*Position of the background-image*/
+}
+form > button[type="submit"], form > input[type="submit"], button{
+    margin:5px;
+    border-radius:0;
+    border: 0px;
+    background-color: rgb(100, 53, 100);
+    color:white;
+    height:2.5em;
+    width:8em;
+    font-size:1em;
+    letter-spacing: .3em;
+    text-transform: uppercase;
+}
+button[type="submit"] {
+/*
+    background: -webkit-linear-gradient(rgb(100, 53, 100), rgb(80, 33, 80));
+    background: -o-linear-gradient(rgb(100, 53, 100), rgb(100, 53, 100));
+    background: -moz-linear-gradient(rgb(100, 53, 100), rgb(80, 33, 80));
+    background: linear-gradient(rgb(100, 53, 100), rgb(80, 33, 80));
+    */
+        margin:5px;
+    border-radius:0;
+    border: 0px;
+    background-color: rgb(100, 53, 100);
+    color:white;
+    height:2.5em;
+    width:8em;
+    font-size:1em;
+  letter-spacing: .3em;
+  text-transform: uppercase;
+    font-size: 20px;
+}
+a{
+    text-decoration: none;
+}
+a >:hover {
+    color: #7f33cc;
+}
+
+.big{
+    color: rgb(53, 53, 53);
+    font-size: 200px;
+}
+.light{
+    color: rgb(100, 100, 100);
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 20px;
+}
+.accent{
+    color:rgb(100, 53, 100);
+}
+.notification{
+
+}
+.text-green{
+    color:#39c639;
+}
+.text-red{
+    color: #c6393c;
+}
+.correct{
+    background-color:#39c639;
+}
+.incorrect{
+    background-color: #c6393c;
+}
+.passed{
+    background-color:grey;
+}

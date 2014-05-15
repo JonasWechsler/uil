@@ -1,0 +1,8 @@
+extends layout
+
+block content
+    h1= title
+    form#next(name="grading",method="get",action="/")
+        button.next(type="next") Home
+block footer
+    script(src="/scripts/keys.js")

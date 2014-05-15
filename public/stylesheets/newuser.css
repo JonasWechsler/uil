@@ -1,0 +1,43 @@
+.err {
+    color: red;
+}
+.center {
+    text-align: center;
+}
+h1{
+	margin: .67em 0 .67em 5px;
+}
+form > input{
+	border: 2px solid #ccc;
+	/*width: 930px;*/
+	width:500px;
+	color: #999;
+	margin:5px;
+	display:inline-block;
+	padding:.8em;
+	text-indent:.5em;
+	height: 2em;
+	font-size: 1em;
+}
+form > .left{
+	float:left;
+}
+form > .right{
+	float:right;
+}
+form > .half{
+	/*width:445px;*/
+	width:230px;
+}
+form > #submit{
+	margin:5px;
+	border-radius:0;
+	border: 0px;
+	background-color: rgb(100, 53, 100);
+	color:white;
+	height:2.5em;
+	width:8em;
+	font-size:1em;
+  letter-spacing: .3em;
+  text-transform: uppercase;
+}

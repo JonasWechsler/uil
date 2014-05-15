@@ -1,0 +1,20 @@
+{
+  "name": "application-name",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "express": "3.3.4",
+    "jade": "*",
+    "pdf-text": "~0.3.0",
+    "lodash": "~2.4.1",
+    "mongodb": "*",
+    "monk": "*",
+    "password-hash": "~1.2.1",
+    "time": "~0.10.0",
+    "node-mailer": "^0.1.1",
+    "node-sass": "~0.8.6"
+  }
+}

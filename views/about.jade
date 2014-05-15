@@ -1,0 +1,16 @@
+extends layout
+block head
+    link(rel='stylesheet', href='/stylesheets/about.css')
+block content
+    span.about
+        div.title= title
+        div.details= desc
+    .names
+        for profile in profiles
+            span.profile
+                img(src= profile.img).profileimage
+                span.bio
+                    div.name= profile.name
+                    div.desc= profile.desc
+                    a(href=profile.src).icon
+                        img.icon(src="images/github.png")

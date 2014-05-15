@@ -1,0 +1,80 @@
+extends layout
+block head
+    link(rel='stylesheet', href='/stylesheets/scoreboard.css')
+block content
+    h1= "Computer Science Bible"
+    table(border= 1 frame="void" rules="all")
+        tr#top
+            td="Topics"
+        tr
+            td
+                a(href= "/bible/math")
+                    div.name
+                        |Base Conversion and Algebra
+        tr
+            td
+                a(href='/bible/classes')
+                    div.name
+                        |User Defined Classes
+        tr
+            td
+                a(href='/bible/datatypes')
+                    div.name
+                        |Data Types
+        tr
+            td
+                a(href='/bible/operators')
+                    div.name
+                        |Operators
+        tr
+            td
+                a(href='/bible/loops')
+                    div.name
+                        |Loops
+        tr
+            td
+                a(href='/bible/system.out')
+                    div.name
+                            |System.out
+        tr
+            td
+                a(href='/bible/escapes')
+                    div.name
+                        |Escape Sequences
+        tr
+            td
+                a(href='/bible/parsing')
+                    div.name
+                        |Parsing
+        tr
+            td
+                a(href='/bible/regex')
+                    div.name
+                        |Regex
+        tr
+            td
+                a(href='/bible/exceptions')
+                    div.name
+                        |Exceptions
+        tr
+            td
+                a(href='/bible/library')
+                    div.name
+                        |Java Standard Library
+        tr
+            td
+                a(href='/bible/datastructures')
+                    div.name
+                        |Data Structures
+        tr
+            td
+                a(href='/bible/recursion')
+                    div.name
+                        |Recursion
+        tr
+            td
+                a(href='/bible/sorting')
+                    div.name
+                        |Sorting
+            
+            

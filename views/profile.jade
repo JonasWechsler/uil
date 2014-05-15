@@ -1,0 +1,66 @@
+extends layout
+block head
+    link(rel='stylesheet', href='/stylesheets/profile.css')
+block content
+    div.top-gold
+        span.info
+            .p-image
+                img#gravatarimage(src="http://www.gravatar.com/avatar/"+hash+"?s=200&d=%2Fimages%2Fdefault_photo.jpg")
+            if(found.score<10000)
+                span.score= found.score
+            else
+                span.score= found.score/1000 + "k"
+        span.streak
+            div.t= "Current Streak "
+            div.s= found.streak
+            div.t= "Longest Streak "
+            div.s= found.longeststreak
+    span.name= found.username
+    span.stats
+        - var total = found.correct.length+found.incorrect.length+found.passed.length+found.corrected.length
+        span.correct(style="width:"+750*found.correct.length/total+"px")
+        span.corrected(style="width:"+750*found.corrected.length/total+"px")
+        span.incorrect(style="width:"+750*found.incorrect.length/total+"px")
+        span.passed(style="width:"+750*found.passed.length/total+"px")
+    div.bottom
+        div.answered
+            span.quarter-1
+                h3.circle.correct
+                h3= "Correct " + found.correct.length
+                for question, i in found.correct
+                    if(i<10)
+                        a(href="/random/"+question.id)
+                            li.qid=question.id
+                a(href="/"+found.username+"/correct")
+                    h4="    See all"
+            span.quarter-2
+                h3.circle.corrected
+                h3="Corrected " + found.corrected.length
+                for question, i in found.corrected
+                    if(i<10)
+                        a.qid(href="/random/"+question.id)
+                            span.question-preview
+                                li=question.id
+                a(href="/" + found.username+"/corrected")
+                    h4="    See all"
+            span.quarter-3
+                h3.circle.incorrect
+                h3="Incorrect " + found.incorrect.length
+                for question, i in found.incorrect
+                    if(i<10)
+                        a(href="/random/"+question.id)
+                            li.qid=question.id
+                a(href="/"+found.username+"/incorrect")
+                    h4="    See all"
+            span.quarter-4
+                h3.circle.passed
+                h3="Passed "+ found.passed.length
+                for question, i in found.passed
+                    if(i<10)
+                        a.qid(href="/random/"+question.id)
+                            span.question-preview
+                                li=question.id
+                a(href="/"+found.username+"/passed")
+                    h4="    See all"
+block footer
+    script(src='/scripts/profile.js')
