@@ -15,13 +15,13 @@ block content
                 label.id= id
     div.middle
         if type==='correct'
-            h3.correct="You have answered this problem correctly."
+            h3.text-correct="You have answered this problem correctly."
         if type==='incorrect'
-            h3.incorrect="You have previously answered this question incorrectly."
+            h3.text-incorrect="You have previously answered this question incorrectly."
         if type==='passed'
-            h3.passed="You have previously passed this question."
+            h3.text-passed="You have previously passed this question."
         if type=== 'corrected'
-            h3.corrected= "You have corrected this question."
+            h3.text-corrected= "You have corrected this question."
     span.leftcol
         pre.question.code(id="qq")= question
         //div.question.code= question

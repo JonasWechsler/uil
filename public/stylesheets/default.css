@@ -102,11 +102,17 @@ a >:hover {
 .notification{
 
 }
-.text-green{
+.text-correct{
     color:#39c639;
 }
-.text-red{
+.text-incorrect{
     color: #c6393c;
+}
+.text-corrected{
+
+}
+.text-passed{
+    color:grey;
 }
 .correct{
     background-color:#39c639;
