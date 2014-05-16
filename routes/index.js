@@ -855,6 +855,7 @@ exports.index = function (db) {
                     throw err;
                 } else {
                     var hash = crypto.createHash('md5').update(found.email).digest('hex');
+                    console.log(JSON.stringify(found));
                     res.render('profile', {
                         found: found,
                         cookie: cookie,

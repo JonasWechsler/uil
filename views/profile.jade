@@ -23,6 +23,7 @@ block content
         span.incorrect(style="width:"+750*found.incorrect.length/total+"px")
         span.passed(style="width:"+750*found.passed.length/total+"px")
     div.bottom
+        canvas#canvas(width=200 height=200 style="left: 0;position: absolute;top: 100px;")
         div.answered
             span.quarter-1
                 h3.circle.correct
@@ -30,7 +31,8 @@ block content
                 for question, i in found.correct
                     if(i<10)
                         a(href="/random/"+question.id)
-                            li.qid=question.id
+                            li.qid= question.id
+                        li.qid= question.time
                 a(href="/"+found.username+"/correct")
                     h4="    See all"
             span.quarter-2
@@ -64,3 +66,5 @@ block content
                     h4="    See all"
 block footer
     script(src='/scripts/profile.js')
+    script.
+        init('!{JSON.stringify(found.correct)}','!{JSON.stringify(found.incorrect)}')
