@@ -123,6 +123,32 @@ h1 {
     left:750px;
     width:250px;
 }
+.details{
+  left: 0;
+  position: absolute;
+  top: 100px;
+}
+.vaxis{
+  -ms-transform: rotate(-90deg) translate(20px,20px); /* IE 9 */
+  -webkit-transform: rotate(-90deg) translate(105px,-105px); /* Chrome, Safari, Opera */
+  transform: rotate(-90deg) translate(-50px,50px);
+  position: relative;
+  left:-20px;
+  width:100%;
+  height:0;
+  opacity:0;
+  }
+  .haxis{
+    position: inherit;
+    left:5px;
+    opacity:0;
+  }
+  .graph:hover + .vaxis{
+    opacity:1;
+  }
+  .graph:hover + .vaxis + .haxis{
+    opacity:1;
+  }
 .answered{
   position: relative;
   top:75px;

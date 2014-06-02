@@ -4,7 +4,7 @@ $('#gravatarimage').error(function() {
 var WIDTH = 200;
 var HEIGHT = 200;
 var divisor = 60000;
-var ctx = document.getElementById("canvas").getContext("2d");
+var ctx = document.getElementById("correctvtime").getContext("2d");
 function init(correct,incorrect){
 	correct= JSON.parse(correct);
 	incorrect= JSON.parse(incorrect);
@@ -70,4 +70,10 @@ function cos_interp(a,b,x){
     var ft = x*3.141592654;
     var f = (1-Math.cos(ft))*.5;
     return a*(1-f)+b*f;
+}
+function linear_interp(a,b,x){
+	return (b-a)*x+a;
+}
+function previous(a,b,x){
+	return a;
 }

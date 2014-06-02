@@ -46,12 +46,9 @@ h1 {
 .navbar > input[type="checkbox"]:checked+.drop {
     display: block;
 }
-.dropnav:hover {
-    background: #E6E6E6;
-}
 .drop {
     position: absolute;
-    top: 72px;
+    top: 60px;
     right: 5px;
     width: 130px;
     display: block;
@@ -80,6 +77,26 @@ h1 {
     height: 25px;
     margin-right: 5px;
 }
+.drop span{
+    font-size: 20px;
+}
+.arrow_box {
+    background: #CCC;
+}
+.arrow_box:after {
+    bottom: 100%;
+    left: 50%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+    border-bottom-color: #CCC;
+    border-width: 10px;
+    margin-left: -10px;
+}
+
 .dropnav {
     margin: 0 5px 0 5px;
     padding: 5px;

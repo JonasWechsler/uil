@@ -33,4 +33,10 @@ td:nth-child(1) > * > *{
     display: inline-block;
     left:0;
     float: left;
+    color:white;
+}
+.bar span{
+    margin-top:.5em;
+    margin-right:.5em;
+    float:right;
 }

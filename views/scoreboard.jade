@@ -7,21 +7,21 @@ block content
         thead
             tr
                 th= "Username"
-                th= "Score"
                 th= "Current Streak"
                 th= "Longest Streak"
-        - var maxCorrect = 0
+                th= "Score"
+        - var maxScore = 0
         each person in ranking
-            if (person.correct.length > maxCorrect)
-                - maxCorrect = person.correct.length
+            if (person.score > maxScore)
+                - maxScore = person.score
         each person in ranking
             tr
                 td
                     a(href= "/user/"+person.username)
                         div.name= person.username
-                td= person.score
                 td= person.streak
                 td= person.longeststreak
                 td
-                    span.correct.bar(style="width:"+500*person.correct.length/maxCorrect + "px")
+                    span.correct.bar(style="width:"+250*person.score/maxScore + "px")
+                        span= person.score
                 
