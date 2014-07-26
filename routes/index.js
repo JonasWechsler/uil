@@ -886,7 +886,7 @@ exports.getquestion = function (db) {
             } else if (!found) {
                 res.redirect("/signin");
             } else if (found.questions.length === 0) {
-                res.send("You answered all of the questions...all bajillion of them...go read a book or something...or answer some of the questions you missed or passed!");
+                res.send("No more questions");
             } else {
                 var correcty = found.correct;
                 var incorrecty = found.incorrect;
