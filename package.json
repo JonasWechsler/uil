@@ -14,7 +14,12 @@
     "monk": "*",
     "password-hash": "~1.2.1",
     "time": "~0.10.0",
-    "node-mailer": "^0.1.1",
-    "node-sass": "~0.8.6"
+    "nodemailer": ">= 0.1.15",
+    "underscore":"*",
+    "node-sass": "~0.8.6",
+    "pdf2json":"~0.6.6",
+    "xmldom": ">=0.1.13",
+    "optimist": ">=0.3.5",
+    "async": ">=0.2.6"
   }
 }

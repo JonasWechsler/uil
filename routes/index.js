@@ -2,7 +2,8 @@ var passwordHash = require('password-hash');
 var crypto = require('crypto'); //To generate a hash for gravatar
 var mongo = require('mongodb');
 var monk = require('monk');
-var db = monk('localhost:27017/nodetest1');
+var db = monk('lasauil:lasauil@novus.modulusmongo.net:27017/mogAh5az');
+
 module.exports = function(app) {
 
     app.all('/home', function (req, res) {
@@ -59,7 +60,7 @@ module.exports = function(app) {
     });
 
     app.get('/', function (req, res) {
-        if (req.session.user) {
+        if (req.session.loggedin) {
             var username = req.session.user;
             var users = db.get('users');
             users.findOne({
@@ -67,7 +68,7 @@ module.exports = function(app) {
             }, function (err, found) {
                 if (err) {
                     throw err;
-                } else {
+                } else if (found) {
                     var hash = crypto.createHash('md5').update(found.email).digest('hex');
                     console.log(JSON.stringify(found));
                     res.render('userpages/profile', {
@@ -75,6 +76,10 @@ module.exports = function(app) {
                         session: req.session,
                         hash: hash
                     });
+                } else {
+                    res.render('index', {
+                        session: req.session
+                    })
                 }
             });
         } else {

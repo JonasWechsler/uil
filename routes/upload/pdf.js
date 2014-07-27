@@ -1,12 +1,13 @@
-var p2jcmd = require('../../node_modules/pdf2json/lib/p2jcmd'),
+var p2jcmd = require('pdf2json'),
     path = require('path'),
     _ = require('underscore'),
     fs = require('fs'),
     nodeUtil = require('util'),
     mongo = require('mongodb'),
     monk = require('monk'),
-    PFParser = require('../../node_modules/pdf2json/pdfparser');
-var db = monk('localhost:27017/nodetest1');
+    PFParser = require('pdf2json/pdfparser');
+var db = monk('lasauil:lasauil@novus.modulusmongo.net:27017/mogAh5az');
+
 var collection = db.get("questions");
 
 var output;

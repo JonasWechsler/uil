@@ -2,7 +2,8 @@ var nodemailer = require('nodemailer');
 var teacher = "jacobstephens";
 var mongo = require('mongodb');
 var monk = require('monk');
-var db = monk('localhost:27017/nodetest1');
+var db = monk('lasauil:lasauil@novus.modulusmongo.net:27017/mogAh5az');
+
 module.exports = function(app) {
     app.all('/getfeedback', function (req, res) {
         res.render('feedback/feedback', {
