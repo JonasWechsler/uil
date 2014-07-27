@@ -1,8 +1,0 @@
-extends layout
-block head
-    link(rel='stylesheet', href='/stylesheets/listof.css')
-block content
-    h1= found.username+ " incorrectly answered: " + found.incorrect.length
-    each question in found.incorrect
-        a(href = "/random/"+question.id)
-            li=question.id

@@ -1,0 +1,27 @@
+extends ../layout
+block head
+    link(rel='stylesheet', href='/stylesheets/scoreboard.css')
+block content
+    h1= "Most Recent Rankings"
+    table#scoreboard(border= 1 frame="void" rules="all")
+        thead
+            tr
+                th= "Username"
+                th= "Current Streak"
+                th= "Longest Streak"
+                th= "Score"
+        - var maxScore = 0
+        each person in ranking
+            if (person.score > maxScore)
+                - maxScore = person.score
+        each person in ranking
+            tr
+                td
+                    a(href= "/user/"+person.username)
+                        div.name= person.username
+                td= person.streak
+                td= person.longeststreak
+                td
+                    span.correct.bar(style="width:"+250*person.score/maxScore + "px")
+                        span= person.score
+                

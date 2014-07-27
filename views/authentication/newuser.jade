@@ -1,0 +1,34 @@
+extends ../layout
+block head
+    link(rel='stylesheet', href='/stylesheets/newuser.css')
+block content
+    h1= title
+    //h4= prompt
+    if grade
+        h5="Please input a valid grade."
+    if password
+        h5="Your password fields do not match."
+    if empty
+        h5= "You left some of the boxes empty."
+    if character
+        h5= "Please do not use punctation in fields."
+    if email
+        h5= "Please input a valid email."
+    if error
+        h5= error
+        
+    form#formAddUser(name="adduser",method="post",action="/adduser")
+        input#inputFirstName.half(type="text", placeholder="First Name",name = "firstname")
+        input#inputLastName.half(type="text",placeholder="Last Name",name="lastname")
+        br
+        input#inputUserName(type="text", placeholder="Username", name="username")
+        br
+        input#inputUserEmail(type="text", placeholder="Email", name="useremail")
+        br
+        input#inputUserGrade(type="text", placeholder="Grade", name="usergrade")
+        br
+        input#inputPassword(type="password", placeholder="Password", name="password")
+        br
+        input#checkpassword(type="password",placeholder="Reenter Password", name="secondpassword")
+        br
+        button#submit(type="submit") submit

@@ -1,8 +1,0 @@
-extends layout
-block head
-    link(rel='stylesheet', href='/stylesheets/listof.css')
-block content
-    h1= found.username+ " passed: " + found.passed.length
-    each question in found.passed
-        a(href = "/random/"+question.id)
-            li=question.id

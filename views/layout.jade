@@ -23,7 +23,7 @@ html
             a(href="/getfeedback")
                 li.nav.left
                     |Feedback
-            if cookie
+            if session.loggedin
                 //a(href="/home")
                 a(href="/bible")
                     li.nav.button.left
