@@ -1,8 +1,8 @@
+var config = require('../../config');
 var nodemailer = require('nodemailer');
-var teacher = "jacobstephens";
 var mongo = require('mongodb');
 var monk = require('monk');
-var db = monk('lasauil:lasauil@novus.modulusmongo.net:27017/mogAh5az');
+var db = require('../../db');
 
 module.exports = function(app) {
     app.all('/getfeedback', function (req, res) {
@@ -19,12 +19,12 @@ module.exports = function(app) {
         var smtpTransport = nodemailer.createTransport("SMTP", {
             service: "Gmail",
             auth: {
-                user: "lasauiltraining@gmail.com",
-                pass: teacher
+                user: config.feedback.email,
+                pass: config.feedback.password
             }
         });
         var mailOptions = {
-            to: "lasauiltraining@gmail.com",
+            to: config.feedback.email,
             from: name,
             subject: subject,
             text: text + "\n\nRespond to this person at: " + email

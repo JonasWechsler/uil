@@ -9,7 +9,6 @@ module.exports = function(app) {
 
 
     app.all('/bible/:section', function(req,res){
-        console.log(algebra)
         var section = req.url
         section = section.substring(section.lastIndexOf('/')+1)
         res.render('bible/biblesection', {

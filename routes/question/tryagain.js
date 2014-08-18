@@ -2,8 +2,8 @@ var passwordHash = require('password-hash');
 var crypto = require('crypto'); //To generate a hash for gravatar
 var mongo = require('mongodb');
 var monk = require('monk');
-var db = monk('lasauil:lasauil@novus.modulusmongo.net:27017/mogAh5az');
-
+var db = require('../../db');
+var commonquestion = require('./commonquestion');
 module.exports = function (app) {
     app.all('/tryagain/:id', function (req, res) {
         var questionid = req.url.substring(10);
@@ -15,107 +15,87 @@ module.exports = function (app) {
             if (err) {
                 throw err;
             } else {
-                var index = -1;
-                var incorrect = false;
-                found.incorrect.forEach(function (obj, ind) {
-                    if (obj.id === questionid) {
-                        incorrect = true;
-                        index = ind;
-                    }
-                });
-                var correct = false;
-                found.correct.forEach(function (obj, ind) {
-                    if (obj.id === questionid) {
-                        correct = true;
-                        index = ind;
-                    }
-                });
-                var passed = false;
-                found.passed.forEach(function (obj, ind) {
-                    if (obj.id === questionid) {
-                        passed = true;
-                        index = ind;
-                    }
-                });
-                found.corrected.forEach(function(obj,ind){
-                    if(obj.id === questionid){
-                        index = ind;
-                    }
-                })
-                if (correct) {
-                    var questions = db.get('questions');
-                    questions.findOne({
-                        '_id': questionid
-                    }, function (err, question) {
-                        var choices = question.key;
-                        var prompt = 'Test: ' + question['test'] + '\nQuestion: ' + question['ques'];
-                        res.render('question/tryagainquestion', {
-                            question:question,
-                            title: 'Random Question',
-                            prompt: prompt,
-                            session: req.session,
-                            type: "correct",
-                            choices: choices,
-                            themeq: found.qtheme,
-                            themec: found.ctheme
+                commonquestion.isQuestion(found,'correct',questionid,function(correctIndex) {
+                    if (correctIndex !== -1) {
+                        questions.findOne({
+                            '_id': questionid
+                        }, function (err, question) {
+                            var choices = question.key;
+                            var prompt = 'Test: ' + question['test'] + '\nQuestion: ' + question['ques'];
+                            res.render('question/tryagainquestion', {
+                                question:question,
+                                title: 'Random Question',
+                                prompt: prompt,
+                                session: req.session,
+                                type: "correct",
+                                choices: choices,
+                                themeq: found.qtheme,
+                                themec: found.ctheme
+                            });
                         });
-                    });
-                } else if (incorrect) {
-                    var questions = db.get('questions');
-                    questions.findOne({
-                        '_id': questionid
-                    }, function (err, question) {
-                        var choices = found.incorrect[index].choice;
-                        var title = "Random Question";
-                        var prompt = 'Test: ' + question['test'] + '\nQuestion: ' + question['ques'];
-                        res.render('question/tryagainquestion', {
-                            question:question,
-                            title: title,
-                            prompt: prompt,
-                            session: req.session,
-                            type: "incorrect",
-                            choices: choices,
-                            themeq: found.qtheme,
-                            themec: found.ctheme
+                    } 
+                });
+                commonquestion.isQuestion(found,'incorrect',questionid,function(incorrectIndex) {
+                    if (incorrectIndex !== -1) {
+                        questions.findOne({
+                            '_id': questionid
+                        }, function (err, question) {
+                            var choices = found.incorrect[incorrectIndex].choice;
+                            var title = "Random Question";
+                            var prompt = 'Test: ' + question['test'] + '\nQuestion: ' + question['ques'];
+                            res.render('question/tryagainquestion', {
+                                question:question,
+                                title: title,
+                                prompt: prompt,
+                                session: req.session,
+                                type: "incorrect",
+                                choices: choices,
+                                themeq: found.qtheme,
+                                themec: found.ctheme
+                            });
                         });
-                    });
-                } else if (passed) {
-                    var questions = db.get('questions');
-                    questions.findOne({
-                        '_id': questionid
-                    }, function (err, question) {
+                    }
+                });
+                commonquestion.isQuestion(found,'passed',questionid, function(passedIndex) {
+                    if (passedIndex !== -1) {
+                        questions.findOne({
+                            '_id': questionid
+                        }, function (err, question) {
+                            var answers = question.ans;
+                            var title = "Random Question";
+                            var prompt = 'Test: ' + question['test'] + '\nQuestion: ' + question['ques'];
+                            res.render('question/tryagainquestion', {
+                                question:question,
+                                title: title,
+                                prompt: prompt,
+                                session: req.session,
+                                type: "passed",
+                                themeq: found.qtheme,
+                                themec: found.ctheme
+                            });
+                        });
+                    }
+                });
+                commonquestion.isQuestion(found,'corrected',questionid, function(correctedIndex) {
+                    if(correctedIndex !== -1) {
+                        questions.findOne({ '_id':questionid}, function(err, question){
                         var answers = question.ans;
-                        var title = "Random Question";
-                        var prompt = 'Test: ' + question['test'] + '\nQuestion: ' + question['ques'];
-                        res.render('question/tryagainquestion', {
-                            question:question,
-                            title: title,
-                            prompt: prompt,
-                            session: req.session,
-                            type: "passed",
-                            themeq: found.qtheme,
-                            themec: found.ctheme
+                            var title = "Random Question";
+                            var prompt = 'Test: ' + question['test'] + "\nQuestion: " + question['ques'];
+                            var choices = found.corrected[index].choice;
+                            res.render('question/tryagainquestion', {
+                                question:question,
+                                title: title,
+                                prompt: prompt,
+                                session: req.session,
+                                type: 'corrected',
+                                choices: choices,
+                                themeq: found.qtheme,
+                                themec: found.ctheme
+                            });
                         });
-                    });
-                } else {
-                    var questions = db.get('questions');
-                    questions.findOne({ '_id':questionid}, function(err, question){
-                    var answers = question.ans;
-                        var title = "Random Question";
-                        var prompt = 'Test: ' + question['test'] + "\nQuestion: " + question['ques'];
-                        var choices = found.corrected[index].choice;
-                        res.render('question/tryagainquestion', {
-                            question:question,
-                            title: title,
-                            prompt: prompt,
-                            session: req.session,
-                            type: 'corrected',
-                            choices: choices,
-                            themeq: found.qtheme,
-                            themec: found.ctheme
-                        });
-                    });
-                }
+                    } 
+                });
             }
         })
 

@@ -2,12 +2,13 @@ var passwordHash = require('password-hash');
 var crypto = require('crypto'); //To generate a hash for gravatar
 var mongo = require('mongodb');
 var monk = require('monk');
-var db = monk('lasauil:lasauil@novus.modulusmongo.net:27017/mogAh5az');
+var db = require('../../db');
+var questions = db.get('questions');
+var users = db.get('users');
+var commonquestion = require('./commonquestion');
 
 module.exports = function(app) {
     app.all('/random', function (req, res) {
-        var questions = db.get('questions');
-        var users = db.get('users');
         users.findOne({
             '_id': req.session.id
         }, function (err, found) {
@@ -18,35 +19,7 @@ module.exports = function(app) {
             } else if (found.questions.length === 0) {
                 res.send("No more questions");
             } else {
-                var correcty = found.correct;
-                var incorrecty = found.incorrect;
-                var correctedy = found.corrected;
-                var scorey = 0;
-                scorey+=100*correcty.length;
-                scorey-=(20*incorrecty.length);
-                for( var i = 0;i<correctedy.length;i++){
-                    var longy = correctedy[i].choice.length;
-                    if(longy===1){
-                        scorey+=70;
-                    }
-                    else if(longy===2){
-                        scorey+=50;
-                    }
-                    else if(longy===3){
-                        scorey+=40;
-                    }
-                    else{
-                        scorey+=30;
-                    }
-                }
-                users.update({
-                    '_id': req.session.id
-                }, {
-                    $set: {
-                        'score':scorey
-                    }
-                });
-                console.log('score is updated');
+                commonquestion.recalcScore(found);
 
                 var arrayofquestions = found.questions;
 
@@ -82,13 +55,13 @@ module.exports = function(app) {
                 var incorrect = found.incorrect
                 var passed = found.passed;
                 var corrected = found.corrected;
-                if (JSON.stringify(correct).indexOf(id) > -1) {
+                if (correct && JSON.stringify(correct).indexOf(id) > -1) {
                     res.redirect('/tryagain/' + id);
-                } else if (JSON.stringify(incorrect).indexOf(id) > -1) {
+                } else if (incorrect && JSON.stringify(incorrect).indexOf(id) > -1) {
                     res.redirect('/tryagain/' + id);
-                } else if (JSON.stringify(passed).indexOf(id) > -1) {
+                } else if (passed && JSON.stringify(passed).indexOf(id) > -1) {
                     res.redirect('/tryagain/' + id);
-                } else if(JSON.stringify(corrected).indexOf(id) > -1){
+                } else if(corrected && JSON.stringify(corrected).indexOf(id) > -1){
                     res.redirect('/tryagain/'+id);
                 }
                 if (JSON.stringify(questions).indexOf(id) > -1) {
@@ -108,6 +81,7 @@ module.exports = function(app) {
                             var prompt = 'Test: ' + question['test'] + '\nQuestion: ' + question['ques'];
                             var answers = question['ans'];
                             res.render('question/renderquestion', {
+                                questionid: id,
                                 question: question,
                                 title: 'Random Question',
                                 prompt: prompt,
@@ -125,15 +99,16 @@ module.exports = function(app) {
     app.all('/checkquestion', function (req, res) {
         var choice = req.body.choice;
         var id = req.body.id;
+        var retry = req.body.retry;
         var collection = db.get('questions');
         var users = db.get('users');
         collection.findOne({
             "_id": id
-        }, function (err, found) {
+        }, function (err, foundquestion) {
             if (err) {
                 throw err;
             } else {
-                var answer = found['key'];
+                var answer = foundquestion['key'];
                 if (choice == answer) {
                     users.findOne({
                         '_id': req.session.id
@@ -141,72 +116,15 @@ module.exports = function(app) {
                         if (err) {
                             throw err;
                         } else {
-                            var correcty = found.correct;
-                            var incorrecty = found.incorrect;
-                            var correctedy = found.corrected;
-                            var scorey = 0;
-                            scorey+=100*correcty.length;
-                            scorey-=(20*incorrecty.length);
-                            for( var i = 0;i<correctedy.length;i++){
-                                var longy = correctedy[i].choice.length;
-                                if(longy===1){
-                                    scorey+=70;
-                                }
-                                else if(longy===2){
-                                    scorey+=50;
-                                }
-                                else if(longy===3){
-                                    scorey+=40;
-                                }
-                                else{
-                                    scorey+=30;
-                                }
-                            }
-                            users.update({
-                                '_id': req.session.id
-                            }, {
-                                $set: {
-                                    'score':scorey
-                                }
-                            });
-                            console.log('score is updated');
-                            var array = found['correct'];
-                            var otherarray = found['questions'];
-                            var streak = found.streak;
-                            var longeststreak = found.longeststreak;
-                            streak++;
-                            if (streak > longeststreak) {
-                                users.update({'_id': req.session.id}, {$set: {'longeststreak': streak}});
-                            }
-                            var index = otherarray.map(function (obj, index) {
-                                if (obj.id == id) {
-                                    return index;
-                                }
-                            }).filter(isFinite)
-                            otherarray.splice(index, 1);
-                            users.update({
-                                '_id': req.session.id
-                            }, {
-                                $set: {
-                                    'questions': otherarray,
-                                    'streak': streak
-                                }
-                            });
-                            array.push({
-                                id: id,
-                                time: Date.now(),
-                                choice: [choice]
-                            });
-                            users.update({
-                                '_id': req.session.id
-                            }, {
-                                $set: {
-                                    'correct': array
-                                }
-                            });
+                            commonquestion.recalcScore(found);
+                            commonquestion.placeIntoAnsweredCategory(found, 'correct', id, choice);
                         }
                     });
-                    res.redirect('/random');
+                    if (retry) {
+                        res.redirect('/tryagain/' + id);
+                    } else {
+                        res.redirect('/random');
+                    }
                 } else if (!choice) {
                     users.findOne({
                         '_id': req.session.id
@@ -214,66 +132,15 @@ module.exports = function(app) {
                         if (err) {
                             throw err;
                         } else {
-                            var correcty = found.correct;
-                            var incorrecty = found.incorrect;
-                            var correctedy = found.corrected;
-                            var scorey = 0;
-                            scorey+=100*correcty.length;
-                            scorey-=(20*incorrecty.length);
-                            for( var i = 0;i<correctedy.length;i++){
-                                var longy = correctedy[i].choice.length;
-                                if(longy===1){
-                                    scorey+=70;
-                                }
-                                else if(longy===2){
-                                    scorey+=50;
-                                }
-                                else if(longy===3){
-                                    scorey+=40;
-                                }
-                                else{
-                                    scorey+=30;
-                                }
-                            }
-                            users.update({
-                                '_id': req.session.id
-                            }, {
-                                $set: {
-                                    'score':scorey
-                                }
-                            });
-                            console.log('score is updated');
-                            var otherarray = found['questions'];
-                            var index = otherarray.map(function (obj, index) {
-                                if (obj.id == id) {
-                                    return index;
-                                }
-                            }).filter(isFinite)
-                            otherarray.splice(index, 1);
-                            users.update({
-                                '_id': req.session.id
-                            }, {
-                                $set: {
-                                    'questions': otherarray
-                                }
-                            });
-
-                            var array = found['passed'];
-                            array.push({
-                                id: id,
-                                time: Date.now(),
-                                choice: [choice]
-                            });
-                            users.update({
-                                '_id': req.session.id
-                            }, {
-                                $set: {
-                                    'passed': array,
-                                }
-                            });
+                            commonquestion.recalcScore(found);
+                            commonquestion.placeIntoAnsweredCategory(found, 'passed', id, choice);
                         }
                     });
-                    res.redirect('/random');
+                    if (retry) {
+                        res.redirect('/tryagain/' + id);
+                    } else {
+                        res.redirect('/random');
+                    }
                 } else {
                     users.findOne({
                         '_id': req.session.id
@@ -281,68 +148,15 @@ module.exports = function(app) {
                         if (err) {
                             throw err;
                         } else {
-                            var correcty = found.correct;
-                            var incorrecty = found.incorrect;
-                            var correctedy = found.corrected;
-                            var scorey = 0;
-                            scorey+=100*correcty.length;
-                            scorey-=(20*incorrecty.length);
-                            for( var i = 0;i<correctedy.length;i++){
-                                var longy = correctedy[i].choice.length;
-                                if(longy===1){
-                                    scorey+=70;
-                                }
-                                else if(longy===2){
-                                    scorey+=50;
-                                }
-                                else if(longy===3){
-                                    scorey+=40;
-                                }
-                                else{
-                                    scorey+=30;
-                                }
-                            }
-                            users.update({
-                                '_id': req.session.id
-                            }, {
-                                $set: {
-                                    'score':scorey
-                                }
-                            });
-                            console.log('score is updated');
-                            var otherarray = found['questions'];
-                            var index = otherarray.map(function (obj, index) {
-                                if (obj.id == id) {
-                                    return index;
-                                }
-                            }).filter(isFinite)
-                            otherarray.splice(index, 1);
-                            var streak = found.streak;
-                            streak = 0;
-                            users.update({
-                                '_id': req.session.id
-                            }, {
-                                $set: {
-                                    'questions': otherarray,
-                                    'streak': streak
-                                }
-                            });
-                            var array = found['incorrect'];
-                            array.push({
-                                id: id,
-                                time: Date.now(),
-                                choice: [choice]
-                            });
-                            users.update({
-                                '_id': req.session.id
-                            }, {
-                                $set: {
-                                    'incorrect': array
-                                }
-                            });
+                            commonquestion.recalcScore(found);
+                            commonquestion.placeIntoAnsweredCategory(found, 'incorrect', id, choice);
                         }
                     });
-                    res.redirect('/random');
+                    if (retry) {
+                        res.redirect('/tryagain/' + id);
+                    } else {
+                        res.redirect('/random');
+                    }
                 }
             }
         });

@@ -69,7 +69,7 @@ input[type="radio"]:checked+label {
 .next{
     display: none;
 }
-.try{
+.try {
     display:none;
 }
 .submit > label {

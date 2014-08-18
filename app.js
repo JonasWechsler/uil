@@ -4,12 +4,13 @@ var express = require('express'),
     sass = require('node-sass'),
     mongo = require('mongodb'),
     monk = require('monk'),
-    verification = require('./verification.js');
+    verification = require('./verification.js'),
+    config = require('./config');
 
 var app = express();
 
 // all environments
-app.set('port', process.env.PORT || 3000);
+app.set('port', config.port);
 app.set('views', __dirname + '/views');
 app.set('view engine', 'jade');
 app.use(express.favicon());

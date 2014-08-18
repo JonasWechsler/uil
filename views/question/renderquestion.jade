@@ -32,6 +32,7 @@ block content
                 input#E(type="radio",name="choice",value="E")
                 |#{question.ans[4]}
             input(type="hidden",name = "id", value= question["_id"])
+            input(type="hidden",name="retry", value = "")
             br
             button.next next
         button#sub submit
@@ -46,18 +47,4 @@ block footer
         var key ="#{question['key']}";
     script(src="/scripts/questiondisp.js")
     script(src="/scripts/keys.js")
-    script.  
-        $(document).ready(function(){
-            $('#sub').click(function(){
-                var first = $("input[name=choice]:checked").val();
-                if(key===first)
-                    $('label[for=' + first + ']').css('background-color','green');
-                else
-                    $('label[for=' + first + ']').css('background-color','red');
-                $('#sub').remove();
-                $('label').click(false);
-                $('.next').css('display','initial');
-                $('.try').css('display','initial');
-                $('.next').attr('id','sub');
-            });
-        });
+    script(src="/scripts/submitquestion.js")

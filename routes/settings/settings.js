@@ -2,7 +2,7 @@ var passwordHash = require('password-hash');
 var crypto = require('crypto'); //To generate a hash for gravatar
 var monk = require('monk');
 var mongo = require('mongodb');
-var db = monk('lasauil:lasauil@novus.modulusmongo.net:27017/mogAh5az');
+var db = require('../../db');
 
 module.exports = function(app) {
     app.get('/settings', function (req, res) {

@@ -1,3 +1,4 @@
+
 var p2jcmd = require('pdf2json'),
     path = require('path'),
     _ = require('underscore'),
@@ -6,10 +7,9 @@ var p2jcmd = require('pdf2json'),
     mongo = require('mongodb'),
     monk = require('monk'),
     PFParser = require('pdf2json/pdfparser');
-var db = monk('lasauil:lasauil@novus.modulusmongo.net:27017/mogAh5az');
-
+var db = require('../../db');
 var collection = db.get("questions");
-
+var usercollection = db.get("users");
 var output;
 var input = "";
 var json = {
@@ -470,6 +470,18 @@ var save = function (file, dirname, filename, callback) {
         });
     });
 }
+
+function pushToDb(obj, callback) {
+    for(var i = 0; i<obj.list.length; i++){
+        collection.insert(JSON.parse(obj.list[i]), function(err, docInserted) {
+            //necessary for each one in case one fails
+            // also since this is a callback you can't ensure the 'idsToInsert' object 
+            //is finished unless it's in the same anonymous function
+            //this is not scalable
+            callback(docInserted._id);  
+        });
+    }
+}
 module.exports = function(app) {
     app.get('/pdf', function (req, res) {
         res.render('upload/pdf', {
@@ -483,10 +495,11 @@ module.exports = function(app) {
         var input = req.body.in;
         var obj = JSON.parse(input);
         res.send(JSON.stringify(obj));
-        for(var i = 0; i<obj.list.length; i++){
-            collection.insert(JSON.parse(obj.list[i]));
-        }
-
+        pushToDb(obj, function(idToInsert) {
+            usercollection.update({}, {
+                $push:{questions:idToInsert}
+            });
+        });
     });
     app.post('/pdf', function (req, res) {
         console.log(req.files.upload);
@@ -514,7 +527,7 @@ module.exports = function(app) {
                     //parsing the json to questions
                     parseJSON(res, req);
                 });
-                //Might not end...
+                //Ends late due to callbacks
 
             }
         });

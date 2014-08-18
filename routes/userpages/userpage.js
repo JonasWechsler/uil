@@ -2,7 +2,7 @@ var passwordHash = require('password-hash');
 var crypto = require('crypto'); //To generate a hash for gravatar
 var mongo = require('mongodb');
 var monk = require('monk');
-var db = monk('lasauil:lasauil@novus.modulusmongo.net:27017/mogAh5az');
+var db = require('../../db');
 
 module.exports = function(app) {
     app.all('/scoreboard', function (req, res) {
@@ -40,7 +40,6 @@ module.exports = function(app) {
                 throw err;
             } else {
                 var hash = crypto.createHash('md5').update(found.email).digest('hex');
-                console.log(found)
                 res.render('userpages/profile', {
                     found: found,
                     session: req.session,
