@@ -6,6 +6,7 @@ $(document).ready(function(){
         else
             $('label[for=' + first + ']').css('background-color','red');
         $('#sub').remove();
+        $('#sub').remove();
         $('label').click(false);
         $('.next').css('display','inline');
         $('.try').css('display','inline');
