@@ -78,18 +78,4 @@ block footer
         var key ="#{question.key}";
     script(src="/scripts/questiondisp.js")
     script(src="/scripts/keys.js")
-    script.  
-        $(document).ready(function(){
-            $('#sub').click(function(){
-                var first = $("input[name=choice]:checked").val();
-                if(key===first)
-                    $('label[for=' + first + ']').addClass('correct');
-                else
-                    $('label[for=' + first + ']').addClass('incorrect');
-                $('#sub').remove();
-                $('label').click(false);
-                $('.next').css('display','initial');
-                $('.next').attr('id','sub');
-                
-            });
-        });
+    script(src="/scripts/submitquestion.js")
