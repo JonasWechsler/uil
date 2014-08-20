@@ -35,7 +35,7 @@ html
                     li.nav.button.left
                         i.fa.fa-random
                 label(for="dropdown").nav.right= session.user
-                input(type="checkbox")#dropdown
+                input.biginput(type="checkbox")#dropdown
                 .drop.arrow_box
                     a(href="/home")
                         div.dropnav
@@ -53,6 +53,11 @@ html
                         div.dropnav
                             i.fa.fa-sign-out
                             span="Logout"
+                li.nav.button.right
+                    form.submit(name="search",method="post",action="/search")
+                        input.smallinput#testname.text.small(type="text", placeholder="Test Name", name="testname")
+                        input.smallinput#qno.text.small(type="text", placeholder="Question Number", name="qno")
+                        button#sub.hidden(type="submit") submit
             else
                 a(href="/newuser")
                     li.nav.button.right

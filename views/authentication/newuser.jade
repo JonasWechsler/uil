@@ -18,17 +18,17 @@ block content
         h5= error
         
     form#formAddUser(name="adduser",method="post",action="/adduser")
-        input#inputFirstName.half(type="text", placeholder="First Name",name = "firstname")
-        input#inputLastName.half(type="text",placeholder="Last Name",name="lastname")
+        input.biginput#inputFirstName.half(type="text", placeholder="First Name",name = "firstname")
+        input.biginput#inputLastName.half(type="text",placeholder="Last Name",name="lastname")
         br
-        input#inputUserName(type="text", placeholder="Username", name="username")
+        input.biginput#inputUserName(type="text", placeholder="Username", name="username")
         br
-        input#inputUserEmail(type="text", placeholder="Email", name="useremail")
+        input.biginput#inputUserEmail(type="text", placeholder="Email", name="useremail")
         br
-        input#inputUserGrade(type="text", placeholder="Grade", name="usergrade")
+        input.biginput#inputUserGrade(type="text", placeholder="Grade", name="usergrade")
         br
-        input#inputPassword(type="password", placeholder="Password", name="password")
+        input.biginput#inputPassword(type="password", placeholder="Password", name="password")
         br
-        input#checkpassword(type="password",placeholder="Reenter Password", name="secondpassword")
+        input.biginput#checkpassword(type="password",placeholder="Reenter Password", name="secondpassword")
         br
         button#submit(type="submit") submit

@@ -9,6 +9,6 @@ block content
         if(error==="username")
             h5= "That username does not exist in our database"
         form#formSignIn.inside(name="sign",method="post",action="/signin")
-            input#inputUserName.text(type="text", placeholder="username", name="username")
-            input#UserPassword.text(type="password", placeholder="password", name="password")
+            input.biginput#inputUserName.text(type="text", placeholder="username", name="username")
+            input.biginput#UserPassword.text(type="password", placeholder="password", name="password")
             button#submit(type="submit") submit

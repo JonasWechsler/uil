@@ -1,0 +1,14 @@
+extends ../layout
+block head
+    link(rel='stylesheet', href='/stylesheets/default.css')
+    script(src="../ace-builds/src-noconflict/ace.js")
+block content
+    if prompt
+        h1.text-incorrect= prompt
+    h1= "Search"
+    form.submit(name="search",method="post",action="/search")
+            input.biginput#testname.text(type="text", placeholder="Test Name", name="testname")
+            input.biginput#qno.text(type="text", placeholder="Question Number", name="qno")
+            button#sub(type="submit") submit
+block footer
+    script(src="/scripts/keys.js")
