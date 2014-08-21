@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    var submittedQuestion = function(init) {
+    var submitQ = (function(init) {
         return function(event) {
             //we only want to replace these on the first call
             var isNotFirstCall = !init;
@@ -21,9 +21,7 @@ $(document).ready(function() {
             }
             return isNotFirstCall;
         }
-    }
-
-    var submitQ = submittedQuestion(true);
+    })(true);
 
     var bind = function() {
         $('.content').find('.sub').click(function(event) {
