@@ -54,11 +54,11 @@ block content
         button.next(type="submit") submit
     h1= "Change Password"
     form.submit(name="newpass",method="post",action="/settings")
-            input#oldpass.text(type="password", placeholder="Old Password", name="pass")
+            input.biginput#oldpass.text(type="password", placeholder="Old Password", name="pass")
             br
-            input#newpass.text(type="password", placeholder="New Password", name="newpass")
+            input.biginput#newpass.text(type="password", placeholder="New Password", name="newpass")
             br
-            input#newpassc.text(type="password", placeholder="Confirm New Password", name="newpassc")
+            input.biginput#newpassc.text(type="password", placeholder="Confirm New Password", name="newpassc")
             br
             button.next(type="submit") submit
 block footer

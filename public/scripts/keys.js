@@ -27,7 +27,7 @@ $('body').keydown(function (e) {
 $('body').keyup(function (e) {
     switch (e.which) {
         case ENTER:
-            $('#sub').click();
+            $('.sub').trigger('enter', [e.target]);
             break;
     }
     keys[e.which] = false;

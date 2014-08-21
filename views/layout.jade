@@ -54,10 +54,10 @@ html
                             i.fa.fa-sign-out
                             span="Logout"
                 li.nav.button.right
-                    form.submit(name="search",method="post",action="/search")
-                        input.smallinput#testname.text.small(type="text", placeholder="Test Name", name="testname")
-                        input.smallinput#qno.text.small(type="text", placeholder="Question Number", name="qno")
-                        button#sub.hidden(type="submit") submit
+                    form.search.submit(name="search",method="post",action="/search")
+                        input.smallinput.search#testname.text.small(type="text", placeholder="Test Name", name="testname")
+                        input.smallinput.search#qno.text.small(type="text", placeholder="Question Number", name="qno")
+                        button.sub.hidden(type="submit") submit
             else
                 a(href="/newuser")
                     li.nav.button.right
@@ -71,6 +71,7 @@ html
     div.footer
         block footer
         script(src="/scripts/keys.js")
+        script(src="/scripts/searchhandler.js")
         script.
             $(document).ready(function(){
                 $("table").tablesorter(); 
