@@ -134,9 +134,9 @@ module.exports = function(app) {
                 throw err;
             } else {
                 getQuestionsList(found.correct, function(questions) {
-                    res.render('listpages/listofcorrects', {
+                    res.render('userpages/listof', {
                         questionlist: questions,
-                        user: found,
+                        title: found.username + ' correctly answered ' + found.correct.length,
                         session: req.session
                     });
                 });
@@ -154,9 +154,9 @@ module.exports = function(app) {
                 throw err;
             } else {
                 getQuestionsList(found.incorrect, function(questions) {
-                    res.render('listpages/listofincorrects', {
+                    res.render('userpages/listof', {
                         questionlist: questions,
-                        user: found,
+                        title: found.username + ' incorrectly answered ' + found.incorrect.length,
                         session: req.session
                     });
                 });
@@ -174,9 +174,9 @@ module.exports = function(app) {
                 throw err;
             } else {
                 getQuestionsList(found.corrected, function(questions) {
-                    res.render('listpages/listofcorrected', {
+                    res.render('userpages/listof', {
                         questionlist: questions,
-                        user: found,
+                        title: found.username + ' corrected ' + found.corrected.length,
                         session: req.session
                     });
                 });
@@ -195,9 +195,9 @@ module.exports = function(app) {
                 throw err;
             } else {
                 getQuestionsList(found.passed, function(questions) {
-                    res.render('listpages/listofpassed', {
+                    res.render('userpages/listof', {
                         questionlist: questions,
-                        user: found,
+                        title: found.username + ' passed ' + found.passed.length,
                         session: req.session
                     });
                 });

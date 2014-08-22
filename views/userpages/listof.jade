@@ -2,7 +2,7 @@ extends ../layout
 block head
     link(rel='stylesheet', href='/stylesheets/listof.css')
 block content
-    h1= user.username + " passed: " + user.passed.length
+    h1= title
     each question in questionlist
         a(href = "/random/"+question._id)
             li=question['test'] + ': ' + question['ques']
