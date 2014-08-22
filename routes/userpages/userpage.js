@@ -15,8 +15,18 @@ var getQuestionsList = function(idlist, callback) {
             completed();
         });
     }, function(err) {
-        callback(questionlist);
+        callback(questionlist.sort(questioncompare));
     });
+}
+
+var questioncompare = function(a, b) {
+    var afull = a.test + "" + a.ques;
+    var bfull = b.test + "" + b.ques;
+    if(afull < bfull)
+        return -1;
+    if(bfull < afull)
+        return 1;
+    return 0;
 }
 //I should learn to use the async library better 
 //someone plz fix this
