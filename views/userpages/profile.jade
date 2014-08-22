@@ -31,40 +31,36 @@ block content
         div.answered
             span.quarter-1
                 h3.circle.correct
-                h3= "Correct " + found.correct.length
-                for question, i in found.correct
-                    if(i<10)
-                        a(href="/random/"+question.id)
-                            li.qid= question.id
+                h3="Correct " + found.correct.length
+                for question in corrects
+                    a.qid(href="/random/"+question._id)
+                        span.question-preview
+                            li=question['test'] + ": " + question['ques']
                 a(href="/"+found.username+"/correct")
                     h4="    See all"
             span.quarter-2
                 h3.circle.corrected
                 h3="Corrected " + found.corrected.length
-                for question, i in found.corrected
-                    if(i<10)
-                        a.qid(href="/random/"+question.id)
-                            span.question-preview
-                                li=question.id
+                for question in correcteds
+                    a.qid(href="/random/"+question._id)
+                        li=question['test'] + ": " + question['ques']
                 a(href="/" + found.username+"/corrected")
                     h4="    See all"
             span.quarter-3
                 h3.circle.incorrect
                 h3="Incorrect " + found.incorrect.length
-                for question, i in found.incorrect
-                    if(i<10)
-                        a(href="/random/"+question.id)
-                            li.qid=question.id
+                for question in incorrects
+                    a.qid(href="/random/"+question._id)
+                        span.question-preview
+                            li=question['test'] + ": " + question['ques']
                 a(href="/"+found.username+"/incorrect")
                     h4="    See all"
             span.quarter-4
                 h3.circle.passed
                 h3="Passed "+ found.passed.length
-                for question, i in found.passed
-                    if(i<10)
-                        a.qid(href="/random/"+question.id)
-                            span.question-preview
-                                li=question.id
+                for question in passeds
+                    a.qid(href="/random/"+question._id)
+                            li=question['test'] + ": " + question['ques']
                 a(href="/"+found.username+"/passed")
                     h4="    See all"
 block footer

@@ -2,7 +2,7 @@ extends ../layout
 block head
     link(rel='stylesheet', href='/stylesheets/listof.css')
 block content
-    h1= found.username+ " incorrectly answered: " + found.incorrect.length
-    each question in found.incorrect
-        a(href = "/random/"+question.id)
-            li=question.id
+    h1= user.username + " incorrectly answered: " + user.correct.length
+    each question in questionlist
+        a(href = "/random/"+question._id)
+            li=question['test'] + ': ' + question['ques']
