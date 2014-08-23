@@ -11,17 +11,18 @@ var getQuestionsList = function(idlist, callback) {
     var questionlist = [];
     async.each(idlist, function(id, completed) {
         questions.find({_id : id.id}, function(err, question) {
+            question[0].time = id.time;
             questionlist.push.apply(questionlist, question);
             completed();
         });
     }, function(err) {
-        callback(questionlist.sort(questioncompare));
+        callback(questionlist);
     });
 }
-
-var questioncompare = function(a, b) {
-    var afull = a.test + "" + a.ques;
-    var bfull = b.test + "" + b.ques;
+//allows for sorting for most recently answered qs
+var questiontimecompare = function(a, b) {
+    var afull = a.time;
+    var bfull = b.time;
     if(afull < bfull)
         return -1;
     if(bfull < afull)
@@ -35,7 +36,10 @@ var getFirstTen = function(user, callback) {
         getQuestionsList(user.incorrect.slice(0,11), function(incorrects) {
             getQuestionsList(user.corrected.slice(0,11), function(correcteds) {
                 getQuestionsList(user.passed.slice(0,11), function(passeds) {
-                    callback(corrects,incorrects,correcteds,passeds);
+                    callback(corrects.sort(questiontimecompare),
+                             incorrects.sort(questiontimecompare),
+                             correcteds.sort(questiontimecompare),
+                             passeds.sort(questiontimecompare));
                 });
             });
         });

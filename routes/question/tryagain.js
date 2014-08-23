@@ -82,7 +82,7 @@ module.exports = function (app) {
                         var answers = question.ans;
                             var title = "Random Question";
                             var prompt = 'Test: ' + question['test'] + "\nQuestion: " + question['ques'];
-                            var choices = found.corrected[index].choice;
+                            var choices = found.corrected[correctedIndex].choice;
                             res.render('question/tryagainquestion', {
                                 question:question,
                                 title: title,
