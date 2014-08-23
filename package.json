@@ -14,7 +14,7 @@
     "monk": "*",
     "password-hash": "~1.2.1",
     "time": "~0.10.0",
-    "nodemailer": ">= 0.1.15",
+    "nodemailer": "*",
     "underscore":"*",
     "node-sass": "~0.8.6",
     "pdf2json":"~0.6.6",
