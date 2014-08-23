@@ -1,9 +1,10 @@
 var passwordHash = require('password-hash');
 var crypto = require('crypto'); //To generate a hash for gravatar
-var mongo = require('mongodb');
-var monk = require('monk');
-var db = require('../../db');
-var commonquestion = require('./commonquestion');
+var db = require('../../common/db');
+var common = {};
+common.question = require('../../common/question');
+common.utils = require('../../common/utils');
+
 module.exports = function (app) {
     app.all('/tryagain/:id', function (req, res) {
         var questionid = req.url.substring(10);
@@ -15,7 +16,7 @@ module.exports = function (app) {
             if (err) {
                 throw err;
             } else {
-                commonquestion.isQuestion(found,'correct',questionid,function(correctIndex) {
+                common.question.isQuestion(found,'correct',questionid,function(correctIndex) {
                     if (correctIndex !== -1) {
                         questions.findOne({
                             '_id': questionid
@@ -35,7 +36,7 @@ module.exports = function (app) {
                         });
                     } 
                 });
-                commonquestion.isQuestion(found,'incorrect',questionid,function(incorrectIndex) {
+                common.question.isQuestion(found,'incorrect',questionid,function(incorrectIndex) {
                     if (incorrectIndex !== -1) {
                         questions.findOne({
                             '_id': questionid
@@ -56,7 +57,7 @@ module.exports = function (app) {
                         });
                     }
                 });
-                commonquestion.isQuestion(found,'passed',questionid, function(passedIndex) {
+                common.question.isQuestion(found,'passed',questionid, function(passedIndex) {
                     if (passedIndex !== -1) {
                         questions.findOne({
                             '_id': questionid
@@ -76,7 +77,7 @@ module.exports = function (app) {
                         });
                     }
                 });
-                commonquestion.isQuestion(found,'corrected',questionid, function(correctedIndex) {
+                common.question.isQuestion(found,'corrected',questionid, function(correctedIndex) {
                     if(correctedIndex !== -1) {
                         questions.findOne({ '_id':questionid}, function(err, question){
                         var answers = question.ans;

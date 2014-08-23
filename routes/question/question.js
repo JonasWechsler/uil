@@ -1,11 +1,9 @@
-var passwordHash = require('password-hash');
-var crypto = require('crypto'); //To generate a hash for gravatar
-var mongo = require('mongodb');
-var monk = require('monk');
-var db = require('../../db');
+var db = require('../../common/db');
 var questions = db.get('questions');
 var users = db.get('users');
-var commonquestion = require('./commonquestion');
+var common = {};
+common.question = require('../../common/question');
+common.utils = require('../../common/utils');
 
 module.exports = function(app) {
     app.all('/random', function (req, res) {
@@ -19,7 +17,7 @@ module.exports = function(app) {
             } else if (found.questions.length === 0) {
                 res.send("No more questions");
             } else {
-                commonquestion.recalcScore(found);
+                common.utils.recalcScore(found);
 
                 var arrayofquestions = found.questions;
 
@@ -116,8 +114,8 @@ module.exports = function(app) {
                         if (err) {
                             throw err;
                         } else {
-                            commonquestion.recalcScore(found);
-                            commonquestion.placeIntoAnsweredCategory(found, 'correct', id, choice);
+                            common.utils.recalcScore(found);
+                            common.question.placeIntoAnsweredCategory(found, 'correct', id, choice);
                         }
                     });
                     if (retry) {
@@ -132,8 +130,8 @@ module.exports = function(app) {
                         if (err) {
                             throw err;
                         } else {
-                            commonquestion.recalcScore(found);
-                            commonquestion.placeIntoAnsweredCategory(found, 'passed', id, choice);
+                            common.utils.recalcScore(found);
+                            common.question.placeIntoAnsweredCategory(found, 'passed', id, choice);
                         }
                     });
                     if (retry) {
@@ -148,8 +146,8 @@ module.exports = function(app) {
                         if (err) {
                             throw err;
                         } else {
-                            commonquestion.recalcScore(found);
-                            commonquestion.placeIntoAnsweredCategory(found, 'incorrect', id, choice);
+                            common.utils.recalcScore(found);
+                            common.question.placeIntoAnsweredCategory(found, 'incorrect', id, choice);
                         }
                     });
                     if (retry) {

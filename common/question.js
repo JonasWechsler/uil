@@ -2,12 +2,11 @@ var passwordHash = require('password-hash');
 var crypto = require('crypto'); //To generate a hash for gravatar
 var mongo = require('mongodb');
 var monk = require('monk');
-var db = require('../../db');
+var db = require('./db');
 var questions = db.get('questions');
 var users = db.get('users');
-var commonquestion = {};
-
-commonquestion.isQuestion = function(user,type,questionid, callback) {
+module.exports = {};
+module.exports.isQuestion = function(user,type,questionid, callback) {
 	user[type].forEach(function (obj, ind) {
         if (obj.id === questionid) {
             callback(ind);
@@ -16,7 +15,7 @@ commonquestion.isQuestion = function(user,type,questionid, callback) {
     callback(-1);
 }
 
-commonquestion.addToStreak = function(user) {
+module.exports.addToStreak = function(user) {
     var streak = user.streak + 1;
     var longeststreak = user.longeststreak;
     if (streak > longeststreak) {
@@ -37,7 +36,7 @@ commonquestion.addToStreak = function(user) {
     });
 }
 
-commonquestion.placeIntoAnsweredCategory = function(user, category, questionid, userchoice) {
+module.exports.placeIntoAnsweredCategory = function(user, category, questionid, userchoice) {
 	var category = category;
     var arrayofcategory = user[category] || [];
     var otherarray = user['questions'];
@@ -69,37 +68,3 @@ commonquestion.placeIntoAnsweredCategory = function(user, category, questionid, 
         '_id': user._id
     }, toUpdate);
 }
-
-
-commonquestion.recalcScore = function(user) {
-    var correcty = user.correct || [];
-    var incorrecty = user.incorrect || [];
-    var correctedy = user.corrected || [];
-    var scorey = 0;
-    scorey+=100*correcty.length;
-    scorey-=(20*incorrecty.length);
-    for( var i = 0;i<correctedy.length;i++){
-        var longy = correctedy[i].choice.length;
-        if(longy===1){
-            scorey+=70;
-        }
-        else if(longy===2){
-            scorey+=50;
-        }
-        else if(longy===3){
-            scorey+=40;
-        }
-        else{
-            scorey+=30;
-        }
-    }
-    users.update({
-        '_id': user._id
-    }, {
-        $set: {
-            'score':scorey
-        }
-    });
-}
-
-module.exports = commonquestion;

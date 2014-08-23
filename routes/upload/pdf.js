@@ -7,7 +7,7 @@ var p2jcmd = require('pdf2json'),
     mongo = require('mongodb'),
     monk = require('monk'),
     PFParser = require('pdf2json/pdfparser');
-var db = require('../../db');
+var db = require('../../common/db');
 var collection = db.get("questions");
 var usercollection = db.get("users");
 var output;

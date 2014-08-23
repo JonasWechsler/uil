@@ -1,8 +1,6 @@
 var passwordHash = require('password-hash');
 var crypto = require('crypto'); //To generate a hash for gravatar
-var mongo = require('mongodb');
-var monk = require('monk');
-var db = require('../db');
+var db = require('../common/db');
 module.exports = function(app) {
     app.get('/', function (req, res) {
         if (req.session.loggedin) {

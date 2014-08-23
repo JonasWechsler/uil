@@ -1,8 +1,5 @@
 var config = require('../../config');
 var nodemailer = require('nodemailer');
-var mongo = require('mongodb');
-var monk = require('monk');
-var db = require('../../db');
 
 module.exports = function(app) {
     app.all('/getfeedback', function (req, res) {

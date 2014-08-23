@@ -1,10 +1,8 @@
-var passwordHash = require('password-hash');
 var crypto = require('crypto'); //To generate a hash for gravatar
-var mongo = require('mongodb');
-var monk = require('monk');
-var db = require('../../db');
+var db = require('../../common/db');
 var async = require('async');
-var commonquestion = require('../question/commonquestion');
+var common = {};
+common.utils = require('../../common/utils');
 
 var getQuestionsList = function(idlist, callback) {
     var questions = db.get('questions');
@@ -59,7 +57,7 @@ module.exports = function(app) {
                 } else {
                     var founduser = found;
                     var hash = crypto.createHash('md5').update(found.email).digest('hex');
-                    commonquestion.recalcScore(found);
+                    common.utils.recalcScore(found);
                     getFirstTen(found, function(corrects, incorrects, correcteds, passeds) {
                         res.render('userpages/profile', {
                             found: founduser,
