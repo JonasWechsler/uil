@@ -139,3 +139,10 @@ a >:hover {
 .passed{
     background-color:grey;
 }
+a.result {
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+}
+p.result {
+    margin-bottom: 48px;
+}

@@ -7,8 +7,8 @@ block content
         h1.text-incorrect= prompt
     if results.length > 0
         for question in results
-            a(href='/random/' + question._id) ##{question.ques.substr(0, 5)} - #{question.test.substr(0, 50)} 
-            p #{question.text.substr(0, 100)}
+            a.result(href='/random/' + question._id) ##{question.ques.substr(0, 5)} - #{question.test.substr(0, 50)} 
+            p.result #{question.text.substr(0, 200)}
     h1= "Search"
     form.submit(name="search",method="post",action="/search")
             input.biginput#query.text(type="text", placeholder="Search", name="query")
