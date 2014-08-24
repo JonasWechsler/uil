@@ -10,17 +10,20 @@ module.exports = function(app) {
     });
 
     app.post('/search', function (req, res) {
-        var testname = req.body.testname;
-        var qno = req.body.qno;
-        db.get('questions').find({'test' : testname, 'ques' : qno}, function(err, ques) {
+        var query = req.body.query;
+        db.get('questions').find({"text" : {$regex : query}}, function(err, ques) {
             if(err || ques.length === 0) {
                 res.render('search/search', {
                     session: req.session,
-                    prompt: 'Could not find question'
-
+                    prompt: 'No results',
+                    results: ques
                 });
             } else {
-                res.redirect('/random/' + ques[0]._id);            
+                res.render('search/search', {
+                    session: req.session,
+                    prompt: 'Search results:',
+                    results: ques
+                });
             }
         });
 

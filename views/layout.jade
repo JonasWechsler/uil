@@ -55,8 +55,7 @@ html
                             span="Logout"
                 li.nav.button.right
                     form.search.submit(name="search",method="post",action="/search")
-                        input.smallinput.search#testname.text.small(type="text", placeholder="Test Name", name="testname")
-                        input.questionno.smallinput.search#qno.text.small(type="text", placeholder="#", name="qno")
+                        input.smallinput.search#query.text.small(type="text", placeholder="Search", name="query")
                         button.sub.hidden(type="submit") submit
             else
                 a(href="/newuser")
