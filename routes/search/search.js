@@ -18,13 +18,15 @@ module.exports = function(app) {
                 if(err || ques.length === 0) {
                     res.render('search/search', {
                         session: req.session,
+                        query: query,
                         prompt: 'No results',
                         results: ques
                     });
                 } else {
                     res.render('search/search', {
                         session: req.session,
-                        prompt: 'Search results:',
+                        query: query,
+                        prompt: 'Search results',
                         results: ques
                     });
                 } 
@@ -35,13 +37,15 @@ module.exports = function(app) {
                 if(err || ques.length === 0) {
                     res.render('search/search', {
                         session: req.session,
+                        query: query,
                         prompt: 'No results',
                         results: ques
                     });
                 } else {
                     res.render('search/search', {
                         session: req.session,
-                        prompt: 'Search results:',
+                        query: query,
+                        prompt: 'Search results',
                         results: ques
                     });
                 } 
