@@ -10,23 +10,43 @@ module.exports = function(app) {
     });
 
     app.post('/search', function (req, res) {
-        var query = req.body.query;
-        db.get('questions').find({"text" : {$regex : query}}, function(err, ques) {
-            if(err || ques.length === 0) {
-                res.render('search/search', {
-                    session: req.session,
-                    prompt: 'No results',
-                    results: ques
-                });
-            } else {
-                res.render('search/search', {
-                    session: req.session,
-                    prompt: 'Search results:',
-                    results: ques
-                });
-            }
-        });
-
+        var query = req.body.query.trim(); // Trim whitespace on either side
+        // Check if query is number
+        if(isNaN(query)) {
+            // Text search the questions
+            db.get('questions').find({'text' : {$regex : query}}, function(err, ques) {
+                if(err || ques.length === 0) {
+                    res.render('search/search', {
+                        session: req.session,
+                        prompt: 'No results',
+                        results: ques
+                    });
+                } else {
+                    res.render('search/search', {
+                        session: req.session,
+                        prompt: 'Search results:',
+                        results: ques
+                    });
+                } 
+            });
+        } else {
+            // Find question by number
+            db.get('questions').find({'ques' : query}, function(err, ques) {
+                if(err || ques.length === 0) {
+                    res.render('search/search', {
+                        session: req.session,
+                        prompt: 'No results',
+                        results: ques
+                    });
+                } else {
+                    res.render('search/search', {
+                        session: req.session,
+                        prompt: 'Search results:',
+                        results: ques
+                    });
+                } 
+            });
+        }
     });
 
 }
