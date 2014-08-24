@@ -56,7 +56,7 @@ html
                 li.nav.button.right
                     form.search.submit(name="search",method="post",action="/search")
                         input.smallinput.search#testname.text.small(type="text", placeholder="Test Name", name="testname")
-                        input.smallinput.search#qno.text.small(type="text", placeholder="Question Number", name="qno")
+                        input.questionno.smallinput.search#qno.text.small(type="text", placeholder="#", name="qno")
                         button.sub.hidden(type="submit") submit
             else
                 a(href="/newuser")

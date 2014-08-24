@@ -43,6 +43,9 @@ form > .smallinput {
     padding:.3em .2em;
     height: .8em;
 }
+form > .questionno {
+    width: 2em;
+}
 select{
     border: 2px solid #ccc;
     width:529px;
