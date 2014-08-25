@@ -1,0 +1,13 @@
+extends ../layout
+block head
+    link(rel='stylesheet', href='/stylesheets/default.css')
+    script(src="../ace-builds/src-noconflict/ace.js")
+block content
+    if prompt
+        h1.text-incorrect= prompt
+    if questionlist.length > 0
+        for question in questionlist
+            a.result(href='/random/' + question._id)
+                strong= question.ques 
+                |   question.test
+            p.result= question.text
