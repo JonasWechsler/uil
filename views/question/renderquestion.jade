@@ -13,6 +13,8 @@ block content
         else
             div.qnum= "Random"
                 label.id= id
+        div
+            label.report= "Report Question"
     span.leftcol
         pre.question.code(id="qq")= question['text']
         form.submit(name="checkquestion",method="post",action="/checkquestion")
@@ -45,5 +47,6 @@ block footer
         var themeq ="#{themeq}";
         var themec ="#{themec}";
         var key ="#{question['key']}";
+        var qid ="#{question._id}"
     script(src="/scripts/questiondisp.js")
-    script(src="/scripts/submitquestion.js")
+    script(src="/scripts/questionscripts.js")
