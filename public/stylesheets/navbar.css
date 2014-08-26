@@ -78,7 +78,7 @@ h1 {
     margin-right: 5px;
 }
 .drop span{
-    font-size: 20px;
+    font-size: 16px;
 }
 .arrow_box {
     background: #CCC;
@@ -102,7 +102,7 @@ h1 {
     padding: 5px;
     color: black;
     vertical-align: bottom;
-    font-size: 22px;
+    font-size: 20px;
     position: relative;
     height: 25px;
     display: block;
@@ -113,10 +113,10 @@ h1 {
     display: block;
 }
 .nav {
-    margin: 0 5px 0 5px;
-    padding: 5px;
+    margin: 0 10px 0 10px;
+    padding: 5px 10px 5px 10px;
     color: black;
-    font-size: 22px;
+    font-size: 20px;
     position: relative;
     height: 100%;
     display: inline-block;
