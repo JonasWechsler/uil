@@ -3,7 +3,7 @@ module.exports = function(app) {
         res.render('about/about', {
             title: 'LASA UIL Training',
             session: req.session,
-            desc: "wat",
+            desc: "UIL Computer Science Practice Site\n A practice site designed by Clayton Petty, Jonas Wechsler, Beck Goodloe, Evan Tey, Neil Patil, and Ryan Rice\n\nFor use by LASA High School.",
             profiles: [{
                 name: "Evan Tey",
                 img: "/images/about/evan.jpg",

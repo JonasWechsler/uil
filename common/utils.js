@@ -2,7 +2,6 @@ var mongo = require('mongodb');
 var monk = require('monk');
 var db = require('./db');
 var users = db.get('users');
-
 module.exports = {};
 
 module.exports.recalcScore = function(user) {
@@ -32,6 +31,19 @@ module.exports.recalcScore = function(user) {
     }, {
         $set: {
             'score':scorey
+        }
+    });
+}
+
+module.exports.verifyAdmin = function(id, callback) {
+    if(!id || id === undefined) {
+        callback(false);
+    }
+    db.get('admins').findOne({'user':id}, function(err, found) {
+        if(err || !found) {
+            callback(false);
+        } else {
+            callback(true);
         }
     });
 }

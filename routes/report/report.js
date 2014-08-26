@@ -1,6 +1,8 @@
 var monk = require('monk');
 var mongo = require('mongodb');
 var db = require('../../common/db');
+var common = {};
+common.utils = require('../../common/utils');
 //reverse sorting
 var questionreportedcompare = function(a, b) {
 	var areported = a.reported?a.reported:0;
@@ -34,16 +36,22 @@ module.exports = function(app) {
     });
 
     app.get('/reported', function (req,res) {
-    	var questions = db.get("questions");
-    	questions.find({}, function(err, questions) {
-    		questions.sort(questionreportedcompare);
-    		if(!err && questions) {
-                res.render('report/reported', {
-                    questionlist: questions.filter(removenonreported),
-                    prompt: 'Reported questions sorted by times reported',
-                    session: req.session
-                });
-    		}
-    	});
+        common.utils.verifyAdmin(req.session.id, function(isAdmin) {;
+            if(isAdmin) {
+             	var questions = db.get("questions");
+            	questions.find({}, function(err, questions) {
+            		questions.sort(questionreportedcompare);
+            		if(!err && questions) {
+                        res.render('report/reported', {
+                            questionlist: questions.filter(removenonreported),
+                            prompt: 'Reported questions sorted by times reported',
+                            session: req.session
+                        });
+            		}
+            	});
+            } else {
+                res.redirect('/');
+            }
+        });
     });
 }
