@@ -18,6 +18,9 @@ var json = {
     }
 };
 
+var common = {};
+common.utils = require('../../common/utils');
+
 
 var PDF2JSONUtil = (function () {
 
@@ -484,51 +487,68 @@ function pushToDb(obj, callback) {
 }
 module.exports = function(app) {
     app.get('/pdf', function (req, res) {
-        res.render('upload/pdf', {
-            session: req.session,
-            title: 'Upload A PDF',
-            prompt: 'Browse for a PDF'
+        common.utils.verifyAdmin(req.session.id, function(isAdmin) {
+            if(isAdmin) {
+                res.render('upload/pdf', {
+                    session: req.session,
+                    title: 'Upload A PDF',
+                    prompt: 'Browse for a PDF'
+                });
+            } else {
+                res.redirect('/');
+            }
         });
     });
     app.post('/pdfsub', function (req, res) {
-        //taking edited questions and adding to database
-        var input = req.body.in;
-        var obj = JSON.parse(input);
-        res.send(JSON.stringify(obj));
-        pushToDb(obj, function(idToInsert) {
-            usercollection.update({}, {
-                $push:{questions:idToInsert}
-            });
+        common.utils.verifyAdmin(req.session.id, function(isAdmin) {
+            if(isAdmin) {
+                //taking edited questions and adding to database
+                var input = req.body.in;
+                var obj = JSON.parse(input);
+                res.send(JSON.stringify(obj));
+                pushToDb(obj, function(idToInsert) {
+                    usercollection.update({}, {
+                        $push:{questions:idToInsert}
+                    });
+                });
+            } else {
+                res.redirect('/');
+            }
         });
     });
     app.post('/pdf', function (req, res) {
         console.log(req.files.upload);
+        common.utils.verifyAdmin(req.session.id, function(isAdmin) {
+            if(isAdmin) {
+                // saving to /pdf directory
+                save(req.files.upload, "./pdf", req.files.upload.name, function (err) {
+                    if (err) {
+                        console.log(err);
+                        res.render('upload/pdf', {
+                            session: req.session,
+                            title: 'Upload A PDF',
+                            prompt: err
+                        });
+                    } else {
 
-        // saving to /pdf directory
-        save(req.files.upload, "./pdf", req.files.upload.name, function (err) {
-            if (err) {
-                console.log(err);
-                res.render('upload/pdf', {
-                    session: req.session,
-                    title: 'Upload A PDF',
-                    prompt: err
+                        // getting from /pdf directory, then parsing to json
+                        input = "./pdf/" + req.files.upload.name;
+                        var inputDir = path.dirname(input);
+                        var inputFile = path.basename(input);
+                        var p2j = new p2jcmd();
+                        p2j.inputCount = 1;
+                        p2j.p2j = new PDF2JSONUtil(inputDir, inputFile, p2j);
+
+                        p2j.p2j.processFile(function () {
+                            //parsing the json to questions
+                            parseJSON(res, req);
+                        });
+                        //Ends late due to callbacks
+
+                    }
                 });
             } else {
-
-                // getting from /pdf directory, then parsing to json
-                input = "./pdf/" + req.files.upload.name;
-                var inputDir = path.dirname(input);
-                var inputFile = path.basename(input);
-                var p2j = new p2jcmd();
-                p2j.inputCount = 1;
-                p2j.p2j = new PDF2JSONUtil(inputDir, inputFile, p2j);
-
-                p2j.p2j.processFile(function () {
-                    //parsing the json to questions
-                    parseJSON(res, req);
-                });
-                //Ends late due to callbacks
-
+                res.redirect('/');
             }
         });
     });

@@ -3,7 +3,7 @@ module.exports = function(app) {
         res.render('about/about', {
             title: 'LASA UIL Training',
             session: req.session,
-            desc: "Lorem ipsum dolor sit amet, ne per solum timeam. Vim ne doctus timeam dolorem, in adhuc delicata maluisset per. Qui essent laoreet et. No eam tota scaevola, choro mollis vituperata te per, ut ius nibh omnium. Ea vel dico duis ridens. Ex sit tempor mandamus ocurreret, populo delectus consectetuer eu vim.",
+            desc: "UIL Computer Science Practice Site\n A practice site designed by Clayton Petty, Jonas Wechsler, Beck Goodloe, Evan Tey, Neil Patil, and Ryan Rice\n\nFor use by LASA High School.",
             profiles: [{
                 name: "Evan Tey",
                 img: "/images/about/evan.jpg",
@@ -24,6 +24,11 @@ module.exports = function(app) {
                 img: "/images/about/ryan.jpg",
                 desc: "Like the tears we cried\nThat day we had to leave\nIt was everything we wanted it to be\nThe summer of\n19 you and me",
                 src: "https://github.com/ryanr1230"
+            }, {
+                name: "Neil Patil",
+                img: "/images/about/neil.jpg",
+                desc: "Uh why are there song lyrics",
+                src: "https://github.com/patil215"
             }]
         });
     });
