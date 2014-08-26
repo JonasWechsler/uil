@@ -12,6 +12,10 @@ var questionreportedcompare = function(a, b) {
 	return 0;
 }
 
+var removenonreported = function(question) {
+    return question.reported?question.reported>0:false;
+}
+
 module.exports = function(app) {
     app.get('/report/:id', function (req, res) {
     	var id = req.param("id");
@@ -35,7 +39,7 @@ module.exports = function(app) {
     		questions.sort(questionreportedcompare);
     		if(!err && questions) {
                 res.render('report/reported', {
-                    questionlist: questions,
+                    questionlist: questions.filter(removenonreported),
                     prompt: 'Reported questions sorted by times reported',
                     session: req.session
                 });

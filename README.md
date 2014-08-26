@@ -8,3 +8,4 @@ For use by LASA High School.
 3. A required ```config.js``` file is missing (for security reasons). Contact one of the developers for this file.
 4. Put the file in the root directory of the project.
 5. Run ```npm start```
+owiafaiwejfpaweifjapoefj
