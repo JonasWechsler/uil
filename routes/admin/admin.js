@@ -56,6 +56,7 @@ module.exports = function(app) {
                     db.get('admins').insert({"user":potato}, function(err) {
                         res.redirect('/admin');
                     });
+                    res.redirect('/admin');
                 }
             }
         });
