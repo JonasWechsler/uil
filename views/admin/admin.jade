@@ -1,9 +1,23 @@
 extends ../layout
 block content
 	if admin
+		br
+		br
 		a(href="/reported/") View reported questions
 		br
 		a(href="/pdf/") Upload/parse PDFs
+		if admins.length > 0
+			h1 Admins
+			for admin in admins
+				p= admin
+			form.submit(name="addadmin",method="post",action="/addadmin")
+				h3 Add admin: 
+				input.biginput(name="username", placeholder="username")
+				button.sub(type="submit") add admin
+			form.submit(name="removeadmin",method="post",action="/removeadmin")
+				h3 Remove admin: 
+				input.biginput(name="username", placeholder="username")
+				button.sub(type="submit") remove admin
 
 		if users.length > 0
 			h1 Users
@@ -34,11 +48,10 @@ block content
 							td= 0
 						td= user.streak
 						td= user.longeststreak
-
 			form.submit(name="removeuser",method="post",action="/removeuser")
 				h3 Remove user: 
 				input.biginput(name="username", placeholder="username")
-				button.sub(type="submit") submit
+				button.sub(type="submit") remove user
 			form.submit(name="changeuserscore",method="post",action="/changeuserscore") 
 				h3 Change user score:
 				input.biginput(name="username", placeholder="username")
