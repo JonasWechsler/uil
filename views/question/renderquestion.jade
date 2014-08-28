@@ -14,7 +14,7 @@ block content
             div.qnum= "Random"
                 label.id= id
         div
-            label.report= "Report Question"
+            a.report= "Report Question"
     span.leftcol
         pre.question.code(id="qq")= question['text']
         form.submit(name="checkquestion",method="post",action="/checkquestion")
