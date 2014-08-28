@@ -521,7 +521,7 @@ module.exports = function(app) {
         common.utils.verifyAdmin(req.session.id, function(isAdmin) {
             if(isAdmin) {
                 // saving to /pdf directory
-                save(req.files.upload, "./pdf", req.files.upload.name, function (err) {
+                common.utils.save(req.files.upload, "./pdf", req.files.upload.name, function (err) {
                     if (err) {
                         console.log(err);
                         res.render('upload/pdf', {
