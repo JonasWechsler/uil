@@ -1,31 +1,61 @@
-if admin
-	a(href="/reported/") View reported questions
-	br
-	a(href="/pdf/") Upload/parse PDFs
+extends ../layout
+block content
+	if admin
+		a(href="/reported/") View reported questions
+		br
+		a(href="/pdf/") Upload/parse PDFs
 
-	
-	if users.length > 0
-		h1 Users
-		table#usertable(border= 1 frame="void" rules="all")
-			tr
-				td Username
-				td First Name
-				td Last Name
-				td Score
-				td Remove
-
-			for user in users
+		if users.length > 0
+			h1 Users
+			table#usertable(border= 1 frame="void" rules="all")
 				tr
-					td= user.username
-					td= user.firstName
-					td= user.lastName
-					td= user.score
-					td
-						form.submit(name="removeuser",method="post",action="/removeuser")
-							input(name="username", value=user.username)
-							button.sub(type="submit") submit
+					td Username
+					td First Name
+					td Last Name
+					td Score
+					td Correct
+					td Incorrect
+					td Streak
+					td Longest Streak
+
+				for user in users
+					tr
+						td= user.username
+						td= user.firstName
+						td= user.lastName
+						td= user.score
+						if user.correct
+							td=user.correct.length
+						else
+							td= 0
+						if user.incorrect
+							td= user.incorrect.length
+						else
+							td= 0
+						td= user.streak
+						td= user.longeststreak
+
+			form.submit(name="removeuser",method="post",action="/removeuser")
+				h3 Remove user: 
+				input.biginput(name="username", placeholder="username")
+				button.sub(type="submit") submit
+			form.submit(name="changeuserscore",method="post",action="/changeuserscore") 
+				h3 Change user score:
+				input.biginput(name="username", placeholder="username")
+				input.biginput(name="score", placeholder="score")
+				button.sub(type="submit") change score
+			form.submit(name="changeuserstreak",method="post",action="/changeuserstreak") 
+				h3 Change user streak:
+				input.biginput(name="username", placeholder="username")
+				input.biginput(name="score", placeholder="score")
+				button.sub(type="submit") change streak
+			form.submit(name="changeuserlongeststreak",method="post",action="/changeuserlongeststreak") 
+				h3 Change user longest streak:
+				input.biginput(name="username", placeholder="username")
+				input.biginput(name="score", placeholder="score")
+				button.sub(type="submit") change longest streak
 
 
 
-else
-	p LOZER YOU ARE NOT ADMIN
+	else
+		p LOZER YOU ARE NOT ADMIN
