@@ -45,6 +45,7 @@ require('./routes/authentication/login')(app);
 require('./routes/settings/settings')(app);
 require('./routes/bible/bible')(app);
 require('./routes/about/about')(app);
+require('./routes/admin/admin')(app);
 require('./routes/search/search')(app);
 require('./routes/report/report')(app);
 
