@@ -460,20 +460,6 @@ var parseJSON = function (res, req) {
 
 };
 
-var save = function (file, dirname, filename, callback) {
-    fs.exists(path.join(dirname, filename), function (exists) {
-        fs.readFile(file.path, function (err, data) {
-            if (err) callback(err)
-            else {
-                fs.writeFile(path.join(dirname, filename), data, function (err) {
-                    if (err) callback(err);
-                    else callback(err, file);
-                });
-            }
-        });
-    });
-}
-
 function pushToDb(obj, callback) {
     for(var i = 0; i<obj.list.length; i++){
         collection.insert(JSON.parse(obj.list[i]), function(err, docInserted) {
