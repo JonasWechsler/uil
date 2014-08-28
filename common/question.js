@@ -41,7 +41,7 @@ module.exports.placeIntoAnsweredCategory = function(user, category, questionid, 
     var arrayofcategory = user[category] || [];
     var otherarray = user['questions'];
     if(category === 'correct') {
-        commonquestion.addToStreak(user);
+        module.exports.addToStreak(user);
     }
     var index = otherarray.map(function (obj, index) {
         if (obj.id == questionid) {
