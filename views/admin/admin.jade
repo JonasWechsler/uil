@@ -1,1 +1,31 @@
-p #{admin}
+if admin
+	a(href="/reported/") View reported questions
+	br
+	a(href="/pdf/") Upload/parse PDFs
+
+	
+	if users.length > 0
+		h1 Users
+		table#usertable(border= 1 frame="void" rules="all")
+			tr
+				td Username
+				td First Name
+				td Last Name
+				td Score
+				td Remove
+
+			for user in users
+				tr
+					td= user.username
+					td= user.firstName
+					td= user.lastName
+					td= user.score
+					td
+						form.submit(name="removeuser",method="post",action="/removeuser")
+							input(name="username", value=user.username)
+							button.sub(type="submit") submit
+
+
+
+else
+	p LOZER YOU ARE NOT ADMIN
