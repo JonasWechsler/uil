@@ -2,6 +2,8 @@ var mongo = require('mongodb');
 var monk = require('monk');
 var db = require('./db');
 var users = db.get('users');
+var fs = require('fs');
+var path = require('path');
 module.exports = {};
 
 module.exports.recalcScore = function(user) {
@@ -45,5 +47,19 @@ module.exports.verifyAdmin = function(id, callback) {
         } else {
             callback(true);
         }
+    });
+}
+
+module.exports.save = function (file, dirname, filename, callback) {
+    fs.exists(path.join(dirname, filename), function (exists) {
+        fs.readFile(file.path, function (err, data) {
+            if (err) callback(err)
+            else {
+                fs.writeFile(path.join(dirname, filename), data, function (err) {
+                    if (err) callback(err);
+                    else callback(err, file);
+                });
+            }
+        });
     });
 }

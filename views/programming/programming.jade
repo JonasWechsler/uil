@@ -1,0 +1,11 @@
+extends ../layout
+block head
+    script(src="./ace-builds/src-noconflict/ace.js")
+    link(rel='stylesheet', href='/stylesheets/upload.css')
+block content
+    h4= prompt
+    pre= programout
+    form(action="/programming" enctype="multipart/form-data" method="post")
+        input(type="file", name="upload")
+        br
+        button(type="submit", value="upload")= "SUBMIT"

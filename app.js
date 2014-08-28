@@ -48,6 +48,7 @@ require('./routes/about/about')(app);
 require('./routes/admin/admin')(app);
 require('./routes/search/search')(app);
 require('./routes/report/report')(app);
+require('./routes/programming/programming')(app);
 
 http.createServer(app).listen(app.get('port'), function () {
     console.log('Express server listening on port ' + app.get('port'));
