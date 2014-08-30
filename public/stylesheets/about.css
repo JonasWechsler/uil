@@ -61,13 +61,22 @@ body {
     display: inline-block;
     position: relative;
     height: 500px;
-    width: 60%;
+    width: 40%;
     float: left;
 }
 .profile {
     position: relative;
     width: 20%;
     float: left;
+}
+.profile.logo>i{
+    font-size:100px;
+    width:100px;
+    height:100px;
+    position:absolute;
+    left:50%;
+    top:50px;
+    margin-left:-50px;
 }
 h2 {
     margin: 0;

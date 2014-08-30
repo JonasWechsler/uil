@@ -89,7 +89,7 @@ input[type="radio"]:checked+label {
 .try {
     display:none;
 }
-.submit > label {
+.submit[name='checkquestion'] > label {
     clear: left;
     display: block;
     width: 300px;

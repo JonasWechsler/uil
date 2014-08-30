@@ -46,6 +46,41 @@ h1 {
 .navbar > input[type="checkbox"]:checked+.drop {
     display: block;
 }
+.nav {
+    margin: 0 10px 0 10px;
+    padding: 5px 10px 5px 10px;
+    color: black;
+    font-size: 20px;
+    position: relative;
+    height: 100%;
+    display: inline-block;
+}
+.right {
+    float: right;
+}
+.left {
+    float: left;
+}
+.search.text{
+   outline:0;
+   outline:none;
+
+    margin-left:10px;
+    width:50px;
+    height:1em;
+    padding:5px;
+    background:transparent;
+    border:0;
+    border-bottom: 2px solid black;
+        -webkit-transition: width .5s; /* For Safari 3.1 to 6.0 */
+    transition: width .5s;
+}
+.search.container:hover > .search.text{
+    width:200px;
+}
+.search.text:focus{
+    width:200px;
+}
 .drop {
     position: absolute;
     top: 60px;
@@ -107,29 +142,7 @@ h1 {
     height: 25px;
     display: block;
 }
-.ico {
-    width: 25px;
-    height: 25px;
-    display: block;
-}
-.nav {
-    margin: 0 10px 0 10px;
-    padding: 5px 10px 5px 10px;
-    color: black;
-    font-size: 20px;
-    position: relative;
-    height: 100%;
-    display: inline-block;
-}
-.nav:hover {
-    color: #7f33cc;
-}
-.right {
-    float: right;
-}
-.left {
-    float: left;
-}
+
 @keyframes inglow {
     0% {
         box-shadow: inset 0 -8px 10px -8px white;

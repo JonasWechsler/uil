@@ -58,9 +58,12 @@ html
                             i.fa.fa-sign-out
                             span="Logout"
                 li.nav.button.right
-                    form.search.submit(name="search",method="post",action="/search")
-                        input.smallinput.search#query.text.small(type="text", placeholder="Search", name="query")
-                        button.sub.hidden(type="submit") submit
+                    form.search.container.submit(name="search",method="post",action="/search")
+                        label.search(for="searchsubmit")
+                            i.fa.fa-search
+                        input.smallinput.search.text.small#query(type="text", placeholder="Search", name="query")
+                        button.sub.hidden#searchsubmit(type="submit")
+
             else
                 a(href="/newuser")
                     li.nav.button.right

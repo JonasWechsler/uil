@@ -23,9 +23,9 @@ h4{
     font-size: 20px; 
 }
 form > input[type="text"], form > input[type="password"], form > input[type="number"], textarea{
-    border: 2px solid #ccc;
-    color: #999;
-    text-indent:.5em;
+    /*-    border: 2px solid #ccc;
+-    color: #999;
+-    text-indent:.5em;*/
 }
 form > .biginput, form > input[type="password"], form > input[type="number"]{
     font-size: 1em;
