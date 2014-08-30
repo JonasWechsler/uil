@@ -81,6 +81,9 @@ h1 {
 .search.text:focus{
     width:200px;
 }
+label[for="dropdown"]:hover{
+ color: #7f33cc; 
+}
 .drop {
     position: absolute;
     top: 60px;
