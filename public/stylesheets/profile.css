@@ -129,9 +129,9 @@ h1 {
   top: 100px;
 }
 .vaxis{
-  -ms-transform: rotate(-90deg) translate(20px,20px); /* IE 9 */
+  -ms-transform: rotate(-90deg) translate(105px,-105px); /* IE 9 */
   -webkit-transform: rotate(-90deg) translate(105px,-105px); /* Chrome, Safari, Opera */
-  transform: rotate(-90deg) translate(-50px,50px);
+  transform: rotate(-90deg) translate(105px,-105px);
   position: relative;
   left:-20px;
   width:100%;
