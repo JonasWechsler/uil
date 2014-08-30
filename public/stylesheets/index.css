@@ -13,37 +13,37 @@ iframe{
 .workspace{
   position:relative;
   display:block;
+  width:700px;
+  height:320px;
+  overflow:hidden;
 }
 .computer {
   display:inline-block;
-    position: relative;
+    position: absolute;
     -webkit-perspective: 150px; /* Chrome, Safari, Opera  */
     perspective: 150px;
-}
-.computer > *{
-    position: absolute;
+  top:0;
 }
 
 .first{
-
   margin-left:400px;
   margin-top:115px;
 }
 .first .screen{
-width: 235px;
-height: 155px;
-background: white;
-border: 12px solid #A4A4A4;
-border-radius: 10px 10px 0 0;
+  width: 235px;
+  height: 155px;
+  background: white;
+  border: 12px solid #A4A4A4;
+  border-radius: 10px 10px 0 0;
 }
 .first .stem{
   left:50%;
   position:relative;
-margin-left: -148px;
-width: 296px;
-height: 7px;
-  border-radius: 0 0 20px 20px;
-background: #BDBDBD;
+  margin-left: -148px;
+  width: 296px;
+  height: 7px;
+    border-radius: 0 0 20px 20px;
+  background: #BDBDBD;
 }
 .first .stem:before {
 content: "";

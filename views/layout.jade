@@ -5,83 +5,84 @@ html
     link(href='http://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet' type='text/css')
     link(href='http://fonts.googleapis.com/css?family=Codystar' rel='stylesheet' type='text/css')
     link(rel='stylesheet', href='/stylesheets/icons.css')
-    link(rel='stylesheet', href='/stylesheets/navbar.css')
+    link(rel='stylesheet', href='/stylesheets/layout.css')
     link(rel='stylesheet', href='/stylesheets/default.css')
     link(rel='stylesheet', href='/plugins/font-awesome-4.0.3/css/font-awesome.min.css')
     script(src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js")
     script(src="/plugins/tablesorter/jquery.tablesorter.min.js")
     block head
   body
-    .navbar-content
-        ul.navbar
-            a(href="/home")
-                li.nav.button.left
-                    |LASA UIL Training
-            a(href="/about")
-                li.nav.left
-                    |About
-            a(href="/getfeedback")
-                li.nav.left
-                    |Feedback
-            if session.loggedin
-                //a(href="/home")
-                //a(href="/bible")
+    #wrap
+        .navbar-content
+            ul.navbar
+                a(href="/home")
                     li.nav.button.left
-                        span='Bible'
-                //a(href='programming')
-                    li.nav.button.left
-                        span='Programming'
-                a(href="/random")
+                        |LASA UIL Training
+                a(href="/about")
                     li.nav.left
-                        |Random question
-                label(for="dropdown").nav.right.username= session.user
-                    .arrow_box_top    
-                        input(type="checkbox")#dropdown
-                        .drop.arrow_box
-                            a(href="/home")
-                                div.dropnav
-                                    i.fa.fa-user
-                                    span="Profile"
-                            a(href="/scoreboard")
-                                div.dropnav
-                                    i.fa.fa-bar-chart-o
-                                    span="Graph"
-                            a(href="/admin")
-                                div.dropnav
-                                    i.fa.fa-money
-                                    span="Admin"
-                            a(href="/settings")
-                                div.dropnav
-                                    i.fa.fa-gear
-                                    span="Settings"
-                            a(href="/logout")
-                                div.dropnav
-                                    i.fa.fa-sign-out
-                                    span="Logout"
-                li.nav.button.right
-                    form.search.container.submit(name="search",method="post",action="/search")
-                        label.search(for="searchsubmit")
-                            i.fa.fa-search
-                        input.smallinput.search.text.small#query(type="text", placeholder="Search", name="query")
-                        button.sub.hidden#searchsubmit(type="submit")
-
-            else
-                a(href="/newuser")
+                        |About
+                a(href="/getfeedback")
+                    li.nav.left
+                        |Feedback
+                if session.loggedin
+                    //a(href="/home")
+                    //a(href="/bible")
+                        li.nav.button.left
+                            span='Bible'
+                    //a(href='programming')
+                        li.nav.button.left
+                            span='Programming'
+                    a(href="/random")
+                        li.nav.left
+                            |Random question
+                    label(for="dropdown").nav.right.username= session.user
+                        .arrow_box_top    
+                            input(type="checkbox")#dropdown
+                            .drop.arrow_box
+                                a(href="/home")
+                                    div.dropnav
+                                        i.fa.fa-user
+                                        span="Profile"
+                                a(href="/scoreboard")
+                                    div.dropnav
+                                        i.fa.fa-bar-chart-o
+                                        span="Graph"
+                                a(href="/admin")
+                                    div.dropnav
+                                        i.fa.fa-money
+                                        span="Admin"
+                                a(href="/settings")
+                                    div.dropnav
+                                        i.fa.fa-gear
+                                        span="Settings"
+                                a(href="/logout")
+                                    div.dropnav
+                                        i.fa.fa-sign-out
+                                        span="Logout"
                     li.nav.button.right
-                        |Register
-                a(href="/signin")
-                    li.nav.button.right
-                        |Login
+                        form.search.container.submit(name="search",method="post",action="/search")
+                            label.search(for="searchsubmit")
+                                i.fa.fa-search
+                            input.smallinput.search.text.small#query(type="text", placeholder="Search", name="query")
+                            button.sub.hidden#searchsubmit(type="submit")
+                else
+                    a(href="/newuser")
+                        li.nav.button.right
+                            |Register
+                    a(href="/signin")
+                        li.nav.button.right
+                            |Login
 
-    div.content
-        block content
-    div.footer
-        block footer
-        script(src="/scripts/keys.js")
-        script(src="/scripts/googleua.js")
-        script(src="/scripts/searchhandler.js")
-        script.
-            $(document).ready(function(){
-                $("table").tablesorter(); 
-            }); 
-        
+        div.content
+            block content
+        div.footer
+            .footer-content
+            block footer
+            script(src="/scripts/keys.js")
+            script(src="/scripts/googleua.js")
+            script(src="/scripts/searchhandler.js")
+            script.
+                $(document).ready(function(){
+                    $("table").tablesorter(); 
+                }); 
+            
