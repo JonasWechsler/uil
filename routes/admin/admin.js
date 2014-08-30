@@ -47,13 +47,16 @@ module.exports = function(app) {
     });
     app.all('/addadmin', function(req, res) {
         db.get('users').find({"username": req.body.username}, function(err, users) {
+            console.log(err);
             if(err) {
                 res.redirect('/admin');
             } else {
                 if(users.length > 0) {
-                    db.get('admins').insert({"user":users[0]._id}, function(err) {
+                    var potato = "" + users[0]._id;
+                    db.get('admins').insert({"user":potato}, function(err) {
                         res.redirect('/admin');
                     });
+                    res.redirect('/admin');
                 }
             }
         });

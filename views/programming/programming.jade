@@ -3,9 +3,19 @@ block head
     script(src="./ace-builds/src-noconflict/ace.js")
     link(rel='stylesheet', href='/stylesheets/upload.css')
 block content
-    h4= prompt
-    pre= programout
+    h1= 'Submit a Java Program'
+    if prompt
+        h4= 'stdout from running program'
+        div#qq= prompt
+    if programout
+        h4= 'Program Contents'
+        div#cc= programout
     form(action="/programming" enctype="multipart/form-data" method="post")
         input(type="file", name="upload")
         br
         button(type="submit", value="upload")= "SUBMIT"
+block footer
+    script.
+        var themeq = 'terminal';
+        var themec = 'eclipse';
+    script(src="/scripts/questiondisp.js")
