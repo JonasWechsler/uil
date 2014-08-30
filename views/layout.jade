@@ -34,29 +34,30 @@ html
                 a(href="/random")
                     li.nav.left
                         |Random question
-                label(for="dropdown").nav.right= session.user
-                input(type="checkbox")#dropdown
-                .drop.arrow_box
-                    a(href="/home")
-                        div.dropnav
-                            i.fa.fa-user
-                            span="Profile"
-                    a(href="/scoreboard")
-                        div.dropnav
-                            i.fa.fa-bar-chart-o
-                            span="Graph"
-                    a(href="/admin")
-                        div.dropnav
-                            i.fa.fa-money
-                            span="Admin"
-                    a(href="/settings")
-                        div.dropnav
-                            i.fa.fa-gear
-                            span="Settings"
-                    a(href="/logout")
-                        div.dropnav
-                            i.fa.fa-sign-out
-                            span="Logout"
+                label(for="dropdown").nav.right.username= session.user
+                    .arrow_box_top    
+                        input(type="checkbox")#dropdown
+                        .drop.arrow_box
+                            a(href="/home")
+                                div.dropnav
+                                    i.fa.fa-user
+                                    span="Profile"
+                            a(href="/scoreboard")
+                                div.dropnav
+                                    i.fa.fa-bar-chart-o
+                                    span="Graph"
+                            a(href="/admin")
+                                div.dropnav
+                                    i.fa.fa-money
+                                    span="Admin"
+                            a(href="/settings")
+                                div.dropnav
+                                    i.fa.fa-gear
+                                    span="Settings"
+                            a(href="/logout")
+                                div.dropnav
+                                    i.fa.fa-sign-out
+                                    span="Logout"
                 li.nav.button.right
                     form.search.container.submit(name="search",method="post",action="/search")
                         label.search(for="searchsubmit")

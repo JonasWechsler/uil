@@ -37,15 +37,21 @@ h1 {
     height: 36px;
     list-style-type: none;
 }
-.navbar > input[type="checkbox"] {
+.navbar input[type="checkbox"] {
     display: none;
 }
-.navbar > input[type="checkbox"]+.drop {
-    display: none;
+.navbar .username .drop{
+    display:none;
 }
-.navbar > input[type="checkbox"]:checked+.drop {
+/*.navbar input[type="checkbox"]+.drop {
+    display: none;
+}*/
+.navbar .username:hover .drop{
+    display:block;
+}
+/*.navbar input[type="checkbox"]:checked+.drop {
     display: block;
-}
+}*/
 .nav {
     margin: 0 10px 0 10px;
     padding: 5px 10px 5px 10px;
@@ -76,18 +82,22 @@ h1 {
     transition: width .5s;
 }
 .search.container:hover > .search.text{
-    width:200px;
+    width:175px;
 }
 .search.text:focus{
-    width:200px;
+    width:175px;
 }
 label[for="dropdown"]:hover{
  color: #7f33cc; 
 }
+.arrow_box_top{
+    position:relative;
+}
 .drop {
     position: absolute;
-    top: 60px;
-    right: 5px;
+    left:50%;
+    margin-left:-65px;
+    margin-top:15px;
     width: 130px;
     display: block;
     background: #EBEBEB;
