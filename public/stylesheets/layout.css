@@ -27,6 +27,7 @@ h1 {
     float: left;
 }
 .content {
+    display:block;
     position: relative;
     width: 1000px;
     margin-left:auto;

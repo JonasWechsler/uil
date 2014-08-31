@@ -8,12 +8,15 @@ module.exports = function(app) {
             session: req.session
         });
     });
-
     app.all('/stylepage', function (req, res) {
         res.render('stylepage', {
             session: req.session,
             title: 'Style'
         });
     });
-
+    app.get('/hack', function (req, res) {
+        res.render('hack', {
+            title: 'Hack it!'
+        });
+    });
 }

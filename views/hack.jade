@@ -1,0 +1,26 @@
+doctype html
+html
+	head
+		link(href='http://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet' type='text/css')
+		link(rel='stylesheet', href='/stylesheets/hack.css')
+		script(src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js")
+	body
+		.console
+		script.
+			$.get('fakecode/kernel.txt',function(text){
+				var lines = text.split('\n');	
+				var i = 0, j=0;
+				setInterval(function(){
+					$(document).scrollTop($(document).height());
+					$('.console').append(lines[i][j]);
+					j++;
+					if(j == lines[i].length){
+						j=0;
+						i++;
+						$('.console').append('<br>');
+					}
+					if(i == lines.length){
+						i=0;
+					}
+				},10);
+			});

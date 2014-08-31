@@ -103,6 +103,7 @@ h1 {
     height:200px;
 }
 .bottom{
+    display:block;
     position: absolute;
     top:200px;
 }

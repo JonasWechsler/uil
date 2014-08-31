@@ -1,0 +1,16 @@
+
+body{
+	background-color:#2C001E;
+	color:white;
+	font-size: 18px;
+	font-family: 'Ubuntu', sans-serif;
+	white-space: pre;
+	overflow:hidden;
+}
+.console{
+	width:100%;
+	height:100%;
+	display:block;
+	background-color:#2C001E;
+	color:white;
+}
