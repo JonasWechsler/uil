@@ -89,6 +89,19 @@ input[type="radio"]:checked+label {
 .try {
     display:none;
 }
+.submit[name='tryagaincheck'] > label {
+    clear: left;
+    display: block;
+    width: 300px;
+    font-size: 20px;
+    border-width: 0;
+    border-top: 1px;
+    border-style: solid;
+    border-color: #EEEEEE;
+    background-color: #EEEEEE;
+    padding: 5px;
+    margin-top: 5px;
+}
 .submit[name='checkquestion'] > label {
     clear: left;
     display: block;

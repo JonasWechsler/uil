@@ -22,6 +22,9 @@ block content
                 td= person.streak
                 td= person.longeststreak
                 td
-                    span.correct.bar(style="width:"+250*person.score/maxScore + "px")
-                        span= person.score
-                
+                    if(person.score > 0)
+                        span.correct.bar(style="width:"+250*person.score/maxScore + "px")
+                            span= person.score
+                    if(person.score < 0)
+                        span.incorrect.bar(style="width:"+250*person.score/maxScore + "px")
+                            span= person.score                
