@@ -80,14 +80,13 @@ h1 {
 .search.text{
    outline:0;
    outline:none;
-
     margin-left:10px;
-    width:80%;
+    width:150px;
     height:1em;
     padding:5px;
     background:transparent;
     border:0;
-    border-bottom: 2px solid black;
+    border-bottom: 2px solid rgb(53, 53, 53);;
         -webkit-transition: width .5s; /* For Safari 3.1 to 6.0 */
     transition: width .5s;
 }/*

@@ -89,7 +89,7 @@ input[type="radio"]:checked+label {
 .try {
     display:none;
 }
-.submit[name='checkquestion'] > label {
+.answers > label{
     clear: left;
     display: block;
     width: 300px;
@@ -106,7 +106,7 @@ hr {
     margin: 0;
     width: 50%;
 }
-.submit > label:hover {
+.answers > label:hover {
     background-color: lightgrey;
 }
 .next {
