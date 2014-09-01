@@ -3,6 +3,7 @@ module.exports = function () {
         var accessible = [
             "/signin",
             "/",
+            "/hack",
             "/newuser",
             "/adduser",
             "/about",

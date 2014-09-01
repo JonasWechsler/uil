@@ -17,7 +17,7 @@ block content
             a.report= "Report Question"
     span.leftcol
         pre.question.code(id="qq")= question['text']
-        form.submit(name="checkquestion",method="post",action="/checkquestion")
+        form.submit.answers(name="checkquestion",method="post",action="/checkquestion")
             label(for='A')
                 input#A(type="radio",name="choice",value="A")
                 |#{question.ans[0]}

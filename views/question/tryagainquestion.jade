@@ -28,7 +28,7 @@ block content
         pre.question.code(id="qq")= question['text']
         
         if(choices)
-            form.submit(name='tryagaincheck',method="post",action='/tryagaincheck')
+            form.submit.answers(name='tryagaincheck',method="post",action='/tryagaincheck')
                 for letter,index in ['A','B','C','D','E']
                     if(type==='correct')
                         if(letter===question.key)
@@ -59,7 +59,7 @@ block content
                 button.next home
             button#sub submit
         if(!choices)
-            form.submit(name='tryagaincheck',method='post',action='/tryagaincheck')
+            form.submit.answers(name='tryagaincheck',method='post',action='/tryagaincheck')
                 for letter,index in ['A','B','C','D','E']
                     label(for=letter)
                         input(id=letter,type='radio',name='choice',value=letter)

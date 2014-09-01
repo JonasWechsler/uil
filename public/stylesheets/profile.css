@@ -100,6 +100,7 @@ h1 {
     position:absolute;
     font-size: 200px;
     left:250px;
+    top: 0;
     height:200px;
 }
 .bottom{
