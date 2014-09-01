@@ -62,6 +62,9 @@ h1 {
 .navbar .username:hover .drop{
     display:block;
 }
+.arrow_box_top:hover .drop{
+    display:block;
+}
 /*.navbar input[type="checkbox"]:checked+.drop {
     display: block;
 }*/

@@ -4,6 +4,10 @@ table {
     text-align: center;
     border: 1px solid white;
 }
+
+table *{
+    border: white;
+}
 a {
     width: 100%;
     height: 100%;
@@ -12,11 +16,12 @@ a {
 thead th{
     font-weight: normal;
     height:2em;
-    background-color: #DDDDDD;    
+    background-color: #DDDDDD;   
 }
 td, th{
     width:200px;
 }
+
 td:nth-child(1) > * > *{
     background-color: #EEEEEE;
     display: block;

@@ -23,7 +23,7 @@ h1 {
     width: 280px;
     zoom: 1;
 }
-.text {
+.inside .text {
     border: 2px solid #ccc;
     color: #999;
     padding:.8em;
