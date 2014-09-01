@@ -1,6 +1,7 @@
 var config = require('../../config');
 var common = {};
 common.utils = require('../../common/utils');
+common.execute = require('../../common/execute');
 var path = require('path');
 var exec = require('child_process').exec;
 var fs = require('fs');
@@ -14,7 +15,19 @@ module.exports = function(app) {
     app.post('/programming', function (req, res) {
         common.utils.verifyAdmin(req.session.id, function(isAdmin) {
             if(isAdmin) {
-                common.utils.save(req.files.upload, "./programs", req.files.upload.name, function (err) {
+                var saveName = req.files.upload.name;
+                //to ensure the correct file type ending
+                var cutoff = saveName.lastIndexOf('.' + req.body.type);
+                saveName = saveName.substring(0, cutoff === -1? saveName.lastIndexOf("."):cutoff);
+                //check against command line injection
+                if(!(/^[a-zA-Z0-9\.]*$/.test(saveName))) {
+                    res.render('programming/programming', {
+                        prompt: 'Invalid File Name',
+                        session:req.session
+                    });
+                    return;
+                }
+                common.utils.save(req.files.upload, "./programs", saveName + "." + req.body.type, function (err) {
                     if (err) {
                         console.log(err);
                         res.render('programming/programming', {
@@ -23,22 +36,20 @@ module.exports = function(app) {
                         });
                     } else {
 
-                        input = "./programs/" + req.files.upload.name;
+                        input = "./programs/" + saveName + "." + req.body.type;
                         var inputDir = path.dirname(input);
                         var inputFile = path.basename(input);
-                        var compile_command = 'javac ' + inputDir + '/' + inputFile;
-                        exec(compile_command, function(err, stdout, stderr){
+                        common.execute.compile(req.body.type, inputDir, inputFile, function(err, stdout, stderr) {
                             if(err) {
                                 res.render('programming/programming', {
-                                    prompt: 'Could not compile java',
+                                    prompt: 'Could not compile' + err,
                                     session: req.session
                                 });
-                            } else{
-                              var run_command = 'java -cp ' + inputDir + ' ' + inputFile.substring(0,inputFile.lastIndexOf('.java'));
-                              exec(run_command, function(err, stdout, stderr){
+                            } else {
+                              common.execute.run(req.body.type, inputDir, inputFile, function(err, stdout, stderr){
                                 if (err) {
                                     res.render('programming/programming', {
-                                        prompt: 'Could not execute java',
+                                        prompt: 'Could not execute' + err,
                                         session: req.session
                                     });
                                 } else {
@@ -55,7 +66,7 @@ module.exports = function(app) {
                                                 session: req.session
                                             });
                                         }
-                                    })
+                                    });
 
                                 }
                               });

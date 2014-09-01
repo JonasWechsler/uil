@@ -3,7 +3,7 @@ block head
     script(src="./ace-builds/src-noconflict/ace.js")
     link(rel='stylesheet', href='/stylesheets/upload.css')
 block content
-    h1= 'Submit a Java Program'
+    h1= 'Submit a Program'
     if prompt
         h4= 'stdout from running program'
         div#qq= prompt
@@ -13,6 +13,11 @@ block content
     form(action="/programming" enctype="multipart/form-data" method="post")
         input(type="file", name="upload")
         br
+        select(name="type")
+            option(value = "java")= "Java"
+            option(value = "c")= "C"
+            option(value = "py")= "Python"
+            option(value = "cc")= "C++"
         button(type="submit", value="upload")= "SUBMIT"
 block footer
     script.

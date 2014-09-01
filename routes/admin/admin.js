@@ -2,6 +2,7 @@ var db = require('../../common/db');
 var async = require('async');
 var common = {}
 common.utils = require('../../common/utils');
+common.execute = require('../../common/execute');
 module.exports = function(app) {
 	app.all('/admin', function (req, res) {
         common.utils.verifyAdmin(req.session.id, function(isAdmin) {
@@ -29,6 +30,17 @@ module.exports = function(app) {
             }
         });
 	});
+
+     app.get('/clearprograms', function(req, res) {
+        common.utils.verifyAdmin(req.session.id, function(isAdmin) {
+            if(isAdmin) {
+                common.execute.clearPrograms();
+                res.redirect('/admin');
+            } else {
+                res.redirect('/');
+            }
+        });
+    });
 
     app.post('/removeadmin', function(req, res) {
         common.utils.verifyAdmin(req.session.id, function(isAdmin) {
