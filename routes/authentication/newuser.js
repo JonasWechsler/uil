@@ -49,6 +49,7 @@ module.exports = function(app) {
                 var email1 = false;
                 var password1 = false;
                 var grade1 = false;
+                var username1 = false;
 
                 if (!email) {
                     email = "";
@@ -66,16 +67,20 @@ module.exports = function(app) {
                     password1 = true;
                     //error: "Make sure the password fields match.",
                 }
+                if(userName.length > 20) {
+                    username1 = true;
+                }
                 if (grade > 12) {
                     grade1 = true;
                 }
-                if (password1 || email1 || grade1 | empty1) {
+                if (password1 || email1 || grade1 || empty1 || username1) {
                     res.render('authentication/newuser', {
                         session: req.session,
                         title: 'Add New User',
                         empty: empty1,
                         email: email1,
                         password: password1,
+                        username: username1,
                         grade: grade1,
                         prompt: "Please fill out the information below."
                     });
