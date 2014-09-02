@@ -30,7 +30,7 @@ module.exports.compile = function(type, inputDir, inputFile, callback) {
 module.exports.run = function(type, inputDir, inputFile, callback) {
 	var run_command;
 	switch(type) {
-		case 'java': run_command = 'java -Djava.security.manager -Djava.security.policy=user.policy -cp ' + inputDir + ' ' + inputFile.substring(0,inputFile.lastIndexOf('.java'));
+		case 'java': run_command = 'cd programs && java -Djava.security.manager -Djava.security.policy=user.policy -cp . ' + inputFile.substring(0,inputFile.lastIndexOf('.java'));
 			break;
 		case 'cc': run_command = './' + inputDir + '/' + inputFile.substring(0,inputFile.lastIndexOf('.cc'));
 		    break;
