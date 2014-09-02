@@ -7,7 +7,130 @@ block content
         h1.text-incorrect= prompt
     if questionlist.length > 0
         for question in questionlist
-            a.result(href='/random/' + question._id)
-                strong= question.ques 
-                |   question.test
-            p.result= question.text
+            .question(id= question.ques)
+                h1.result(id='ques', href='/random/' + question._id)
+                    strong= question.ques 
+                    |   #{question.test}
+                    | reported #{question.reported} times
+                if question.code
+                    h3= 'Code'
+                    pre.edit(id='code')= question.code
+                h3= 'Text'
+                pre.edit(id='text')= question.text
+                h3= 'Answer Choices'
+                pre.edit(id='ans')='A. '+question.ans[0]+'\nB. '+question.ans[1]+'\nC. '+question.ans[2]+'\nD. '+question.ans[3]+'\nE. '+question.ans[4]
+                h3= 'Correct Answer'
+                pre.edit(id='key' style='font-size:150%')= question.key
+                form(id="jsonsubmit" action="/questionupdate" method="post")
+                    p(hidden name="obj" type="text" id="obj")= JSON.stringify(question, null, '\t')
+                    // THIS IS ACTUALLY AN IMPORTANT VARIABLE, DO NOT MODIFY
+                    // SERIOUSLY
+                    input(hidden name="potato" type="text" id="potato")= JSON.stringify(question, null, '\t')
+                    button.sub(type="submit") Update
+
+    script.
+        var editors={};
+        function bindSaveSmall(){
+            $('.savesmall').click(function(){
+                var num = $(this).attr('id');
+                var inside= editors[num].getValue();
+                var qnum = '';
+                var attr = '';
+                if(num[1]<57){
+                    qnum=num.substr(0,2); 
+                    attr=num.substr(2);
+                } else {
+                    qnum=num[0];
+                    attr=num.substr(1);
+                }
+                $('.question#'+qnum).find('#'+attr).text(inside);
+                var jsonstr =  $('#'+qnum+' #obj').text();
+                var obj = JSON.parse(jsonstr);
+                console.log("Updated obj");
+                if(attr!=='ans'){
+                    obj[attr]=inside;
+                } else {
+                    var list = inside.split('\n');
+                    list = list.map(function(el){
+                        return el.substring(3);
+                    });
+                    obj[attr] = list;
+                }
+                $('.question#'+qnum).find('#obj').text(JSON.stringify(obj,null,'\t'));
+                $('.question#'+qnum).find('#potato').val(JSON.stringify(obj,null,'\t'));
+                $('.question#'+qnum+'>#'+attr+'.edit').show();
+
+                $('#editor'+num).remove();
+                $('#'+num+'.savesmall').remove();
+            });
+        };
+        function bindSave(){
+            $('.save').click(function(e){ // save button
+                var num = $(this).attr('id');
+                var inside= editors[num].getValue();
+                console.log(inside);
+                var obj = JSON.parse(inside);
+                $('.question#'+num).find('#test').text(obj.test);
+                $('.question#'+num).find('#code').text(obj.code);
+                $('.question#'+num).find('#text').text(obj.text);
+                $('.question#'+num).find('#A').text('A. '+obj.ans[0]);
+                $('.question#'+num).find('#B').text('B. '+obj.ans[1]);
+                $('.question#'+num).find('#C').text('C. '+obj.ans[2]);
+                $('.question#'+num).find('#D').text('D. '+obj.ans[3]);
+                $('.question#'+num).find('#E').text('E. '+obj.ans[4]);
+                $('.question#'+num).find('#key').text(obj.key);
+                $('.question#'+num).find('#obj').text(JSON.stringify(obj,null,'\t'));
+                $('.question#'+num).find('#potato').val(JSON.stringify(obj,null,'\t'));
+                $('.question#'+num).show();
+                $('#editor'+num).remove();
+                $('#'+num+'.save').remove();
+            });
+        };
+        $(document).ready(function() {
+            $('.question > .edit').click(function(){
+                $(this).hide();
+                var num = $($(this).parent()).attr('id')+$(this).attr('id');
+                var text = $(this).text();
+                var id = "editor" + num;
+                var div = $("<pre id="+id+">"+text+"</pre><button class='savesmall' id="+num+" >Save</button>");
+                div.insertAfter(this);
+
+                editors[num] = ace.edit(id);
+                editors[num].setTheme("ace/theme/monokai");
+                editors[num].getSession().setMode("ace/mode/javascript");
+                editors[num].getSession().setUseWrapMode(true);
+                editors[num].setOptions({
+                    maxLines: Infinity
+                });
+                editors[num].setFontSize('16px');
+                editors[num].renderer.setShowGutter(false);
+                editors[num].setShowPrintMargin(false);
+
+                bindSaveSmall();
+            })
+            $('h1#ques').click(function(){
+                var par = $(this).parent();
+                $(par).hide();
+                var num = $(par).attr('id');
+                var id = "editor"+num;
+                var text = "";
+                text = ""+$('#'+num+' #obj').text();
+                //console.log(text);
+
+                var div = $("<pre id="+id+">"+text+"</pre><button class='save' id="+num+" >Save</button>");
+                div.insertAfter(par);
+                
+                editors[num] = ace.edit(id);
+                editors[num].setTheme("ace/theme/monokai");
+                editors[num].getSession().setMode("ace/mode/javascript");
+                editors[num].getSession().setUseWrapMode(true);
+                editors[num].setOptions({
+                    maxLines: Infinity
+                });
+                editors[num].setFontSize('16px');
+                editors[num].renderer.setShowGutter(false);
+                editors[num].setShowPrintMargin(false);
+                
+                bindSave();
+            });
+        });
