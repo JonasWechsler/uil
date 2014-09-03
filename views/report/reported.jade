@@ -9,9 +9,10 @@ block content
         for question in questionlist
             .question(id= question.ques)
                 h1.result(id='ques', href='/random/' + question._id)
-                    strong= question.ques 
-                    |   #{question.test}
-                    | reported #{question.reported} times
+                    strong
+                    | ##{question.ques}
+                    | #{question.test}
+                    | (reported #{question.reported} times)
                 if question.code
                     h3= 'Code'
                     pre.edit(id='code')= question.code
@@ -23,12 +24,11 @@ block content
                 pre.edit(id='key' style='font-size:150%')= question.key
                 form(id="jsonsubmit" action="/questionupdate" method="post")
                     p(hidden name="obj" type="text" id="obj")= JSON.stringify(question, null, '\t')
-                    // THIS IS ACTUALLY AN IMPORTANT VARIABLE, DO NOT MODIFY
-                    // SERIOUSLY
-                    input(hidden name="potato" type="text" id="potato")= JSON.stringify(question, null, '\t')
+                    input(hidden name="questionjsoninput" type="text" id="questionjsoninput")= JSON.stringify(question, null, '\t')
                     button.sub(type="submit") Update
 
     script.
+        // THIS JAVASCRIPT IS CANCER. PLEASE DO NOT LOOK AT OR MODIFY IT.
         var editors={};
         function bindSaveSmall(){
             $('.savesmall').click(function(){
@@ -46,7 +46,6 @@ block content
                 $('.question#'+qnum).find('#'+attr).text(inside);
                 var jsonstr =  $('#'+qnum+' #obj').text();
                 var obj = JSON.parse(jsonstr);
-                console.log("Updated obj");
                 if(attr!=='ans'){
                     obj[attr]=inside;
                 } else {
@@ -57,7 +56,7 @@ block content
                     obj[attr] = list;
                 }
                 $('.question#'+qnum).find('#obj').text(JSON.stringify(obj,null,'\t'));
-                $('.question#'+qnum).find('#potato').val(JSON.stringify(obj,null,'\t'));
+                $('.question#'+qnum).find('#questionjsoninput').val(JSON.stringify(obj,null,'\t'));
                 $('.question#'+qnum+'>#'+attr+'.edit').show();
 
                 $('#editor'+num).remove();
@@ -68,7 +67,6 @@ block content
             $('.save').click(function(e){ // save button
                 var num = $(this).attr('id');
                 var inside= editors[num].getValue();
-                console.log(inside);
                 var obj = JSON.parse(inside);
                 $('.question#'+num).find('#test').text(obj.test);
                 $('.question#'+num).find('#code').text(obj.code);
@@ -80,7 +78,7 @@ block content
                 $('.question#'+num).find('#E').text('E. '+obj.ans[4]);
                 $('.question#'+num).find('#key').text(obj.key);
                 $('.question#'+num).find('#obj').text(JSON.stringify(obj,null,'\t'));
-                $('.question#'+num).find('#potato').val(JSON.stringify(obj,null,'\t'));
+                $('.question#'+num).find('#questionjsoninput').val(JSON.stringify(obj,null,'\t'));
                 $('.question#'+num).show();
                 $('#editor'+num).remove();
                 $('#'+num+'.save').remove();
@@ -105,9 +103,8 @@ block content
                 editors[num].setFontSize('16px');
                 editors[num].renderer.setShowGutter(false);
                 editors[num].setShowPrintMargin(false);
-
                 bindSaveSmall();
-            })
+            });
             $('h1#ques').click(function(){
                 var par = $(this).parent();
                 $(par).hide();
@@ -115,11 +112,10 @@ block content
                 var id = "editor"+num;
                 var text = "";
                 text = ""+$('#'+num+' #obj').text();
-                //console.log(text);
 
                 var div = $("<pre id="+id+">"+text+"</pre><button class='save' id="+num+" >Save</button>");
                 div.insertAfter(par);
-                
+
                 editors[num] = ace.edit(id);
                 editors[num].setTheme("ace/theme/monokai");
                 editors[num].getSession().setMode("ace/mode/javascript");
@@ -130,7 +126,6 @@ block content
                 editors[num].setFontSize('16px');
                 editors[num].renderer.setShowGutter(false);
                 editors[num].setShowPrintMargin(false);
-                
                 bindSave();
             });
         });

@@ -59,8 +59,7 @@ module.exports = function(app) {
         common.utils.verifyAdmin(req.session.id, function(isAdmin) {
             if(isAdmin) {
                 var questions = db.get("questions");
-                var question = JSON.parse(req.body.potato);
-                console.log(String(req.body.potato));
+                var question = JSON.parse(req.body.questionjsoninput);
                 questions.update({"_id":question._id}, question, function(err) {
                     if(err) {
                         res.redirect('/reported');
