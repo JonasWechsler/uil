@@ -79,3 +79,14 @@ background: #D8D8D8;
   height:10px;
   background-color:#AAAAAA;
 }
+.toadd {
+  font-size: 18px;
+}
+ul.toadd {
+  padding-top: 0px;
+  margin-top: 0px;
+}
+p.toadd {
+  margin-bottom: 0px;
+  padding-bottom: 0px;
+}

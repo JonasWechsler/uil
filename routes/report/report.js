@@ -36,7 +36,7 @@ module.exports = function(app) {
     });
 
     app.get('/reported', function (req,res) {
-        common.utils.verifyAdmin(req.session.id, function(isAdmin) {;
+        common.utils.verifyAdmin(req.session.id, function(isAdmin) {
             if(isAdmin) {
              	var questions = db.get("questions");
             	questions.find({}, function(err, questions) {
@@ -49,6 +49,24 @@ module.exports = function(app) {
                         });
             		}
             	});
+            } else {
+                res.redirect('/');
+            }
+        });
+    });
+
+    app.post('/questionupdate', function(req, res) {
+        common.utils.verifyAdmin(req.session.id, function(isAdmin) {
+            if(isAdmin) {
+                var questions = db.get("questions");
+                var question = JSON.parse(req.body.questionjsoninput);
+                questions.update({"_id":question._id}, question, function(err) {
+                    if(err) {
+                        res.redirect('/reported');
+                    } else {
+                        res.redirect('/reported');
+                    }
+                });
             } else {
                 res.redirect('/');
             }
