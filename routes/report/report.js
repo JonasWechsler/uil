@@ -66,7 +66,7 @@ module.exports = function(app) {
                     } else {
                         res.redirect('/reported');
                     }
-                })
+                });
             } else {
                 res.redirect('/');
             }

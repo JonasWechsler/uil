@@ -85,6 +85,12 @@ block content
             });
         };
         $(document).ready(function() {
+            $("#jsonsubmit").submit(function(event) {
+                event.preventDefault();
+                var $form = $(this),
+                url= $form.attr('action');
+                var posting = $.post( url, { questionjsoninput: $('#questionjsoninput').val()});
+            });
             $('.question > .edit').click(function(){
                 $(this).hide();
                 var num = $($(this).parent()).attr('id')+$(this).attr('id');
