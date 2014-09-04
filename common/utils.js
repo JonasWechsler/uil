@@ -5,6 +5,18 @@ var users = db.get('users');
 var fs = require('fs');
 var path = require('path');
 module.exports = {};
+module.exports.testFileName = function(name) {
+    if(!(/^[a-zA-Z0-9\.]*$/.test(name))) {
+        return false;
+    }
+    return true;
+}
+
+module.exports.getProblemList = function(callback) {
+    var problems = [];
+    problems.push('test');
+    callback(problems);
+}
 
 module.exports.recalcScore = function(user) {
     var correcty = user.correct || [];
