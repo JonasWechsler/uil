@@ -33,7 +33,7 @@ $(document).ready(function() {
 
     $('.try').click(function() {
         $('input[name="retry"]').val('true');
-        $('.next').click();
+        $('.sub').click();
     });
 
     $('.report').one("click", function() {
