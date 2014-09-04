@@ -13,6 +13,10 @@ module.exports.testFileName = function(name) {
 }
 
 module.exports.getProblemList = function(callback) {
+    /* 
+     * this should be replaced with an actual way 
+     * to get the problems list later on
+     */ 
     var problems = [];
     problems.push('test');
     callback(problems);
