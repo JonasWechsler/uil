@@ -57,7 +57,7 @@ block content
                 input(type="hidden",name = "typer",value = type)
                 br
                 button.next home
-            button#sub submit
+            button.sub submit
         if(!choices)
             form.submit.answers(name='tryagaincheck',method='post',action='/tryagaincheck')
                 for letter,index in ['A','B','C','D','E']
@@ -78,6 +78,6 @@ block footer
         var themeq ="#{themeq}";
         var themec ="#{themec}";
         var key ="#{question.key}";
-        var qid ="#{question._id}"
+        var qid ="#{question._id}";
     script(src="/scripts/questiondisp.js")
     script(src="/scripts/questionscripts.js")

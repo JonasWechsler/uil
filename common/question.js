@@ -7,12 +7,13 @@ var questions = db.get('questions');
 var users = db.get('users');
 module.exports = {};
 module.exports.isQuestion = function(user,type,questionid, callback) {
-	user[type].forEach(function (obj, ind) {
-        if (obj.id === questionid) {
-            callback(ind);
+   var returnInd = -1;
+   user[type].forEach(function (obj, ind) {
+	if (obj.id === questionid) {
+            returnInd = ind;
         }
     });
-    callback(-1);
+    callback(returnInd);
 }
 
 module.exports.addToStreak = function(user) {

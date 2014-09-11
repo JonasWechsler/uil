@@ -1,0 +1,11 @@
+extends ../layout
+block content
+	h1#timeleft #{testend - teststart} seconds remaining
+
+	script.
+		window.setInterval(function() {
+			seconds = parseInt(new Date().getTime() / 1000);
+			var timeremaining = parseInt("#{testend}") - seconds;
+			$("h1").text(timeremaining + " seconds remaining");
+		}, 1000);
+
