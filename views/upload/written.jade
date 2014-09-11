@@ -5,14 +5,9 @@ block head
 block content
     h1= title
     h4= prompt
-    if !text
-        form(action="/pdf" enctype="multipart/form-data" method="post")
-            input(type="file", name="upload")
-            br
-            button(type="submit", value="upload")= "SUBMIT"
     if text
         //div(id="editor")= text
-        //form(id="jsonsubmit" action="/pdfsub" enctype="multipart/form-data" method="post")
+        //form(id="jsonsubmit" action="/upload/written" enctype="multipart/form-data" method="post")
         //    input.hide(id="divin" type="text" name="in")
         //button(id="sub" type="button")= "Submit"
         
@@ -33,7 +28,7 @@ block content
                     pre.edit(id='key' style='font-size:150%')= question.key
                     p(hidden id="obj")=JSON.stringify(question, null, '\t')
 
-        form(id="jsonsubmit" action="/pdfsub" enctype="multipart/form-data" method="post")
+        form(id="jsonsubmit" action="/upload/written" enctype="multipart/form-data" method="post")
             input.hide(id="divin" type="text" name="in")
         button(id="finalsub" type="button")= "Submit"
 
