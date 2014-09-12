@@ -1,6 +1,7 @@
 $(document).ready(function() {
     $('.content').find('.sub').click(function(event) {
-        event.preventDefault();
+        if(!event.which)
+            event.preventDefault();
     });
     var submitQ = (function(init) {
         return function(event) {
