@@ -28,7 +28,7 @@ block content
         pre.question.code(id="qq")= question['text']
         
         if(choices)
-            form.submit.answers(name='tryagaincheck',method="post",action='/tryagaincheck')
+            form.submit.answers(name='tryagaincheck',method="get",action='/random')
                 for letter,index in ['A','B','C','D','E']
                     if(type==='correct')
                         if(letter===question.key)
@@ -56,10 +56,10 @@ block content
                 input(type="hidden",name = "id", value= question["_id"])
                 input(type="hidden",name = "typer",value = type)
                 br
-                button.next home
+                button.next next
             button.sub submit
         if(!choices)
-            form.submit.answers(name='tryagaincheck',method='post',action='/tryagaincheck')
+            form.submit.answers(name='tryagaincheck',method='get',action='/random')
                 for letter,index in ['A','B','C','D','E']
                     label(for=letter)
                         input(id=letter,type='radio',name='choice',value=letter)
@@ -77,7 +77,6 @@ block footer
     script.                                                 
         var themeq ="#{themeq}";
         var themec ="#{themec}";
-        var key ="#{question.key}";
         var qid ="#{question._id}";
     script(src="/scripts/questiondisp.js")
     script(src="/scripts/questionscripts.js")

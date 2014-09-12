@@ -5,19 +5,28 @@ $(document).ready(function() {
             var isNotFirstCall = !init;
             if(init) {
                 var first = $("input[name=choice]:checked").val();
-                if(key===first)
-                    $('label[for=' + first + ']').css('background-color','green');
-                else
-                    $('label[for=' + first + ']').css('background-color','red');
-                $('.content').find('.sub').remove();
-                $('label').click(false);
-                $('.next').css('display','inline');
-                $('.try').css('display','inline');
-                $('.next').attr('class','sub');
-                //need to rebind click handlers (of .sub) because we've created 
-                //a new object to observe
-                bind();
-                init = false;
+                var type = $('input[name=typer]').val();
+                var postData = {};
+                postData.id=qid;
+                postData.choice=first;
+                if(type) {
+                    postData.typer=type;
+                }
+                $.post(type?'/tryagaincheck':'/checkquestion',postData).done(function(data){
+                    if(data==='correct')
+                        $('label[for=' + first + ']').css('background-color','green');
+                    else if(data === 'incorrect')
+                        $('label[for=' + first + ']').css('background-color','red');
+                    $('.content').find('.sub').remove();
+                    $('label').click(false);
+                    $('.next').css('display','inline');
+                    $('.try').css('display','inline');
+                    $('.next').attr('class','sub');
+                    //need to rebind click handlers (of .sub) because we've created 
+                    //a new object to observe
+                    bind();
+                    init = false;
+                });
             }
             return isNotFirstCall;
         }
