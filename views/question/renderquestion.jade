@@ -34,10 +34,9 @@ block content
                 input#E(type="radio",name="choice",value="E")
                 |#{question.ans[4]}
             input(type="hidden",name = "id", value= question["_id"])
-            input(type="hidden",name="retry", value = "")
             br
             button.next next
-        button.sub submit
+            button.sub submit
         a(href='/tryagain/' + question._id)
             button.try= "retry"
     span.rightcol

@@ -28,7 +28,7 @@ block content
         pre.question.code(id="qq")= question['text']
         
         if(choices)
-            form.submit.answers(name='tryagaincheck',method="get",action='/random')
+            form.submit.answers(name='checkquestion',method="get",action='/random')
                 for letter,index in ['A','B','C','D','E']
                     if(type==='correct')
                         if(letter===question.key)
@@ -57,7 +57,7 @@ block content
                 input(type="hidden",name = "typer",value = type)
                 br
                 button.next next
-            button.sub submit
+                button.sub submit
         if(!choices)
             form.submit.answers(name='tryagaincheck',method='get',action='/random')
                 for letter,index in ['A','B','C','D','E']
@@ -68,7 +68,7 @@ block content
                 input(type="hidden",name = "typer",value = type)
                 br
                 button.next home
-            button.sub submit
+                button.sub submit
         
     span.rightcol
         if question['code']

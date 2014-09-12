@@ -1,4 +1,7 @@
 $(document).ready(function() {
+    $('.content').find('.sub').click(function(event) {
+        event.preventDefault();
+    });
     var submitQ = (function(init) {
         return function(event) {
             //we only want to replace these on the first call
@@ -25,24 +28,27 @@ $(document).ready(function() {
                     //need to rebind click handlers (of .sub) because we've created 
                     //a new object to observe
                     bind();
-                    init = false;
                 });
+                init = false;
             }
             return isNotFirstCall;
         }
     })(true);
 
     var bind = function() {
-        $('.content').find('.sub').click(function(event) {
-            submitQ(event);
+        $('.content').find('[name=checkquestion]').submit(function(event) {
+            event.preventDefault();
+            if(submitQ(event)) {
+                window.location.href= "/random"
+            } 
         });
     }
 
     bind();
 
-    $('.try').click(function() {
-        $('input[name="retry"]').val('true');
-        $('.sub').click();
+    $('.try').click(function(event) {
+        event.preventDefault();
+        window.location.href= "/random/" + qid;
     });
 
     $('.report').one("click", function() {
