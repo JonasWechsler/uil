@@ -1,12 +1,53 @@
 extends ../layout
+block head
+	link(rel='stylesheet', href='/stylesheets/question.css')
+	script(src="../ace-builds/src-noconflict/ace.js")
 block content
 	a(href="/begintest/") Start new test
+	div#acey
+		if questions
+			h1 40 Question Test
+			h1#timeleft **** seconds remaining
+			each question, index in questions
+				div.top
+					if question['ques']
+						div.qnum ##{index+1}
+					div
+						a.report= "Report Question"
+				span.spanner
+					span.leftcol
+						pre.question.code(id="qq")= question['text']
+						form.submit.answers(name="checkquestion",method="post",action="/checkquestion")
+							label(for='A')
+								input#A(type="radio",name="choice",value="A")
+								|#{question.ans[0]}
+							label(for='B')
+								input#B(type="radio",name="choice",value="B")
+								|#{question.ans[1]}
+							label(for='C')
+								input#C(type="radio",name="choice",value="C")
+								|#{question.ans[2]}
+							label(for='D')
+								input#D(type="radio",name="choice",value="D")
+								|#{question.ans[3]}
+							label(for='E')
+								input#E(type="radio",name="choice",value="E")
+								|#{question.ans[4]}
+							input(type="hidden",name = "id", value= question["_id"])
+							input(type="hidden",name="retry", value = "")
+							br
+					span.rightcol
+						if question['code']
+							pre.question.side(id="cc")= question['code']
+
 
 	h1#timeleft **** seconds remaining
-
+	script(src="/questiondisp.js")
 	script.
 		window.setInterval(function() {
-			seconds = parseInt(new Date().getTime() / 1000);
-			var timeremaining = parseInt("#{testend}") - seconds;
-			$("h1").text(timeremaining + " seconds remaining");
+			var timeInSeconds = parseInt(new Date().getTime() / 1000);
+			var timeRemaining = parseInt("#{testend}") - timeInSeconds;
+			minutes = parseInt(timeRemaining / 60);
+			seconds = parseInt(timeRemaining % 60);
+			$("h1#timeleft").text(minutes + " minutes, " + seconds + " seconds remaining");
 		}, 1000);
