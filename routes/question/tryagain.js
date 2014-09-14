@@ -116,14 +116,13 @@ module.exports = function (app) {
                 var userselection = req.body.choice;
                 var type = req.body.typer;
                 if (!userselection) {
-                    res.redirect('/');
-
+                    res.send('passed');
                 } else if (type === 'correct'||type ==='corrected') {
                     if (userselection === answer) {
-                        res.redirect('/');
+                        res.send('correct');
 
                     } else {
-                        res.redirect('/');
+                        res.send('incorrect');
 
                     }
                 } else if (type === 'passed') {
@@ -156,7 +155,7 @@ module.exports = function (app) {
                                         'correct': correctarray,
                                     }
                                 });
-                                res.redirect('/');
+                                res.send('correct');
 
                             } else {
                                 var passedarray = user.passed;
@@ -181,7 +180,7 @@ module.exports = function (app) {
                                         'incorrect': incorrectarray,
                                     }
                                 });
-                                res.redirect('/');
+                                res.send('incorrect');
 
                             }
                         }
@@ -215,7 +214,7 @@ module.exports = function (app) {
                                         'corrected': correctedarray,
                                     }
                                 });
-                                res.redirect('/');
+                                res.send('correct');
 
                             }
                             //question was answered incorrectly again
@@ -229,7 +228,7 @@ module.exports = function (app) {
                                         'incorrect': incorrectarray
                                     }
                                 });
-                                res.redirect('/');
+                                res.send('incorrect');
 
                             }
                         }

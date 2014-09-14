@@ -19,7 +19,7 @@ block content
         span.spanner
             span.leftcol
                 pre.question.code(id="qq")= question['text']
-                form.submit.answers(name="checkquestion",method="post",action="/checkquestion")
+                form.submit.answers(name="checkquestion",method="get",action="/random")
                     label(for='A')
                         input#A(type="radio",name="choice",value="A")
                         |#{question.ans[0]}
@@ -39,16 +39,16 @@ block content
                     input(type="hidden",name="retry", value = "")
                     br
                     button.next next
-                button.sub submit
-                button.try= "retry"
+                    button.sub submit
+                a(href='/tryagain/' + question._id)
+                    button.try= "retry"
             span.rightcol
                 if question['code']
                     pre.question.side(id="cc")= question['code']
 block footer
-    script.                                                 
+    script.                                             
         var themeq ="#{themeq}";
         var themec ="#{themec}";
-        var key ="#{question['key']}";
         var qid ="#{question._id}"
     script(src="/scripts/questiondisp.js")
     script(src="/scripts/questionscripts.js")
