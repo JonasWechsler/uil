@@ -57,6 +57,13 @@ module.exports.placeIntoAnsweredCategory = function(user, category, questionid, 
             'questions': otherarray,
         }
     });
+    var inctemp = {};
+    inctemp['$inc'] = {};
+    inctemp['$inc'][category] = 1;
+    questions.update({
+        '_id': questionid
+    }, inctemp);
+
     arrayofcategory.push({
         id: questionid,
         time: Date.now(),

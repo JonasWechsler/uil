@@ -22,17 +22,13 @@ module.exports = function(app) {
     app.get('/report/:id', function (req, res) {
     	var id = req.param("id");
     	var questions = db.get("questions");
-    	questions.findOne({'_id' : id}, function(err, question) {
-    		if(!err && question) {
-	    		questions.update({'_id':id}, 
-	    			{$set: 
-	    				{
-	    					reported: (question.reported)?question.reported+1:1
-	    				}
-	    			}
-	    		);
-	    	}
-    	});
+    		questions.update({'_id':id}, 
+    			{$inc: 
+    				{
+    					reported: 1
+    				}
+    			}
+    		);
     });
 
     app.get('/reported', function (req,res) {

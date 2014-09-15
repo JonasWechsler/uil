@@ -84,7 +84,7 @@ h1 {
    outline:0;
    outline:none;
     margin-left:10px;
-    width:150px;
+    width:50px;
     height:1em;
     padding:5px;
     background:transparent;
@@ -92,13 +92,13 @@ h1 {
     border-bottom: 2px solid rgb(53, 53, 53);;
         -webkit-transition: width .5s; /* For Safari 3.1 to 6.0 */
     transition: width .5s;
-}/*
+}
 .search.container:hover > .search.text{
-    width:80%;
+    width:150px;
 }
 .search.text:focus{
-    width:80%;
-}*/
+    width:150px;
+}
 
 
 label[for="dropdown"]:hover{
