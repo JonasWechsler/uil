@@ -5,7 +5,15 @@ block head
 block content
     h1= title
     h4= prompt
+    br
+    h2= "Written"
     form(action="/upload/written/edit" enctype="multipart/form-data" method="post")
+        input(type="file", name="upload")
+        br
+        button(type="submit", value="upload")= "SUBMIT"
+    br
+    h2= "Programming"
+    form(action="/upload/programming/edit" enctype="multipart/form-data" method="post")
         input(type="file", name="upload")
         br
         button(type="submit", value="upload")= "SUBMIT"
