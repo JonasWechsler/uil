@@ -472,18 +472,19 @@ function pushToDb(obj, callback) {
     }
 }
 module.exports = function(app) {
-    app.post('/upload/written', function (req, res) {
+    app.post('/upload/written/submit', function (req, res) {
         common.utils.verifyAdmin(req.session.id, function(isAdmin) {
             if(isAdmin) {
                 //taking edited questions and adding to database
                 var input = req.body.in;
                 var obj = JSON.parse(input);
-                res.send(JSON.stringify(obj));
+                //res.send(JSON.stringify(obj));
                 pushToDb(obj, function(idToInsert) {
                     usercollection.update({}, {
                         $push:{questions:idToInsert}
                     });
                 });
+                res.redirect('/upload');
             } else {
                 res.redirect('/');
             }

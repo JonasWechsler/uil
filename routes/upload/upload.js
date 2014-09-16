@@ -14,8 +14,8 @@ module.exports = function(app) {
             if(isAdmin) {
                 res.render('upload/upload', {
                     session: req.session,
-                    title: 'Upload A PDF',
-                    prompt: 'Browse for a PDF'
+                    title: 'Upload Tests',
+                    prompt: 'Browse for tests'
                 });
             } else {
                 res.redirect('/');
