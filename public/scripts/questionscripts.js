@@ -1,8 +1,4 @@
 $(document).ready(function() {
-    $('.content').find('.sub').click(function(event) {
-        if(!event.which)
-            event.preventDefault();
-    });
     var submitQ = (function(init) {
         return function(event) {
             //we only want to replace these on the first call

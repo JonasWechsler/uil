@@ -4,26 +4,28 @@ $('body').keydown(function (e) {
     switch (e.which) {
     case A:
     case ONE:
+        $('#A').focus();
         $('#A').click();
         break;
     case B:
     case TWO:
+        $('#B').focus();
         $('#B').click();
         break;
     case C:
     case THREE:
+        $('#C').focus();
         $('#C').click();
         break;
     case D:
     case FOUR:
+        $('#D').focus();
         $('#D').click();
         break;
     case E:
     case FIVE:
+        $('#E').focus();
         $('#E').click();
-        break;
-    case ENTER:
-        $('.sub').trigger('enter', [e.target]);
         break;
     }
 });
