@@ -3,76 +3,78 @@ block head
     link(rel='stylesheet', href='/stylesheets/question.css')
     script(src="../ace-builds/src-noconflict/ace.js")
 block content
-    div.top
-        if question['ques']
-            div.qnum= question['ques'] +"."
-                label.id= id
-            div.details
-                div.title= title
-                div.test= "Test " + question['test']
-        else
-            div.qnum= "Random"
-                label.id= id
-        div
-            label.report= "Report Question"
-    div.middle
-        if type==='correct'
-            h3.text-correct="You have answered this problem correctly."
-        if type==='incorrect'
-            h3.text-incorrect="You have previously answered this question incorrectly."
-        if type==='passed'
-            h3.text-passed="You have previously passed this question."
-        if type=== 'corrected'
-            h3.text-corrected= "You have corrected this question."
-    span.leftcol
-        pre.question.code(id="qq")= question['text']
-        
-        if(choices)
-            form.submit.answers(name='checkquestion',method="get",action='/random')
-                for letter,index in ['A','B','C','D','E']
-                    if(type==='correct')
-                        if(letter===question.key)
-                            label.correct(for=letter)
-                                input.correct(id=letter,type='radio',name='choice',value=letter)
+    div#acey
+        div.top
+            if question['ques']
+                div.qnum= question['ques'] +"."
+                    label.id= id
+                div.details
+                    div.title= title
+                    div.test= "Test " + question['test']
+            else
+                div.qnum= "Random"
+                    label.id= id
+            div
+                a.report= "Report Question"
+        div.middle
+            if type==='correct'
+                h3.text-correct="You have answered this problem correctly."
+            if type==='incorrect'
+                h3.text-incorrect="You have previously answered this question incorrectly."
+            if type==='passed'
+                h3.text-passed="You have previously passed this question."
+            if type=== 'corrected'
+                h3.text-corrected= "You have corrected this question."
+        span.spanner
+            span.leftcol
+                pre.question.code(id="qq")= question['text']
+                
+                if(choices)
+                    form.submit.answers(name='checkquestion',method="get",action='/random')
+                        for letter,index in ['A','B','C','D','E']
+                            if(type==='correct')
+                                if(letter===question.key)
+                                    label.correct(for=letter)
+                                        input.correct(id=letter,type='radio',name='choice',value=letter)
+                                        |#{question.ans[index]}
+                            if(type==='corrected')
+                                if(letter===question.key)
+                                    label.correct(for=letter)
+                                        input.correct(id=letter,type='radio',name='choice',value=letter)
+                                        |#{question.ans[index]}
+                                else if(choices.indexOf(letter)>-1)
+                                    label.incorrect(for=letter)
+                                        input.incorrect(id=letter,type='radio',name='choice',value=letter)
+                                        |#{question.ans[index]}
+                            if(type==='incorrect')
+                                if(choices.indexOf(letter)>-1)
+                                    label.wrong(for=letter)
+                                        input.wrong(id=letter,type='radio',name='choice',value=letter)
+                                        |#{question.ans[index]}
+                            if(choices.indexOf(letter)===-1&&(type==='incorrect'||letter!==question.key))
+                                label(for=letter)
+                                    input(id=letter,type='radio',name='choice',value=letter)
+                                    |#{question.ans[index]}
+                        input(type="hidden",name = "id", value= question["_id"])
+                        input(type="hidden",name = "typer",value = type)
+                        br
+                        button.next next
+                        button.sub submit
+                if(!choices)
+                    form.submit.answers(name='tryagaincheck',method='get',action='/random')
+                        for letter,index in ['A','B','C','D','E']
+                            label(for=letter)
+                                input(id=letter,type='radio',name='choice',value=letter)
                                 |#{question.ans[index]}
-                    if(type==='corrected')
-                        if(letter===question.key)
-                            label.correct(for=letter)
-                                input.correct(id=letter,type='radio',name='choice',value=letter)
-                                |#{question.ans[index]}
-                        else if(choices.indexOf(letter)>-1)
-                            label.incorrect(for=letter)
-                                input.incorrect(id=letter,type='radio',name='choice',value=letter)
-                                |#{question.ans[index]}
-                    if(type==='incorrect')
-                        if(choices.indexOf(letter)>-1)
-                            label.wrong(for=letter)
-                                input.wrong(id=letter,type='radio',name='choice',value=letter)
-                                |#{question.ans[index]}
-                    if(choices.indexOf(letter)===-1&&(type==='incorrect'||letter!==question.key))
-                        label(for=letter)
-                            input(id=letter,type='radio',name='choice',value=letter)
-                            |#{question.ans[index]}
-                input(type="hidden",name = "id", value= question["_id"])
-                input(type="hidden",name = "typer",value = type)
-                br
-                button.next next
-                button.sub submit
-        if(!choices)
-            form.submit.answers(name='tryagaincheck',method='get',action='/random')
-                for letter,index in ['A','B','C','D','E']
-                    label(for=letter)
-                        input(id=letter,type='radio',name='choice',value=letter)
-                        |#{question.ans[index]}
-                input(type="hidden",name = "id", value= question["_id"])
-                input(type="hidden",name = "typer",value = type)
-                br
-                button.next home
-                button.sub submit
-        
-    span.rightcol
-        if question['code']
-            pre.question.side(id="cc")= question['code']
+                        input(type="hidden",name = "id", value= question["_id"])
+                        input(type="hidden",name = "typer",value = type)
+                        br
+                        button.next home
+                        button.sub submit
+                
+            span.rightcol
+                if question['code']
+                    pre.question.side(id="cc")= question['code']
 block footer
     script.                                                 
         var themeq ="#{themeq}";
