@@ -10,6 +10,10 @@
     /* Fix for IE7 and below */
     zoom: 1;
 }
+.top > .detailcontainer{
+    display:inline-block;
+    position:absolute;
+}
 .report {
     font-size: 10px;
     padding: 5px;

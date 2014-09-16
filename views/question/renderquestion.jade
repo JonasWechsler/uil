@@ -6,16 +6,20 @@ block content
     div#acey
         div.top
             if question['ques']
-                div.qnum= question['ques'] +"."
+                span.qnum= question['ques'] +"."
                     label.id= id
-                span.details
-                    div.title= title
-                    div.test= "Test " + question['test']
+                span.detailcontainer
+                    div.details
+                        div.title= title
+                        div.test= "Test " + question['test']
+                    div
+                        a.report= "Report Question"
             else
-                div.qnum= "Random"
+                span.qnum= "Random"
                     label.id= id
-            div
-                a.report= "Report Question"
+                span
+                    div
+                        a.report= "Report Question"
         span.spanner
             span.leftcol
                 pre.question.code(id="qq")= question['text']
