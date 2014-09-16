@@ -20,7 +20,7 @@ module.exports = function(app) {
                 common.utils.recalcScore(found);
 
                 var arrayofquestions = found.questions;
-
+                
                 var temporary = arrayofquestions.shift();
                 arrayofquestions.push(temporary);
                 users.update({
