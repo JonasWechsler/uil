@@ -97,7 +97,6 @@ module.exports = function(app) {
     app.all('/checkquestion', function (req, res) {
         var choice = req.body.choice;
         var id = req.body.id;
-        var retry = req.body.retry;
         var collection = db.get('questions');
         var users = db.get('users');
         collection.findOne({
@@ -118,11 +117,7 @@ module.exports = function(app) {
                             common.question.placeIntoAnsweredCategory(found, 'correct', id, choice);
                         }
                     });
-                    if (retry) {
-                        res.redirect('/tryagain/' + id);
-                    } else {
-                        res.redirect('/random');
-                    }
+                    res.send('correct');
                 } else if (!choice) {
                     users.findOne({
                         '_id': req.session.id
@@ -134,11 +129,7 @@ module.exports = function(app) {
                             common.question.placeIntoAnsweredCategory(found, 'passed', id, choice);
                         }
                     });
-                    if (retry) {
-                        res.redirect('/tryagain/' + id);
-                    } else {
-                        res.redirect('/random');
-                    }
+                    res.send('passed');
                 } else {
                     users.findOne({
                         '_id': req.session.id
@@ -150,11 +141,7 @@ module.exports = function(app) {
                             common.question.placeIntoAnsweredCategory(found, 'incorrect', id, choice);
                         }
                     });
-                    if (retry) {
-                        res.redirect('/tryagain/' + id);
-                    } else {
-                        res.redirect('/random');
-                    }
+                    res.send('incorrect');
                 }
             }
         });
