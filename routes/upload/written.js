@@ -451,7 +451,7 @@ var parseJSON = function (res, req) {
 
     //rendering to be editable
     output = questions;
-    res.render('upload/pdf', {
+    res.render('upload/written', {
                 session: req.session,
                 title: 'Edit PDF',
                 prompt: 'Edit your pdf',
@@ -472,20 +472,7 @@ function pushToDb(obj, callback) {
     }
 }
 module.exports = function(app) {
-    app.get('/pdf', function (req, res) {
-        common.utils.verifyAdmin(req.session.id, function(isAdmin) {
-            if(isAdmin) {
-                res.render('upload/pdf', {
-                    session: req.session,
-                    title: 'Upload A PDF',
-                    prompt: 'Browse for a PDF'
-                });
-            } else {
-                res.redirect('/');
-            }
-        });
-    });
-    app.post('/pdfsub', function (req, res) {
+    app.post('/upload/written', function (req, res) {
         common.utils.verifyAdmin(req.session.id, function(isAdmin) {
             if(isAdmin) {
                 //taking edited questions and adding to database
@@ -502,7 +489,7 @@ module.exports = function(app) {
             }
         });
     });
-    app.post('/pdf', function (req, res) {
+    app.post('/upload/written/edit', function (req, res) {
         console.log(req.files.upload);
         common.utils.verifyAdmin(req.session.id, function(isAdmin) {
             if(isAdmin) {
@@ -510,7 +497,7 @@ module.exports = function(app) {
                 common.utils.save(req.files.upload, "./pdf", req.files.upload.name, function (err) {
                     if (err) {
                         console.log(err);
-                        res.render('upload/pdf', {
+                        res.render('upload/written', {
                             session: req.session,
                             title: 'Upload A PDF',
                             prompt: err

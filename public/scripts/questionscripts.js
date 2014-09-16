@@ -1,22 +1,35 @@
 $(document).ready(function() {
+    $('.content').find('.sub').click(function(event) {
+        if(!event.which)
+            event.preventDefault();
+    });
     var submitQ = (function(init) {
         return function(event) {
             //we only want to replace these on the first call
             var isNotFirstCall = !init;
             if(init) {
                 var first = $("input[name=choice]:checked").val();
-                if(key===first)
-                    $('label[for=' + first + ']').css('background-color','green');
-                else
-                    $('label[for=' + first + ']').css('background-color','red');
-                $('.content').find('.sub').remove();
-                $('label').click(false);
-                $('.next').css('display','inline');
-                $('.try').css('display','inline');
-                $('.next').attr('class','sub');
-                //need to rebind click handlers (of .sub) because we've created 
-                //a new object to observe
-                bind();
+                var type = $('input[name=typer]').val();
+                var postData = {};
+                postData.id=qid;
+                postData.choice=first;
+                if(type) {
+                    postData.typer=type;
+                }
+                $.post(type?'/tryagaincheck':'/checkquestion',postData).done(function(data){
+                    if(data==='correct')
+                        $('label[for=' + first + ']').css('background-color','green');
+                    else if(data === 'incorrect')
+                        $('label[for=' + first + ']').css('background-color','red');
+                    $('.content').find('.sub').remove();
+                    $('label').click(false);
+                    $('.next').css('display','inline');
+                    $('.try').css('display','inline');
+                    $('.next').attr('class','sub');
+                    //need to rebind click handlers (of .sub) because we've created 
+                    //a new object to observe
+                    bind();
+                });
                 init = false;
             }
             return isNotFirstCall;
@@ -24,16 +37,19 @@ $(document).ready(function() {
     })(true);
 
     var bind = function() {
-        $('.content').find('.sub').click(function(event) {
-            submitQ(event);
+        $('.content').find('[name=checkquestion]').submit(function(event) {
+            event.preventDefault();
+            if(submitQ(event)) {
+                window.location.href= "/random"
+            } 
         });
     }
 
     bind();
 
-    $('.try').click(function() {
-        $('input[name="retry"]').val('true');
-        $('.sub').click();
+    $('.try').click(function(event) {
+        event.preventDefault();
+        window.location.href= "/random/" + qid;
     });
 
     $('.report').one("click", function() {

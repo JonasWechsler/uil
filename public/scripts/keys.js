@@ -22,14 +22,12 @@ $('body').keydown(function (e) {
     case FIVE:
         $('#E').click();
         break;
+    case ENTER:
+        $('.sub').trigger('enter', [e.target]);
+        break;
     }
 });
 $('body').keyup(function (e) {
-    switch (e.which) {
-        case ENTER:
-            $('.sub').trigger('enter', [e.target]);
-            break;
-    }
     keys[e.which] = false;
 });
 

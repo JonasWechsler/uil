@@ -3,50 +3,52 @@ block head
     link(rel='stylesheet', href='/stylesheets/question.css')
     script(src="../ace-builds/src-noconflict/ace.js")
 block content
-    div.top
-        if question['ques']
-            div.qnum= question['ques'] +"."
-                label.id= id
-            div.details
-                div.title= title
-                div.test= "Test " + question['test']
-        else
-            div.qnum= "Random"
-                label.id= id
-        div
-            a.report= "Report Question"
-    span.leftcol
-        pre.question.code(id="qq")= question['text']
-        form.submit.answers(name="checkquestion",method="post",action="/checkquestion")
-            label(for='A')
-                input#A(type="radio",name="choice",value="A")
-                |#{question.ans[0]}
-            label(for='B')
-                input#B(type="radio",name="choice",value="B")
-                |#{question.ans[1]}
-            label(for='C')
-                input#C(type="radio",name="choice",value="C")
-                |#{question.ans[2]}
-            label(for='D')
-                input#D(type="radio",name="choice",value="D")
-                |#{question.ans[3]}
-            label(for='E')
-                input#E(type="radio",name="choice",value="E")
-                |#{question.ans[4]}
-            input(type="hidden",name = "id", value= question["_id"])
-            input(type="hidden",name="retry", value = "")
-            br
-            button.next next
-        button.sub submit
-        button.try= "retry"
-    span.rightcol
-        if question['code']
-            pre.question.side(id="cc")= question['code']
+    div#acey
+        div.top
+            if question['ques']
+                div.qnum= question['ques'] +"."
+                    label.id= id
+                span.details
+                    div.title= title
+                    div.test= "Test " + question['test']
+            else
+                div.qnum= "Random"
+                    label.id= id
+            div
+                a.report= "Report Question"
+        span.spanner
+            span.leftcol
+                pre.question.code(id="qq")= question['text']
+                form.submit.answers(name="checkquestion",method="get",action="/random")
+                    label(for='A')
+                        input#A(type="radio",name="choice",value="A")
+                        |#{question.ans[0]}
+                    label(for='B')
+                        input#B(type="radio",name="choice",value="B")
+                        |#{question.ans[1]}
+                    label(for='C')
+                        input#C(type="radio",name="choice",value="C")
+                        |#{question.ans[2]}
+                    label(for='D')
+                        input#D(type="radio",name="choice",value="D")
+                        |#{question.ans[3]}
+                    label(for='E')
+                        input#E(type="radio",name="choice",value="E")
+                        |#{question.ans[4]}
+                    input(type="hidden",name = "id", value= question["_id"])
+                    input(type="hidden",name="retry", value = "")
+                    br
+                    button.next next
+                    button.sub submit
+                a(href='/tryagain/' + question._id)
+                    button.try= "retry"
+            span.rightcol
+                if question['code']
+                    pre.question.side(id="cc")= question['code']
 block footer
-    script.                                                 
+    script.                                             
         var themeq ="#{themeq}";
         var themec ="#{themec}";
-        var key ="#{question['key']}";
         var qid ="#{question._id}"
     script(src="/scripts/questiondisp.js")
     script(src="/scripts/questionscripts.js")
