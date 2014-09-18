@@ -9,6 +9,7 @@ var express = require('express'),
 
 var app = express();
 
+app.use(express.favicon(__dirname + '/public/favicon/favicon.png'));
 // all environments
 app.set('port', config.port);
 app.set('views', __dirname + '/views');
