@@ -1,29 +1,34 @@
 var keys = [];
+
+function clickbutton(id, event) {
+    if(!(event.target && $(event.target).hasClass('search'))) {
+        $(id).focus();
+        $(id).click();
+    }
+}
+
 $('body').keydown(function (e) {
     keys[e.which] = true;
     switch (e.which) {
     case A:
     case ONE:
-        $('#A').click();
+        clickbutton('#A',e);
         break;
     case B:
     case TWO:
-        $('#B').click();
+        clickbutton('#B',e);
         break;
     case C:
     case THREE:
-        $('#C').click();
+        clickbutton('#C',e);
         break;
     case D:
     case FOUR:
-        $('#D').click();
+        clickbutton('#D',e);
         break;
     case E:
     case FIVE:
-        $('#E').click();
-        break;
-    case ENTER:
-        $('.sub').trigger('enter', [e.target]);
+        clickbutton('#E',e);
         break;
     }
 });
