@@ -6,7 +6,8 @@ var p2jcmd = require('pdf2json'),
     nodeUtil = require('util'),
     mongo = require('mongodb'),
     monk = require('monk'),
-    PFParser = require('pdf2json/pdfparser');
+    PFParser = require('pdf2json/pdfparser'),
+    pdf2jsonutil = require('./pdf2jsonutil.js');
 var db = require('../../common/db');
 var collection = db.get("questions");
 var usercollection = db.get("users");
@@ -18,86 +19,10 @@ var json = {
     }
 };
 
+
+
 var common = {};
 common.utils = require('../../common/utils');
-
-
-var PDF2JSONUtil = (function () {
-
-    var _continue = function (callback, err) {
-        if (err)
-            nodeUtil.p2jwarn(err);
-        if (_.isFunction(callback))
-            callback(err);
-    };
-
-    var _writeOneJSON = function (data, callback) {
-
-        json = {
-            formImage: data
-        };
-        this.curProcessor.successCount++;
-        _continue.call(this, callback);
-    };
-
-    var _parseOnePDF = function (callback) {
-        this.pdfParser = new PFParser();
-
-        this.pdfParser.on("pdfParser_dataReady", function (evtData) {
-
-            if (( !! evtData) && ( !! evtData.data)) {
-                _writeOneJSON.call(this, evtData.data, callback);
-            } else {
-                this.curProcessor.failedCount++;
-                _continue.call(this, callback, "Exception: empty parsing result - " + this.inputPath);
-            }
-        }.bind(this));
-
-        this.pdfParser.on("pdfParser_dataError", function (evtData) {
-            this.curProcessor.failedCount++;
-            var errMsg = "Exception: " + evtData.data;
-            _continue.call(this, callback, errMsg);
-        }.bind(this));
-
-        nodeUtil.p2jinfo("Transcoding " + this.inputFile + " to - " + this.outputPath);
-        this.pdfParser.loadPDF(this.inputPath, 5); //(_.has(argv, 's') ? 0 : 5));
-
-    };
-
-    // constructor
-    var cls = function (inputDir, inputFile, curProcessor) {
-        // public, this instance copies
-        this.inputDir = path.normalize(inputDir);
-        this.inputFile = inputFile;
-        this.inputPath = this.inputDir + path.sep + this.inputFile;
-
-        this.outputDir = path.normalize(inputDir);
-        this.outputFile = null;
-        this.outputPath = null;
-
-        this.pdfParser = null;
-        this.curProcessor = curProcessor;
-    };
-
-    cls.prototype.destroy = function () {
-        this.inputDir = null;
-        this.inputFile = null;
-        this.inputPath = null;
-        this.outputDir = null;
-        this.outputPath = null;
-
-        if (this.pdfParser) {
-            this.pdfParser.destroy();
-        }
-        this.pdfParser = null;
-        this.curProcessor = null;
-    };
-
-    cls.prototype.processFile = function (callback) {
-        _parseOnePDF.call(this, callback);
-    };
-    return cls;
-})();
 
 
 var error = .5;
@@ -110,6 +35,7 @@ var equals = function (one, two) {
     }
 };
 var parseJSON = function (res, req) {
+    
     console.log("Successfully converted PDF -> JSON");
 
     var testn = "";
@@ -495,7 +421,7 @@ module.exports = function(app) {
         common.utils.verifyAdmin(req.session.id, function(isAdmin) {
             if(isAdmin) {
                 // saving to /pdf directory
-                common.utils.save(req.files.upload, "./pdf", req.files.upload.name, function (err) {
+                common.utils.save(req.files.upload, "./files/written/", req.files.upload.name, function (err) {
                     if (err) {
                         console.log(err);
                         res.render('upload/written', {
@@ -506,16 +432,18 @@ module.exports = function(app) {
                     } else {
 
                         // getting from /pdf directory, then parsing to json
-                        input = "./pdf/" + req.files.upload.name;
+                        input = "./files/written/" + req.files.upload.name;
                         var inputDir = path.dirname(input);
                         var inputFile = path.basename(input);
                         var p2j = new p2jcmd();
                         p2j.inputCount = 1;
-                        p2j.p2j = new PDF2JSONUtil(inputDir, inputFile, p2j);
+                        p2j.p2j = new pdf2jsonutil.PDF2JSONUtil(inputDir, inputFile, p2j);
 
                         p2j.p2j.processFile(function () {
                             //parsing the json to questions
+                            json = pdf2jsonutil.getJSON();
                             parseJSON(res, req);
+
                         });
                         //Ends late due to callbacks
 

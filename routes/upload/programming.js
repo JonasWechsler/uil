@@ -15,10 +15,12 @@ module.exports = function(app) {
         common.utils.verifyAdmin(req.session.id, function(isAdmin) {
             if(isAdmin) {
                 // saving to /pdf directory
-                common.utils.save(req.files.upload, "./pdf", req.files.upload.name, function (err) {
+                console.log(req.files.upload+" "req.files.upload.name);
+
+                common.utils.save(req.files.upload, "./files/programming/", req.files.upload.name, function (err) {
                     if (err) {
                         console.log(err);
-                        res.render('upload/written', {
+                        res.render('upload/programming', {
                             session: req.session,
                             title: 'Upload A PDF',
                             prompt: err
@@ -26,7 +28,7 @@ module.exports = function(app) {
                     } else {
 
                         // getting from /pdf directory, then parsing to json
-                        input = "./pdf/" + req.files.upload.name;
+                        input = "./files/programming/" + req.files.upload.name;
                         var inputDir = path.dirname(input);
                         var inputFile = path.basename(input);
                         var p2j = new p2jcmd();
