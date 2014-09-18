@@ -16,7 +16,7 @@ module.exports = function(app) {
 				// 1) Test questions exist
 				// 2) End time of test exists
 				// 3) End time of test has not happened yet
-				if(user.testquestions && user.testend && (user.testend / 1000) - (new Date().getTime() / 1000) < 2400) {
+				if(user.testquestions && user.testquestions.length > 0 && user.testend && (user.testend / 1000) - (new Date().getTime() / 1000) < 2400) {
 					// Go through each id of the saved question and pull the question javascript object
 					var questions = [];
 					var questionids = user.testquestions;
@@ -102,6 +102,7 @@ module.exports = function(app) {
 			if(users.length > 0) {
 				var user = users[0];
 				user.testend = new Date().getTime() / 1000 + 2400;
+				user.testquestions = [];
 				db.get('users').update({"username": req.session.user}, user, function(err, count, status) {
 					res.redirect('/test');
 				});
