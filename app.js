@@ -39,6 +39,7 @@ require('./routes/question/question')(app);
 require('./routes/question/tryagain')(app);
 require('./routes/userpages/userpage')(app);
 require('./routes/feedback/feedback')(app);
+require('./routes/upload/programming')(app);
 require('./routes/upload/written')(app);
 require('./routes/upload/upload')(app);
 require('./routes/authentication/newuser')(app);

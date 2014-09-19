@@ -1,9 +1,6 @@
-
 var p2jcmd = require('pdf2json'),
     path = require('path'),
     _ = require('underscore'),
-    fs = require('fs'),
-    nodeUtil = require('util'),
     mongo = require('mongodb'),
     monk = require('monk'),
     PFParser = require('pdf2json/pdfparser'),
@@ -417,7 +414,7 @@ module.exports = function(app) {
         });
     });
     app.post('/upload/written/edit', function (req, res) {
-        console.log(req.files.upload);
+        //console.log(req.files.upload + req.files.upload.name);
         common.utils.verifyAdmin(req.session.id, function(isAdmin) {
             if(isAdmin) {
                 // saving to /pdf directory
