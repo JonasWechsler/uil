@@ -110,10 +110,14 @@ input[type="radio"]:checked+label {
     display:inline-block;
     width: 100%;
 }
-.spanner > .leftcol {
+.leftcol {
     width: 50%;
-    float: left;
+    display:inline-block;
 }
-.spanner > .rightcol {
+.rightcol {
     width: 50%;
+    left: 50%;
+    top: 0;
+    display:inline-block;
+    vertical-align: top;
 }

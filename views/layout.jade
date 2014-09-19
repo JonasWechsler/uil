@@ -21,10 +21,7 @@ html
                 a(href="/home")
                     li.nav.button.left
                         |LASA UIL Training
-                a(href="/about")
-                    li.nav.left
-                        |About
-                a(href="/getfeedback")
+                //a(href="/getfeedback")
                     li.nav.left
                         |Feedback
                 if session.loggedin
@@ -38,7 +35,7 @@ html
                     a(href="/random")
                         li.nav.left
                             |Random question
-                    label(for="dropdown").nav.right.username= session.user
+                    label(for="dropdown").nav.right.username.accent= session.user
                         .arrow_box_top    
                             input(type="checkbox")#dropdown
                             .drop.arrow_box
@@ -80,6 +77,10 @@ html
             block content
         div.footer
             .footer-content
+                a(href="/about")
+                    |About
+                a(href="/getfeedback")
+                    |Feedback
             block footer
             script(src="/scripts/keys.js")
             script(src="/scripts/googleua.js")

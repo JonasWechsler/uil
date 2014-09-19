@@ -23,6 +23,9 @@ h1 {
     width: 280px;
     zoom: 1;
 }
+.footer{
+    display:none;
+}
 .inside .text {
     border: 2px solid #ccc;
     color: #999;

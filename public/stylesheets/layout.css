@@ -179,22 +179,25 @@ label[for="dropdown"]:hover{
 /*Footer*/
 /********/
 .footer{
-    display:none;
-    background-color: #E6E6E6;
-    margin: 0;
-    border-bottom: 1px solid #E6E6E6;
-    top:100%;
+    position:relative;
+    margin-top: 50px;
+    bottom:0;
     height:60px;
 }
 .footer-content {
-    position: relative;
+    position:absolute;
+    border-top:1px solid #DDD;
+    padding:15px;
     left: 50%;
-    top:100%;
-    padding: 18px 0 18px 0;
+    top:0;
     width: 1000px;
     margin-left:-500px;
-    height: 60px;
     list-style-type: none;
+    color: rgb(53,53,53);
+    font-size: 15px;
+}
+.footer-content > a{
+    margin:15px;
 }
 /*@keyframes inglow {
     0% {

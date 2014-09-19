@@ -10,11 +10,13 @@ h1 {
     color: rgb(53, 53, 53);
     clear: left;
 }
+.content{
+  height:550px;
+}
 .name{
     color:rgb(53,53,53);
     font-weight:bold;
     display:inline-block;
-    height:100%;
     width:200px;
     position:relative;
     overflow: hidden;
@@ -108,6 +110,12 @@ h1 {
     position: absolute;
     top:200px;
 }
+/*
+    color: rgb(53, 53, 53);
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    height:200px;
+    width:1000px;
+    padding:25px 0 25px 0;*/
 .left-third{
     position:absolute;
     top:0;

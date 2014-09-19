@@ -20,35 +20,34 @@ block content
                 span
                     div
                         a.report= "Report Question"
-        span.spanner
-            span.leftcol
-                pre.question.code(id="qq")= question['text']
-                form.submit.answers(name="checkquestion",method="get",action="/random")
-                    label(for='A')
-                        input#A(type="radio",name="choice",value="A")
-                        |#{question.ans[0]}
-                    label(for='B')
-                        input#B(type="radio",name="choice",value="B")
-                        |#{question.ans[1]}
-                    label(for='C')
-                        input#C(type="radio",name="choice",value="C")
-                        |#{question.ans[2]}
-                    label(for='D')
-                        input#D(type="radio",name="choice",value="D")
-                        |#{question.ans[3]}
-                    label(for='E')
-                        input#E(type="radio",name="choice",value="E")
-                        |#{question.ans[4]}
-                    input(type="hidden",name = "id", value= question["_id"])
-                    input(type="hidden",name="retry", value = "")
-                    br
-                    button.next next
-                    button.sub submit
-                a(href='/tryagain/' + question._id)
-                    button.try= "retry"
-            span.rightcol
-                if question['code']
-                    pre.question.side(id="cc")= question['code']
+        span.leftcol
+            pre.question.code(id="qq")= question['text']
+            form.submit.answers(name="checkquestion",method="get",action="/random")
+                label(for='A')
+                    input#A(type="radio",name="choice",value="A")
+                    |#{question.ans[0]}
+                label(for='B')
+                    input#B(type="radio",name="choice",value="B")
+                    |#{question.ans[1]}
+                label(for='C')
+                    input#C(type="radio",name="choice",value="C")
+                    |#{question.ans[2]}
+                label(for='D')
+                    input#D(type="radio",name="choice",value="D")
+                    |#{question.ans[3]}
+                label(for='E')
+                    input#E(type="radio",name="choice",value="E")
+                    |#{question.ans[4]}
+                input(type="hidden",name = "id", value= question["_id"])
+                input(type="hidden",name="retry", value = "")
+                br
+                button.next next
+                button.sub submit
+            a(href='/tryagain/' + question._id)
+                button.try= "retry"
+        span.rightcol
+            if question['code']
+                pre.question.side(id="cc")= question['code']
 block footer
     script.                                             
         var themeq ="#{themeq}";
