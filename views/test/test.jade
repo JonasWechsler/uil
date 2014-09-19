@@ -15,35 +15,69 @@ block content
 					div
 						a.report= "Report Question"
 				span.spanner
-					span.leftcol
+					span.leftcol.answers
 						pre.question.code(id="qq")= question['text']
-						form.submit.answers(name="checkquestion",method="post",action="/checkquestion")
-							label(for='A')
-								input#A(type="radio",name="choice",value="A")
-								|#{question.ans[0]}
-							label(for='B')
-								input#B(type="radio",name="choice",value="B")
-								|#{question.ans[1]}
-							label(for='C')
-								input#C(type="radio",name="choice",value="C")
-								|#{question.ans[2]}
-							label(for='D')
-								input#D(type="radio",name="choice",value="D")
-								|#{question.ans[3]}
-							label(for='E')
-								input#E(type="radio",name="choice",value="E")
-								|#{question.ans[4]}
-							input(type="hidden",name = "id", value= question["_id"])
-							input(type="hidden",name="retry", value = "")
-							br
+						label(for='A'+index)
+							input#A(type="radio",name='choice'+index,value="A")
+							|#{question.ans[0]}
+						label(for='B'+index)
+							input#B(type="radio",name='choice'+index,value="B")
+							|#{question.ans[1]}
+						label(for='C'+index)
+							input#C(type="radio",name='choice'+index,value="C")
+							|#{question.ans[2]}
+						label(for='D'+index)
+							input#D(type="radio",name='choice'+index,value="D")
+							|#{question.ans[3]}
+						label(for='E'+index)
+							input#E(type="radio",name='choice'+index,value="E")
+							|#{question.ans[4]}
+						input(type="hidden",name = "id", value= question["_id"])
+						input(type="hidden",name="retry", value = "")
+						br
 					span.rightcol
 						if question['code']
 							pre.question.side(id="cc")= question['code']
 
 
 	h1#timeleft **** seconds remaining
-	script(src="/questiondisp.js")
 	script.
+		$( document ).ready(function() {
+			// Get the previous selections
+			var previousSelections = "#{selections}".split(",");
+			$(".answers").each(function(i, obj) {
+				// When the selection is changed
+				$(this).change(function() {
+					// Get the changes and send to server
+					var newselections = [];
+					$(".answers").each(function(i, obj) {
+						if($(this).children().find('#A').is(':checked')) { 
+							newselections.push('A');
+						} else if($(this).children().find('#B').is(':checked')) { 
+							newselections.push('B');
+						} else if($(this).children().find('#C').is(':checked')) { 
+							newselections.push('C');
+						} else if($(this).children().find('#D').is(':checked')) { 
+							newselections.push('D');
+						} else if($(this).children().find('#E').is(':checked')) { 
+							newselections.push('E');
+						} else {
+							newselections.push('Z'); // Dummy value
+						}
+					});
+					// Send request
+					$.ajax({
+					  type: "POST",
+					  url: "/questionchosen",
+					  data: {selections: newselections}
+					});
+				});
+				// Set the selected answers to the previously selected, if any
+				if("#{selections}".length > 0) {
+					$(this).children().find("#"+previousSelections[i]).prop("checked", true);
+				}
+			});
+		});
 		window.setInterval(function() {
 			var timeInSeconds = parseInt(new Date().getTime() / 1000);
 			var timeRemaining = parseInt("#{testend}") - timeInSeconds;

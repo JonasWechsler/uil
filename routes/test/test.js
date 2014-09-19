@@ -35,6 +35,7 @@ module.exports = function(app) {
 						res.render('test/test', {
 							session: req.session,
 							testend: user.testend,
+							selections: user.testselections,
 							questions: questions.sort(compare),
 							themeq: user.themeq,
 							themec: user.themec
@@ -73,6 +74,7 @@ module.exports = function(app) {
 							res.render('test/test', {
 								session: req.session,
 								testend: testend,
+								selections: user.selections,
 								questions: questions.sort(compare),
 								themeq: user.themeq,
 								themec: user.themec
@@ -86,6 +88,22 @@ module.exports = function(app) {
 			}
 		});
 	});
+
+    app.post('/questionchosen', function(req, res) {
+    	// Update the selections in the database to what the user chose 
+        var selections = req.body.selections;
+        db.get('users').find({"username":req.session.user}, function(err, users) {
+        	if(users.length > 0) {
+        		var user = users[0];
+        		user.testselections = selections;
+        		db.get('users').update({"username":req.session.user}, user, function(err, count, status) {
+
+        		});
+        	} else {
+        		res.redirect('/');
+        	}
+        })
+    });
 
 	function compare(a,b) {
 	  if (a._id < b._id)
@@ -103,6 +121,7 @@ module.exports = function(app) {
 				var user = users[0];
 				user.testend = new Date().getTime() / 1000 + 2400;
 				user.testquestions = [];
+				user.testselections = [];
 				db.get('users').update({"username": req.session.user}, user, function(err, count, status) {
 					res.redirect('/test');
 				});
