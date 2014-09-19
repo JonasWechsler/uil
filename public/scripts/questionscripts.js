@@ -12,7 +12,7 @@ $(document).ready(function() {
                 if(type) {
                     postData.typer=type;
                 }
-                $.post(type?'/tryagaincheck':'/checkquestion',postData).done(function(data){
+                $.post('/checkquestion',postData).done(function(data){
                     if(data==='correct')
                         $('label[for=' + first + ']').css('background-color','green');
                     else if(data === 'incorrect')

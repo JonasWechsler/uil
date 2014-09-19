@@ -46,8 +46,9 @@ module.exports.run = function(type, inputDir, inputFile, callback) {
 	}
 }
 
+//this should probably not be here
 module.exports.clearPrograms = function() {
-	execute('find ./programs/ -not -name ".gitignore" -not -name "user.policy" -delete', function(err, stdout, stderr) {
+	execute('find ./programs/ -not -name ".gitignore" -not -name "user.policy" -not -name "*.in" -delete', function(err, stdout, stderr) {
 		console.log(err);
 		console.log(stderr);
 	});
