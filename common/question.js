@@ -2,18 +2,25 @@ var passwordHash = require('password-hash');
 var crypto = require('crypto'); //To generate a hash for gravatar
 var mongo = require('mongodb');
 var monk = require('monk');
+var Promise = require('promise');
 var db = require('./db');
 var questions = db.get('questions');
 var users = db.get('users');
 module.exports = {};
 module.exports.isQuestion = function(user,type,questionid, callback) {
-   var returnInd = -1;
-   user[type].forEach(function (obj, ind) {
-	if (obj.id === questionid) {
-            returnInd = ind;
+    return new Promise(function (fulfill,reject) {
+        var returnInd = -1;
+        user[type].forEach(function (obj, ind) {
+        if (obj.id === questionid) {
+                returnInd = ind;
+            }
+        });
+        if(returnInd < 0) {
+            reject(returnInd);
+        } else {
+            fulfill(returnInd);
         }
     });
-    callback(returnInd);
 }
 
 module.exports.addToStreak = function(user) {

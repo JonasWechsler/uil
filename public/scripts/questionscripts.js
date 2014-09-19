@@ -5,13 +5,9 @@ $(document).ready(function() {
             var isNotFirstCall = !init;
             if(init) {
                 var first = $("input[name=choice]:checked").val();
-                var type = $('input[name=typer]').val();
                 var postData = {};
                 postData.id=qid;
                 postData.choice=first;
-                if(type) {
-                    postData.typer=type;
-                }
                 $.post('/checkquestion',postData).done(function(data){
                     if(data==='correct')
                         $('label[for=' + first + ']').css('background-color','green');

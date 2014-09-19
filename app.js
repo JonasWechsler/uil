@@ -37,6 +37,7 @@ if ('development' == app.get('env')) {
 }
 require('./routes/index')(app);
 require('./routes/question/question')(app);
+require('./routes/question/checkquestion')(app);
 require('./routes/userpages/userpage')(app);
 require('./routes/feedback/feedback')(app);
 require('./routes/upload/written')(app);
