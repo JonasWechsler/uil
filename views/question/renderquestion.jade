@@ -59,7 +59,6 @@ block content
                                 input(id=letter,type='radio',name='choice',value=letter)
                                 |#{question.ans[index]}
                     input(type="hidden",name = "id", value= question["_id"])
-                    input(type="hidden",name = "typer",value = type)
                     br
                     button.next next
                     button.sub submit
@@ -72,7 +71,6 @@ block content
                             input(id=letter,type='radio',name='choice',value=letter)
                             |#{question.ans[index]}
                     input(type="hidden",name = "id", value= question["_id"])
-                    input(type="hidden",name = "typer",value = type)
                     br
                     button.next next
                     button.sub submit
@@ -86,7 +84,6 @@ block footer
     script.                                                 
         var themeq ="#{themeq}";
         var themec ="#{themec}";
-        var question = "#{question.ans}"
         var qid ="#{question._id}";
     script(src="/scripts/questiondisp.js")
     script(src="/scripts/questionscripts.js")
