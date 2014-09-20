@@ -109,7 +109,7 @@ module.exports = function(app) {
         }, function (err, found) {
             if (err) {
                 throw err;
-            } else {
+            } else if (found) {
                 var hash = crypto.createHash('md5').update(found.email).digest('hex');
                 getFirstTen(found, function(corrects, incorrects, correcteds, passeds) {
                     res.render('userpages/profile', {
@@ -122,6 +122,8 @@ module.exports = function(app) {
                         passeds : passeds
                     });
                 });
+            } else {
+                res.render('404/404', {url: req.url});
             }
         });
     });

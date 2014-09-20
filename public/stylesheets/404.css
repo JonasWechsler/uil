@@ -1,0 +1,11 @@
+body{
+	margin:10px 0 0 100px;
+}
+.banner{
+	font:500px Helvetica;
+}
+.text{
+	right:100px;
+	bottom:100px;
+	position:absolute;
+}
