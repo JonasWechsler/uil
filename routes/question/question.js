@@ -184,7 +184,7 @@ module.exports = function(app) {
                     }, function (err, question) {
                         if (err) {
                             throw err;
-                        } else if (!question) {
+                        }  else if (!question) {
                             res.render('error', {
                                 title: 'Error',
                                 prompt: 'We are having issues with the database. Sorry! \nPlease notify the creators and try again later.',
@@ -206,6 +206,8 @@ module.exports = function(app) {
                             });
                         }
                     });
+                } else {
+                    res.render('404/404', {url: req.url});
                 }
             }
         });
