@@ -206,8 +206,6 @@ module.exports = function(app) {
                             });
                         }
                     });
-                } else {
-                    res.render('404/404', {url: req.url});
                 }
             }
         });
